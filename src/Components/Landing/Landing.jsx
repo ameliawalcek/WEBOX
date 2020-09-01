@@ -28,7 +28,9 @@ const Landing = inject("userStore", "mediaStore")(
       password: "",
       email: ""
     });
-    const [message, setMassege] = useState("");
+    const [userMessage, setUserMassege] = useState("");
+    const [passwordMessage, setPasswordMassege] = useState("");
+    const [emailMessage, setEmailMassege] = useState("");
 
     const handleInput = ({ target }) => {
       const value = target.value;
@@ -39,11 +41,15 @@ const Landing = inject("userStore", "mediaStore")(
     };
 
     const checkInputs = () => {
-      if (state.userName.length < 3 && state.password.length < 3) {
-        setMassege("user name and password needs to be more then 3 letters");
+      if (state.userName.length < 3) {
+        setUserMassege("user name needs to be more then 3 letters");
       }
+      if (state.password.length < 3) {
+        setPasswordMassege("password needs to be more then 3 letters");
+      }
+
       if (page === "register" && state.email.length < 6) {
-        setMassege("email needs to be more then 6 letters");
+        setEmailMassege("email needs to be more then 6 letters");
       } else {
         enterClicked();
       }
@@ -72,10 +78,10 @@ const Landing = inject("userStore", "mediaStore")(
           )}
           <form className={classes.root} noValidate autoComplete="off">
             <Grid item>
-              <TextField id="standard-basic" label="User Name" name="userName" onChange={handleInput} helperText={message}/>
+              <TextField id="standard-basic" label="User Name" name="userName" onChange={handleInput} helperText={userMessage}/>
               
-              <TextField id="standard-password-input" label="Password" name="password" type="password" onChange={handleInput} helperText={message}/>
-              {page === "register" && <TextField id="standard-basic" name="email" label="Email" type="email" onChange={handleInput} helperText={message}/>}
+              <TextField id="standard-password-input" label="Password" name="password" type="password" onChange={handleInput} helperText={passwordMessage}/>
+              {page === "register" && <TextField id="standard-basic" name="email" label="Email" type="email" onChange={handleInput} helperText={emailMessage}/>}
               {/* <TextField error id="standard-error-helper-text" label="Error"  /> */}
             </Grid>
             <Grid item width={200}>
