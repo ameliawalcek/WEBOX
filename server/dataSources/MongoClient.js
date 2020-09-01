@@ -9,7 +9,7 @@ class MongoClient {
   async getUserByName(userName) {
     return Models
       .User
-      .find({ userName: userName })
+      .findOne({ userName: userName })
       .lean()
   }
 
@@ -45,7 +45,7 @@ class MongoClient {
       .User
       .findByIdAndUpdate(
         userId,
-        { $pull: { favorites: { _id: creatorDoc._id } } },
+        { $pull: { favorites: creatorDoc._id } },
         { new: true }
       )
       .lean()

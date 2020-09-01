@@ -34,6 +34,7 @@ authRouter.post('/signup', async (req, res) => {
 
 authRouter.post('/login', async (req, res) => {
     const { userName, password } = req.body
+    console.log(userName, password)
     const isUserNameInDB = await mongoClient.getUserByName(userName)
 
     if (!isUserNameInDB) {
@@ -41,7 +42,7 @@ authRouter.post('/login', async (req, res) => {
     } else {
         const hash = isUserNameInDB.password
         await bcrypt.compare(password, hash) ?
-            res.status(202).send({ userId: isUserNameInDB._id, msg: 'success' })
+            res.status(202).send({ userId: isUserNameInDB._id, msg: 'user found in database' })
             :
             res.status(401).send('passwords dont match')
     }
