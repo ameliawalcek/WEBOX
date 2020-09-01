@@ -27,13 +27,14 @@ authRouter.post('/signup', async (req, res) => {
 
         newUser
             .save()
-            .then(user => { res.status(201).send({ user, msg: 'success' }) })
+            .then(user => { res.status(201).send({ userId: user._id, msg: 'success' }) })
             .catch(error => { res.status(500).send('Oops the user couldn\'t be saved please try again') })
     }
 })
 
 authRouter.post('/login', async (req, res) => {
     const { userName, password } = req.body
+    console.log(userName, password)
     const isUserNameInDB = await mongoClient.getUserByName(userName)
 
     if (!isUserNameInDB) {
@@ -41,7 +42,7 @@ authRouter.post('/login', async (req, res) => {
     } else {
         const hash = isUserNameInDB.password
         await bcrypt.compare(password, hash) ?
-            res.status(202).send({ userId: isUserNameInDB._id, msg: 'success' })
+            res.status(202).send({ userId: isUserNameInDB._id, msg: 'user found in database' })
             :
             res.status(401).send('passwords dont match')
     }
