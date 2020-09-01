@@ -25,7 +25,6 @@ class MongoClient {
   async addUser(userDoc) {
     return new Models
       .User(userDoc)
-      .save()
   }
 
   async addFavoriteToUser(creatorId, userId) {
