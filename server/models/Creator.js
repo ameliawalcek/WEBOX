@@ -5,7 +5,8 @@ const CreatorSchema = new Schema({
   twitch: String,
   youtube: String,
   twitter: String,
-  instagram: String
+  instagram: String,
+  img: String
 })
 
 const Creator = mongoose.model('Creator', CreatorSchema)
