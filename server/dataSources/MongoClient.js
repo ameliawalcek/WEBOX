@@ -1,4 +1,4 @@
-require('mongoose').connect(process.env.MONGO_URI)
+require('mongoose').connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })
 const Models = require('../models/Models')
 
 class MongoClient {
@@ -9,7 +9,7 @@ class MongoClient {
   async getUserByName(userName) {
     return Models
       .User
-      .find({ userName: userName })
+      .findOne({ userName: userName })
       .lean()
   }
 
@@ -25,7 +25,6 @@ class MongoClient {
   async addUser(userDoc) {
     return new Models
       .User(userDoc)
-      .save()
   }
 
   async addFavoriteToUser(creatorId, userId) {
@@ -46,7 +45,7 @@ class MongoClient {
       .User
       .findByIdAndUpdate(
         userId,
-        { $pull: { favorites: { _id: creatorDoc._id } } },
+        { $pull: { favorites: creatorDoc._id } },
         { new: true }
       )
       .lean()
