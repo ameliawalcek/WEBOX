@@ -4,7 +4,7 @@ const dataSources = require('../dataSources/DataSources')
 
 userRouter.get("/:id", async (req, res) => {
     const { id } = req.params
-    const user = dataSources.mongoClient.getUserById(id)
+    const user = await dataSources.mongoClient.getUserById(id)
     res.send(user)
 });
 userRouter.post("/favorites", async (req, res) => {
@@ -15,7 +15,7 @@ userRouter.post("/favorites", async (req, res) => {
 }); 
 userRouter.delete("/favorites", async (req, res) => {
     const { creatorId, userId } = req.body
-    const response = await dataSources.mongoClient.deleteFavoriteFromUser(creatorId, userId) 
+    const response = await dataSources.mongoClient.removeFavoriteFromUser(creatorId, userId) 
     res.send(response)
 });
 
