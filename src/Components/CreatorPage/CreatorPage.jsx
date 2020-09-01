@@ -5,6 +5,7 @@ const CreatorPage = inject('userStore', 'mediaStore')(observer((props) => {
 
     return (
         <div>
+        <Header page={'creator'}/>
 
         </div>
     )
