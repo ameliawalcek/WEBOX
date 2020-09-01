@@ -15,7 +15,7 @@ const App = inject('userStore', 'mediaStore')(observer((props) => {
       <div id='main-container'>
         <Header/>
         <>
-          <Route exact path='/' render={() => <Landing />} />
+          <Route exact path='/auth' render={() => <Landing />} />
           <Route exact path='/dashboard' render={({ match }) => <MediaCards page={match} />} />
           <Route exact path='/explore' render={({ match }) => <MediaCards page={match} />} />
           <Route exact path='/creator/:id' render={({ match }) => <MediaCards page={match} />} />
