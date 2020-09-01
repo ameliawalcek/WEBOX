@@ -27,7 +27,7 @@ authRouter.post('/signup', async (req, res) => {
 
         newUser
             .save()
-            .then(user => { res.status(201).send({ user, msg: 'success' }) })
+            .then(user => { res.status(201).send({ userId: user._id, msg: 'success' }) })
             .catch(error => { res.status(500).send('Oops the user couldn\'t be saved please try again') })
     }
 })
