@@ -4,7 +4,7 @@ import SearchBar from './SearchBar'
 import CreatorHeader from './CreatorHeader'
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import {
-    AppBar, Toolbar, IconButton, Typography, Badge, Menu,
+    AppBar, Toolbar, IconButton, Badge, Menu,
     ListItem, ListItemText, Drawer, List, Divider
 } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
