@@ -6,4 +6,5 @@ class DataSources {
   }
 }
 
-module.exports = DataSources
+const dataSources = new DataSources()
+module.exports = dataSources
