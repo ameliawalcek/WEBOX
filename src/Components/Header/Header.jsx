@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import clsx from 'clsx';
 import SearchBar from './SearchBar'
 import CreatorHeader from './CreatorHeader'
@@ -7,11 +8,11 @@ import {
     ListItem, ListItemText, Drawer, List, Divider, ListItemIcon, makeStyles, useTheme
 } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
-import MailIcon from '@material-ui/icons/Mail';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
+import ExploreIcon from '@material-ui/icons/Explore';
+import HomeIcon from '@material-ui/icons/Home';
 
 const drawerWidth = 180;
 
@@ -168,7 +169,7 @@ export default function Header(props) {
                             : null}
 
                     <div className={classes.grow} />
-                    <IconButton aria-label="show 17 new notifications" color="inherit">
+                    <IconButton button component={Link} to="/notifications" aria-label="show 17 new notifications" color="inherit">
                         <Badge badgeContent={17} color="secondary">
                             <NotificationsIcon />
                         </Badge>
@@ -194,12 +195,18 @@ export default function Header(props) {
                 </div>
                 <Divider />
                 <List>
-                    {['Dashboard', 'Explore', 'Notifications'].map((text, index) => (
-                        <ListItem button key={text}>
-                            <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-                            <ListItemText primary={text} />
-                        </ListItem>
-                    ))}
+                    <ListItem button component={Link} to="/dashboard">
+                        <ListItemIcon><HomeIcon /></ListItemIcon>
+                        <ListItemText primary={`Dashboard`} />
+                    </ListItem>
+                    <ListItem button component={Link} to="/explore">
+                        <ListItemIcon><ExploreIcon /></ListItemIcon>
+                        <ListItemText primary={`Explore`} />
+                    </ListItem>
+                    <ListItem button component={Link} to="/notifications">
+                        <ListItemIcon><NotificationsIcon /></ListItemIcon>
+                        <ListItemText primary={`Notifications`} />
+                    </ListItem>
                 </List>
             </Drawer>
 
