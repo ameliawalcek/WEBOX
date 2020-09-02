@@ -3,26 +3,19 @@ const dataSources = require("../dataSources/DataSources");
 const mediaRouter = express.Router();
 
 mediaRouter.get("/trending", async (req, res) => {
-  let { category } = req.query;
+  const { category } = req.query;
   const streamNames = category
-    ? dataSources.twitchAPI.getTrendingByCategory(category)
-    : dataSources.twitchAPI.getTrending();
+    ? await dataSources.twitchAPI.getTrendingByCategory(category)
+    : await dataSources.twitchAPI.getTrending();
 
   const creators = await dataSources.mongoClient.getAllCreators();
-
-  const creatorDocuments = streamNames.map((name) => {
-    creators.filter((c) => c.twitch === name);
-
-    res.send(creatorDocuments)
-  });
+  res.send(creators.filter((c) => streamNames.includes(c.twitch)))
 });
+
 
 mediaRouter.get("/channel/:id", async (req, res) => {
-  let { id } = req.params;
-  const creator = await dataSources.mongoClient.getCreatorById(id)
-  res.send(creator);
+  const { id } = req.params;
+  res.send(await dataSources.getCreatorLinksByid(id))
 });
 
-
-
-module.exports = mediaRouter;
+module.exports = mediaRouter
