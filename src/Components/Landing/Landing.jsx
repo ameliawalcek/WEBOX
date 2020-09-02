@@ -6,6 +6,7 @@ import Button from "@material-ui/core/Button";
 import Grid from "@material-ui/core/Grid";
 import Header from "../Header/Header";
 import { useLocation, Link } from "react-router-dom";
+import Paper from '@material-ui/core/Paper';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -73,6 +74,7 @@ const Landing = inject("userStore", "mediaStore")(
     return (
       <div>
         <Header page="basic" />
+        <Paper className={classes.paper}>
         <Grid container spacing={2} justify="center" justify-content="center" align-items="center">
           {page === "login" ? (
             <Grid item>
@@ -130,6 +132,7 @@ const Landing = inject("userStore", "mediaStore")(
               </Grid>
           </form>
         </Grid>
+        </Paper>
       </div>
     );
   })
