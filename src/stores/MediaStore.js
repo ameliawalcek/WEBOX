@@ -1,4 +1,4 @@
-import { observable, action, computed } from 'mobx'
+import { observable, action } from 'mobx'
 import axios from 'axios'
 
 export class MediaStore {
@@ -7,16 +7,18 @@ export class MediaStore {
     @observable searchResults = []
 
     @action async getTrending(category) {
-        let trending = await axios.get('/') // 
-        this.trending = trending
+        let trending = await axios.get(`http://localhost:3001/media/trending`) //
+        this.trending = trending.data
     }
 
     @action async getCreators() {
         let creatorsFromDb = await axios.get('/') // 
-        this.creators = creatorsFromDb
+        this.creators = creatorsFromDb.data
     }
 
     @action searchCreators(value) {
-        this.searchResults = this.creators.filter(c => c.twitch.toLowerCase().includes(value));
+        this.creators.length
+            ? this.searchResults = this.creators.filter(c => c.twitch.toLowerCase().includes(value))
+            : this.searchResults = this.trending.filter(c => c.twitch.toLowerCase().includes(value))
     }
 }
