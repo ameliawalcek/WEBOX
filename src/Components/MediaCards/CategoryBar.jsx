@@ -1,34 +1,79 @@
 import React from 'react';
-import { observer, inject } from 'mobx-react'
-import { Button } from '@material-ui/core';
-import Grid from '@material-ui/core/Grid';
+import PropTypes from 'prop-types';
+import { makeStyles } from '@material-ui/core/styles';
+import AppBar from '@material-ui/core/AppBar';
+import Tabs from '@material-ui/core/Tabs';
+import Tab from '@material-ui/core/Tab';
+import Typography from '@material-ui/core/Typography';
+import Box from '@material-ui/core/Box';
 
-const CategoryBar = inject('userStore', 'mediaStore')(observer((props) => {
-    const categories = ['All', 'Gaming', 'Music', 'Art', 'Fitness', 'News', 'Movies']
+function TabPanel(props) {
+  const { children, value, index, ...other } = props;
 
-    const changeCategory = (category) => {
-        props.mediaStore.getTrending(category)
-    }
+  return (
+    <div
+      role="tabpanel"
+      hidden={value !== index}
+      id={`scrollable-auto-tabpanel-${index}`}
+      aria-labelledby={`scrollable-auto-tab-${index}`}
+      {...other}
+    >
+      {value === index && (
+        <Box p={3}>
+          <Typography>{children}</Typography>
+        </Box>
+      )}
+    </div>
+  );
+}
 
-    return (
-        <Grid
-            container
-            direction="row"
-            justify="space-around"
-            alignItems="center"
+TabPanel.propTypes = {
+  children: PropTypes.node,
+  index: PropTypes.any.isRequired,
+  value: PropTypes.any.isRequired,
+};
+
+function a11yProps(index) {
+  return {
+    id: `scrollable-auto-tab-${index}`,
+    'aria-controls': `scrollable-auto-tabpanel-${index}`,
+  };
+}
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    flexGrow: 1,
+    width: '100%',
+  },
+}));
+
+export default function ScrollableTabsButtonAuto() {
+  const classes = useStyles();
+  const [value, setValue] = React.useState(0);
+  
+  const categories = ['All', 'Gaming', 'Music', 'Art', 'Fitness', 'News', 'Movies']
+
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+  };
+
+  return (
+    <div className={classes.root}>
+      <AppBar style={{position:'fixed', paddingTop: 10, marginTop: 55, zIndex: 2}}
+      color="default">
+        <Tabs
+          value={value}
+          onChange={handleChange}
+          indicatorColor="primary"
+          textColor="primary"
+          variant="scrollable"
+          scrollButtons="auto"
         >
-            <Grid item xs={12}>
-                <Grid container justify="space-around" spacing={2}>
-                    {categories.map(category => {
-                        return <Grid >
-                            <Button onClick={()=> changeCategory(category)} size="small" variant="contained" color="default">
-                                {category}
-                            </Button>
-                        </Grid>
-                    })}
-                </Grid>
-            </Grid>
-        </Grid>
-    );
-}))
-export default CategoryBar;
+          {categories.map(category => {
+            return <Tab label={category} {...a11yProps(0)} />
+          })}
+        </Tabs>
+      </AppBar>
+    </div>
+  );
+}

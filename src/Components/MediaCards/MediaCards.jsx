@@ -18,6 +18,9 @@ const useStyles = makeStyles((theme) => ({
     icon: {
         color: 'rgba(255, 255, 255, 0.54)',
     },
+    container: {
+        marginTop: 50
+    }
 }));
 
 const MediaCards = inject('userStore', 'mediaStore')(observer((props) => {
@@ -44,9 +47,9 @@ const MediaCards = inject('userStore', 'mediaStore')(observer((props) => {
     return (
         <>
             <Header page={header} />
-            {header === 'explore' && <CategoryBar/>}
+            {header === 'explore' && <CategoryBar />}
             {mediaCard
-                ? <Grid container spacing={16} justify="flex-start" >
+                ? <Grid container className={header === 'explore' && classes.container} justify="flex-start" >
                     <GridList cellHeight={180} className={classes.gridList}>
                         {/* {searchResults.length
                             ? renderMediaCard(searchResults)
@@ -64,9 +67,6 @@ const MediaCards = inject('userStore', 'mediaStore')(observer((props) => {
 
                 : <EmptyCard />
             }
-
-
-            <CategoryBar />
         </>
     )
 }))
