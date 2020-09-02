@@ -6,7 +6,7 @@ export class UserStore {
   @observable favorites = [];
   @observable isLoggedIn = false;
   @observable notifications = [];
-  
+
 
   @action async getUser(id) {
     let data = await axios.get(`ADDRESS/user/${id}`);
@@ -19,7 +19,7 @@ export class UserStore {
         this.userId = result._id
         this.getUser(this.userId)
     }
-    alert(result.message);
+    return result.message;
   }
 
   @action async saveUser(user) {
@@ -28,7 +28,7 @@ export class UserStore {
         this.isLoggedIn = true
         this.userId = result._id
     }
-    alert(result.message);
+    return result.message;
   }
 
   @action async saveFavorite(id) {
