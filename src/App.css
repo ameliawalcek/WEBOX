@@ -1,8 +1,9 @@
 body {
+  margin: 0;
+  padding: 0;
   height:100vh; 
   font-family: 'Roboto', sans-serif;
   overflow-x:  hidden !important;
-  padding-top: 65px;
 }
 
 .card-img{
@@ -14,8 +15,4 @@ body {
 .media-card{
   margin: 7px;
   border-radius: 2%;
-}
-
-.category-bar{
-
 }

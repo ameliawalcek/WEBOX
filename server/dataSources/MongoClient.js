@@ -55,6 +55,7 @@ class MongoClient {
     return Models
       .Creator
       .find({})
+      .select('_id twitch img')
       .lean()
   }
 

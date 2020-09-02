@@ -1,6 +1,6 @@
-import React, { useEffect } from "react";
+import React from "react";
 import "./App.css";
-import { BrowserRouter as Router, Route, Link, Redirect } from "react-router-dom";
+import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
 import Landing from "./Components/Landing/Landing";
 import { observer, inject } from "mobx-react";
 import MediaCards from "./Components/MediaCards/MediaCards";
