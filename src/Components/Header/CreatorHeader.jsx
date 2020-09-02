@@ -1,9 +1,6 @@
 import React from 'react';
 import { observer, inject } from 'mobx-react'
-import { makeStyles } from '@material-ui/core/styles';
-import Button from '@material-ui/core/Button';
-import Avatar from '@material-ui/core/Avatar';
-import MenuItem from '@material-ui/core/MenuItem';
+import { makeStyles, Button, Avatar, MenuItem } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
     root: {
