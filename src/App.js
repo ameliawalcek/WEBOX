@@ -6,6 +6,7 @@ import Header from './Components/Header/Header'
 import { observer, inject } from 'mobx-react'
 import MediaCards from './Components/MediaCards/MediaCards';
 import Notifications from './Components/Notifications/Notifications';
+import CreatorPage from './Components/CreatorPage/CreatorPage';
 //user params hook
 
 const App = inject('userStore', 'mediaStore')(observer((props) => {
@@ -16,9 +17,9 @@ const App = inject('userStore', 'mediaStore')(observer((props) => {
         <Header/>
         <>
           <Route exact path='/auth' render={() => <Landing />} />
-          <Route exact path='/dashboard' render={({ match }) => <MediaCards page={match} />} />
+          <Route exact path='/dashboard' render={() => <MediaCards page={match} />} />
           <Route exact path='/explore' render={({ match }) => <MediaCards page={match} />} />
-          <Route exact path='/creator/:id' render={({ match }) => <MediaCards page={match} />} />
+          <Route exact path='/creator' render={({ match }) => <CreatorPage page={match} />} />
           <Route exact path='/notifications' render={() => <Notifications />} />
         </>
       </div>

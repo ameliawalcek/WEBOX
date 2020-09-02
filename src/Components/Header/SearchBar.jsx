@@ -1,9 +1,8 @@
 import React from 'react';
 import { observer, inject } from 'mobx-react'
 import SearchIcon from '@material-ui/icons/Search';
-import { fade, makeStyles } from '@material-ui/core/styles';
+import { fade, makeStyles, InputBase } from '@material-ui/core';
 
-import { InputBase} from '@material-ui/core';
 const useStyles = makeStyles((theme) => ({
     search: {
         position: 'relative',
@@ -34,7 +33,6 @@ const useStyles = makeStyles((theme) => ({
     },
     inputInput: {
         padding: theme.spacing(1, 1, 1, 0),
-        // vertical padding + font size from searchIcon
         paddingLeft: `calc(1em + ${theme.spacing(4)}px)`,
         transition: theme.transitions.create('width'),
         width: '100%',

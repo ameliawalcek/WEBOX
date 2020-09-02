@@ -2,17 +2,15 @@ import React from 'react';
 import clsx from 'clsx';
 import SearchBar from './SearchBar'
 import CreatorHeader from './CreatorHeader'
-import { makeStyles, useTheme } from '@material-ui/core/styles';
 import {
     AppBar, Toolbar, IconButton, Badge, Menu,
-    ListItem, ListItemText, Drawer, List, Divider
+    ListItem, ListItemText, Drawer, List, Divider, ListItemIcon, makeStyles, useTheme
 } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
 import MailIcon from '@material-ui/icons/Mail';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
 
 const drawerWidth = 180;
@@ -150,6 +148,7 @@ export default function Header(props) {
         <div className={classes.grow}>
             <AppBar
                 position="fixed"
+                color='primary'
                 className={clsx(classes.appBar, {
                     [classes.appBarShift]: open,
                 })}

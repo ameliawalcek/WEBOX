@@ -5,8 +5,8 @@ body {
   padding-top: 65px;
 }
 
-.media-card{
-  border-radius: 50%;
-  margin: 2px;
-  margin-left: 10px;
+.card-img{
+  max-width: 100%;
+  height: auto;
+  /* object-fit: cover; */
 }
