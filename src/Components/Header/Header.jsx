@@ -1,20 +1,21 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import clsx from 'clsx';
+import React, { useState } from 'react'
+import { Link } from 'react-router-dom'
+import clsx from 'clsx'
 import SearchBar from './SearchBar'
 import CreatorHeader from './CreatorHeader'
 import {
-    AppBar, Toolbar, IconButton, Badge, Menu,
+    AppBar, Toolbar, IconButton, Badge, Menu,createMuiTheme, ThemeProvider, Switch,
     ListItem, ListItemText, Drawer, List, Divider, ListItemIcon, makeStyles, useTheme
-} from '@material-ui/core';
-import MenuIcon from '@material-ui/icons/Menu';
-import NotificationsIcon from '@material-ui/icons/Notifications';
-import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
-import ChevronRightIcon from '@material-ui/icons/ChevronRight';
-import ExploreIcon from '@material-ui/icons/Explore';
-import HomeIcon from '@material-ui/icons/Home';
+} from '@material-ui/core'
+import NotificationsIcon from '@material-ui/icons/Notifications'
+import ChevronRightIcon from '@material-ui/icons/ChevronRight'
+import ChevronLeftIcon from '@material-ui/icons/ChevronLeft'
+import ExploreIcon from '@material-ui/icons/Explore'
+import HomeIcon from '@material-ui/icons/Home'
+import MenuIcon from '@material-ui/icons/Menu'
+import { orange, lightBlue, deepPurple, deepOrange } from "@material-ui/core/colors"
 
-const drawerWidth = 180;
+const drawerWidth = 180
 
 const useStyles = makeStyles((theme) => ({
     grow: {
@@ -51,74 +52,61 @@ const useStyles = makeStyles((theme) => ({
         display: 'flex',
         alignItems: 'center',
         padding: theme.spacing(0, 1),
-        // necessary for content to be below app bar
         ...theme.mixins.toolbar,
         justifyContent: 'flex-end',
-    },
-    content: {
-        flexGrow: 1,
-        padding: theme.spacing(3),
-        transition: theme.transitions.create('margin', {
-            easing: theme.transitions.easing.sharp,
-            duration: theme.transitions.duration.leavingScreen,
-        }),
-        marginLeft: -drawerWidth,
-    },
-    contentShift: {
-        transition: theme.transitions.create('margin', {
-            easing: theme.transitions.easing.easeOut,
-            duration: theme.transitions.duration.enteringScreen,
-        }),
-        marginLeft: 0,
-    },
-    title: {
-        display: 'none',
-        [theme.breakpoints.up('sm')]: {
-            display: 'block',
-        },
-    },
-    sectionDesktop: {
-        display: 'none',
-        [theme.breakpoints.up('md')]: {
-            display: 'flex',
-        },
-    },
-    sectionMobile: {
-        display: 'flex',
-        [theme.breakpoints.up('md')]: {
-            display: 'none',
-        },
-    },
-}));
+    }
+}))
 
 export default function Header(props) {
-    const classes = useStyles();
-    const theme = useTheme();
-    const [open, setOpen] = React.useState(false);
-    const [anchorEl, setAnchorEl] = React.useState(null);
-    const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
+    const [open, setOpen] = React.useState(false)
+    const [anchorEl, setAnchorEl] = React.useState(null)
+    const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null)
+    const isMenuOpen = Boolean(anchorEl)
+    const isMobileMenuOpen = Boolean(mobileMoreAnchorEl)
+    
+    const classes = useStyles()
+    const theme = useTheme()
+    
+    const [darkState, setDarkState] = useState(false)
+    const palletType = darkState ? "dark" : "light"
+    const mainPrimaryColor = darkState ? orange[500] : lightBlue[500]
+    const mainSecondaryColor = darkState ? deepOrange[900] : deepPurple[500]
+    
 
-    const isMenuOpen = Boolean(anchorEl);
-    const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
+    const darkTheme = createMuiTheme({
+        palette: {
+            type: palletType,
+            primary: {
+                main: mainPrimaryColor
+            },
+            secondary: {
+                main: mainSecondaryColor
+            }
+        }
+    })
+
+    const handleThemeChange = () => {
+        setDarkState(!darkState)
+    }
 
     const handleDrawerOpen = () => {
-        setOpen(true);
-    };
+        setOpen(true)
+    }
 
     const handleDrawerClose = () => {
-        setOpen(false);
-    };
+        setOpen(false)
+    }
 
     const handleMobileMenuClose = () => {
-        setMobileMoreAnchorEl(null);
-    };
+        setMobileMoreAnchorEl(null)
+    }
 
     const handleMenuClose = () => {
-        setAnchorEl(null);
-        handleMobileMenuClose();
-    };
+        setAnchorEl(null)
+        handleMobileMenuClose()
+    }
 
-    const menuId = 'primary-search-account-menu';
+    const menuId = 'primary-search-account-menu'
     const renderMenu = (
         <Menu
             anchorEl={anchorEl}
@@ -129,9 +117,9 @@ export default function Header(props) {
             open={isMenuOpen}
             onClose={handleMenuClose}
         ></Menu>
-    );
+    )
 
-    const mobileMenuId = 'primary-search-account-menu-mobile';
+    const mobileMenuId = 'primary-search-account-menu-mobile'
     const renderMobileMenu = (
         <Menu
             anchorEl={mobileMoreAnchorEl}
@@ -143,73 +131,78 @@ export default function Header(props) {
             onClose={handleMobileMenuClose}
         >
         </Menu>
-    );
+    )
 
     return (
-        <div className={classes.grow}>
-            <AppBar
-                position='sticky'
-                color='primary'
-                className={clsx(classes.appBar, {
-                    [classes.appBarShift]: open,
-                })}
-            >
-                <Toolbar>
-                    <IconButton
-                        color="inherit"
-                        aria-label="open drawer"
-                        onClick={handleDrawerOpen}
-                        edge="start"
-                        className={clsx(classes.menuButton, open && classes.hide)}
-                    >
-                        <MenuIcon />
-                    </IconButton>
-                    {props.page === 'explore' ? <SearchBar />
-                        : props.page === 'creator' ? <CreatorHeader />
-                            : null}
+        <ThemeProvider theme={darkTheme}>
+            <div className={classes.grow}>
+                <AppBar
+                    position='sticky'
+                    color='primary'
+                    className={clsx(classes.appBar, {
+                        [classes.appBarShift]: open,
+                    })}
+                >
+                    <Toolbar>
+                        <IconButton
+                            color="inherit"
+                            aria-label="open drawer"
+                            onClick={handleDrawerOpen}
+                            edge="start"
+                            className={clsx(classes.menuButton, open && classes.hide)}
+                        >
+                            <MenuIcon />
+                        </IconButton>
+                        {props.page === 'explore' ? <SearchBar />
+                            : props.page === 'creator' ? <CreatorHeader />
+                                : null}
 
-                    <div className={classes.grow} />
-                    <IconButton button component={Link} to="/notifications" aria-label="show 17 new notifications" color="inherit">
-                        <Badge badgeContent={17} color="secondary">
-                            <NotificationsIcon />
-                        </Badge>
-                    </IconButton>
-                </Toolbar>
-            </AppBar>
-            {renderMobileMenu}
-            {renderMenu}
+                        <div className={classes.grow} />
+                        <IconButton button component={Link} to="/notifications" aria-label="show 17 new notifications" color="inherit">
+                            <Badge badgeContent={17} color="secondary">
+                                <NotificationsIcon />
+                            </Badge>
+                        </IconButton>
+                    </Toolbar>
+                </AppBar>
+                {renderMobileMenu}
+                {renderMenu}
 
-            <Drawer
-                className={classes.drawer}
-                variant="persistent"
-                anchor="left"
-                open={open}
-                classes={{
-                    paper: classes.drawerPaper,
-                }}
-            >
-                <div className={classes.drawerHeader}>
-                    <IconButton onClick={handleDrawerClose}>
-                        {theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
-                    </IconButton>
-                </div>
-                <Divider />
-                <List>
-                    <ListItem button component={Link} to="/dashboard">
-                        <ListItemIcon><HomeIcon /></ListItemIcon>
-                        <ListItemText primary={`Dashboard`} />
-                    </ListItem>
-                    <ListItem button component={Link} to="/explore">
-                        <ListItemIcon><ExploreIcon /></ListItemIcon>
-                        <ListItemText primary={`Explore`} />
-                    </ListItem>
-                    <ListItem button component={Link} to="/notifications">
-                        <ListItemIcon><NotificationsIcon /></ListItemIcon>
-                        <ListItemText primary={`Notifications`} />
-                    </ListItem>
-                </List>
-            </Drawer>
-
-        </div >
-    );
+                <Drawer
+                    className={classes.drawer}
+                    variant="persistent"
+                    anchor="left"
+                    open={open}
+                    classes={{
+                        paper: classes.drawerPaper,
+                    }}
+                >
+                    <div className={classes.drawerHeader}>
+                        <IconButton onClick={handleDrawerClose}>
+                            {theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
+                        </IconButton>
+                    </div>
+                    <Divider />
+                    <List>
+                        <ListItem button component={Link} to="/dashboard">
+                            <ListItemIcon><HomeIcon /></ListItemIcon>
+                            <ListItemText primary={`Dashboard`} />
+                        </ListItem>
+                        <ListItem button component={Link} to="/explore">
+                            <ListItemIcon><ExploreIcon /></ListItemIcon>
+                            <ListItemText primary={`Explore`} />
+                        </ListItem>
+                        <ListItem button component={Link} to="/notifications">
+                            <ListItemIcon><NotificationsIcon /></ListItemIcon>
+                            <ListItemText primary={`Notifications`} />
+                        </ListItem>
+                        <ListItem >
+                            <ListItemIcon><Switch checked={darkState} onChange={handleThemeChange} /></ListItemIcon>
+                            <ListItemText primary={`Dark Mode`} />
+                        </ListItem>
+                    </List>
+                </Drawer>
+            </div >
+        </ThemeProvider>
+    )
 }

@@ -1,6 +1,6 @@
-import React from 'react';
+import React from 'react'
 import { observer, inject } from 'mobx-react'
-import { makeStyles, Button, Avatar, MenuItem } from '@material-ui/core';
+import { makeStyles, Button, Avatar, MenuItem } from '@material-ui/core'
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -13,10 +13,10 @@ const useStyles = makeStyles((theme) => ({
         width: theme.spacing(7),
         height: theme.spacing(7),
     },
-}));
+}))
 
-const CreatorHeader = inject('userStore', 'mediaStore')(observer((props) => {
-    const classes = useStyles();
+const CreatorHeader = inject('userStore', 'mediaStore')(observer(() => {
+    const classes = useStyles()
 
     return (
         <>
@@ -37,4 +37,4 @@ const CreatorHeader = inject('userStore', 'mediaStore')(observer((props) => {
     )
 }))
 
-export default CreatorHeader;
+export default CreatorHeader

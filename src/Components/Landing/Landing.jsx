@@ -1,13 +1,8 @@
-import React, { useState } from 'react';
-import { observer, inject } from 'mobx-react';
-import { makeStyles } from '@material-ui/core/styles';
-import TextField from '@material-ui/core/TextField';
-import Button from '@material-ui/core/Button';
-import Grid from '@material-ui/core/Grid';
-import Header from '../Header/Header';
-import { useLocation, Link } from 'react-router-dom';
-import Paper from '@material-ui/core/Paper';
-import { Typography } from '@material-ui/core';
+import React, { useState } from 'react'
+import { observer, inject } from 'mobx-react'
+import { makeStyles, TextField, Button, Grid, Paper, Typography } from '@material-ui/core'
+import Header from '../Header/Header'
+import { useLocation, Link } from 'react-router-dom'
 
 const useStyles = makeStyles(() => ({
   root: {
@@ -22,13 +17,13 @@ const useStyles = makeStyles(() => ({
   },
   input: {
     width: '100%',
-    marginTop: 25,
-    marginBottom: 25,
+    marginTop: 15,
+    marginBottom: 15,
   },
   button: {
     width: 200,
     height: 40,
-    margin: 10,
+    margin: 15,
   },
 }));
 
@@ -86,12 +81,12 @@ const Landing = inject(
 
     const enterClicked = async () => {
       if (inputBoolen()) {
-          const dataMassage = page === 'login'
-            ? await props.userStore.checkUser(state)
-            : await props.userStore.saveUser(state)
-          if (dataMassage) {
-            setServerMessage(dataMassage);
-          }
+        const dataMassage = page === 'login'
+          ? await props.userStore.checkUser(state)
+          : await props.userStore.saveUser(state)
+        if (dataMassage) {
+          setServerMessage(dataMassage);
+        }
       }
     };
 
@@ -112,12 +107,12 @@ const Landing = inject(
                 </Typography>
               </Grid>
             ) : (
-              <Grid item>
-                <Typography variant='h3' style={{ marginTop: 30 }}>
-                  Sign-Up
+                <Grid item>
+                  <Typography variant='h3' style={{ marginTop: 30 }}>
+                    Sign-Up
                 </Typography>
-              </Grid>
-            )}
+                </Grid>
+              )}
             <form className={classes.root} noValidate autoComplete='off'>
               <Grid item>
                 <TextField
@@ -188,16 +183,16 @@ const Landing = inject(
                   </Grid>
                 </>
               ) : (
-                <>
-                  <Grid item>
-                    <Button size='small' color='primary'>
-                      <Link style={{ textDecoration: 'none' }} to='/auth/login'>
-                        Login
+                  <>
+                    <Grid item>
+                      <Button size='small' color='primary'>
+                        <Link style={{ textDecoration: 'none' }} to='/auth/login'>
+                          Login
                       </Link>
-                    </Button>
-                  </Grid>
-                </>
-              )}
+                      </Button>
+                    </Grid>
+                  </>
+                )}
               <Grid item>
                 <Typography variant='caption' color='error'>
                   {serverMessage}
