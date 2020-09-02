@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { observer, inject } from "mobx-react";
 import Header from "../Header/Header";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
@@ -44,7 +44,7 @@ const Notifications = inject("userStore", "mediaStore")(
               <Grid item>{}</Grid>
               <Grid item xs>
                 {notifications.map(n => (
-                    <Typography>
+                    <Typography key={Math.random()}>
                     <Grid item>
                       <MoreVertIcon fontSize="small" verticalAlign="-webkit-baseline-middle" />
                       {n.icon} {n.notification}

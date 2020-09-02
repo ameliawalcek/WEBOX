@@ -148,7 +148,7 @@ export default function Header(props) {
     return (
         <div className={classes.grow}>
             <AppBar
-                position="fixed"
+                position='sticky'
                 color='primary'
                 className={clsx(classes.appBar, {
                     [classes.appBarShift]: open,
