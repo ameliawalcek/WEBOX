@@ -6,6 +6,7 @@ import { observer, inject } from "mobx-react";
 import MediaCards from "./Components/MediaCards/MediaCards";
 import Notifications from "./Components/Notifications/Notifications";
 import CreatorPage from "./Components/CreatorPage/CreatorPage";
+
 //user params hook
 
 const App = inject("userStore", "mediaStore")(
