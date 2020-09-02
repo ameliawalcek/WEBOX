@@ -8,5 +8,14 @@ body {
 .card-img{
   max-width: 100%;
   height: auto;
-  /* object-fit: cover; */
+  object-fit: cover;
+}
+
+.media-card{
+  margin: 7px;
+  border-radius: 2%;
+}
+
+.category-bar{
+
 }

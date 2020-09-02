@@ -37,8 +37,8 @@ export default function RecipeReviewCard(props) {
     ];
 
     return (
-        <Grid xs={6} sm={4} md={4} lg={2}>
-            <div style={{ backgroundImage: `url(https://steamcdn-a.akamaihd.net/steamcommunity/public/images/avatars/95/95e20ac0675bbb5a07a120e1d53f7cead53d44d5_full.jpg)`, backgroundSize: '100% 100%' }}>
+        <Grid item xs={6} sm={4} md={4} lg={2}>
+            <div className='media-card'style={{ backgroundImage: `url(https://steamcdn-a.akamaihd.net/steamcommunity/public/images/avatars/95/95e20ac0675bbb5a07a120e1d53f7cead53d44d5_full.jpg)`, backgroundSize: '100% 100%' }}>
                 <GridListTile className={classes.gridList}>
                     <Link to={`creator/${props.id}`}>
                         <img className='card-img' src={`https://upload.wikimedia.org/wikipedia/commons/4/48/BLANK_ICON.png`} alt={``} />
