@@ -5,7 +5,7 @@ import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import Grid from "@material-ui/core/Grid";
 import Header from "../Header/Header";
-import { useLocation, Link, useHistory } from "react-router-dom";
+import { useLocation, Link } from "react-router-dom";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -23,7 +23,7 @@ const Landing = inject("userStore", "mediaStore")(
     const classes = useStyles();
     const location = useLocation();
     const page = location.pathname.split("/")[2];
-    const [state, setState] = React.useState({
+    const [state, setState] = useState({
       userName: "",
       password: "",
       email: ""
@@ -31,6 +31,7 @@ const Landing = inject("userStore", "mediaStore")(
     const [userMessage, setUserMassege] = useState("");
     const [passwordMessage, setPasswordMassege] = useState("");
     const [emailMessage, setEmailMassege] = useState("");
+    const [serverMessage, setServerMessage] = useState('')
 
     const handleInput = ({ target }) => {
       const value = target.value;
@@ -55,11 +56,17 @@ const Landing = inject("userStore", "mediaStore")(
       }
     };
 
-    const enterClicked = () => {
+    const enterClicked = async () => {
       if (page === "login") {
-        props.userStore.checkUser(state);
+        const dataMassage = await props.userStore.checkUser(state);
+        if (dataMassage.massege) {
+            setServerMessage(dataMassage.massege);
+        }
+        else {
+        }
       } else {
         props.userStore.saveUser(state);
+       ;
       }
     };
 
@@ -78,10 +85,18 @@ const Landing = inject("userStore", "mediaStore")(
           )}
           <form className={classes.root} noValidate autoComplete="off">
             <Grid item>
-              <TextField id="standard-basic" label="User Name" name="userName" onChange={handleInput} helperText={userMessage}/>
-              
-              <TextField id="standard-password-input" label="Password" name="password" type="password" onChange={handleInput} helperText={passwordMessage}/>
-              {page === "register" && <TextField id="standard-basic" name="email" label="Email" type="email" onChange={handleInput} helperText={emailMessage}/>}
+              <TextField id="standard-basic" label="User Name" name="userName" onChange={handleInput} helperText={userMessage} />
+              <TextField
+                id="standard-password-input"
+                label="Password"
+                name="password"
+                type="password"
+                onChange={handleInput}
+                helperText={passwordMessage}
+              />
+              {page === "register" && (
+                <TextField id="standard-basic" name="email" label="Email" type="email" onChange={handleInput} helperText={emailMessage} />
+              )}
               {/* <TextField error id="standard-error-helper-text" label="Error"  /> */}
             </Grid>
             <Grid item width={200}>
@@ -108,9 +123,11 @@ const Landing = inject("userStore", "mediaStore")(
                   <Button size="small" color="primary">
                     <Link to="/auth/login">Login</Link>
                   </Button>
-                </Grid>{" "}
-              </>
-            )}
+                </Grid>
+              </>  )}
+              <Grid item>
+              {serverMessage}
+              </Grid>
           </form>
         </Grid>
       </div>
