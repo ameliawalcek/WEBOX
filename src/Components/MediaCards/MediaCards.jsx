@@ -2,6 +2,7 @@ import React from 'react'
 import Header from '../Header/Header'
 import MediaCard from './MediaCard'
 import EmptyCard from './EmptyCard'
+import CategoryBar from './CategoryBar'
 import { inject, observer } from 'mobx-react'
 import { useLocation } from 'react-router-dom'
 import { Grid, GridList, makeStyles } from "@material-ui/core";
@@ -22,24 +23,36 @@ const useStyles = makeStyles((theme) => ({
 const MediaCards = inject('userStore', 'mediaStore')(observer((props) => {
     const location = useLocation()
     const classes = useStyles();
-    let { userStore, mediaStore } = props
-    let media
+    let { isLoggedIn, favorites } = props.userStore
+    let { trending, searchResults } = props.mediaStore
+
+    const { media, header, mediaCard }
+        = location.pathname === '/dashboard' && (!isLoggedIn || !favorites.length)
+            ? { media: null, header: 'basic', mediaCard: false }
+
+            : location.pathname === '/dashboard'
+                ? { media: favorites, header: 'basic', mediaCard: true }
+
+                : { media: trending, header: 'explore', mediaCard: true }
+
+    const renderMediaCard = (data) => {
+        data.map(d => {
+            return <MediaCard id={d._id} img={d.img} creator={d.creator} />
+        })
+    }
 
     return (
         <>
-            {location.pathname === '/dashboard'
-                ? <Header page={'basic'} /> && (media = userStore.favorites || null)
-                : <Header page={'explore'} /> && (media = mediaStore.trending)}
-
-            {userStore.isLoggedIn === false || userStore.favorites.length === 0
-                ? <EmptyCard />
-                :
-                <Grid container spacing={16} justify="flex-start" >
+            <Header page={header} />
+            {header === 'explore' && <CategoryBar/>}
+            {mediaCard
+                ? <Grid container spacing={16} justify="flex-start" >
                     <GridList cellHeight={180} className={classes.gridList}>
-                        {/* {userStore.media.map(m => {
-                            return <MediaCard id={m._id} img={m.img} creator={m.creator} />
-                        })} */}
-                        <MediaCard />
+                        {/* {searchResults.length
+                            ? renderMediaCard(searchResults)
+                            : renderMediaCard(media)
+                        } */}
+                        < MediaCard />
                         <MediaCard />
                         <MediaCard />
                         <MediaCard />
@@ -47,8 +60,13 @@ const MediaCards = inject('userStore', 'mediaStore')(observer((props) => {
                         <MediaCard />
                         <MediaCard />
                     </GridList>
-                </Grid>}
+                </Grid>
 
+                : <EmptyCard />
+            }
+
+
+            <CategoryBar />
         </>
     )
 }))

@@ -4,7 +4,7 @@ import axios from "axios";
 export class UserStore {
   @observable userId = "";
   @observable favorites = [];
-  @observable isLoggedIn = false;
+  @observable isLoggedIn = true;
   @observable notifications = [];
   
 
