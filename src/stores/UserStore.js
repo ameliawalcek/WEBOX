@@ -31,8 +31,6 @@ export class UserStore {
     alert(result.message);
   }
 
-  //get favorites (do we need?)
-
   @action async saveFavorite(id) {
     let favorite = await axios.post(`ADDRESS/user/favorites/${id}`);
     this.favorites.push(/*update state with favorite*/);
@@ -42,8 +40,6 @@ export class UserStore {
     let deletedFavorite = await axios.delete(`ADDRESS/user/favorites/${id}`);
     this.favorites.find(/*delete favorite from state*/);
   }
-
-  //get notifications (do we need?)
 
   @action async deleteNotification(id) {
     let deletedNotification = await axios.delete(`ADDRESS/user/notifications/${id}`);
