@@ -43,8 +43,8 @@ export class UserStore {
     }
 
     @action async deleteFavorite(id) {
-        await axios.delete(`http://localhost:3001/user/favorites/${id}`)
-        this.favorites = this.favorites.filter(favorite => favorite.id !== id);
+        await axios({ url: `http://localhost:3001/user/favorites`, method: 'DELETE', data: { creatorId: id, userId: this.userId } })
+        this.favorites = this.favorites.filter(favorite => favorite._id !== id)
     }
 
     @action async deleteNotification(id) {

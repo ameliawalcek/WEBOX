@@ -45,7 +45,7 @@ const MediaCards = inject('userStore', 'mediaStore')(observer((props) => {
 
     const renderMediaCard = (data) => {
         return data.map((d) => {
-            let isFavorite = favorites.some(d._id === favorites._id)
+            let isFavorite = favorites.some(f => d._id === f._id)
             return (
                 <MediaCard id={d._id} img={d.img} isFavorite={isFavorite} twitchName={d.twitch} key={d._id} />
             )
