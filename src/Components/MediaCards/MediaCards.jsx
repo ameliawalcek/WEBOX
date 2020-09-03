@@ -9,32 +9,28 @@ import { Grid, GridList, makeStyles, Paper } from '@material-ui/core';
 import Loading from '../Loading';
 
 const useStyles = makeStyles((theme) => ({
-  root: {
-    display: 'flex',
-    flexWrap: 'wrap',
-    justifyContent: 'flex-start',
-    overflow: 'hidden',
-    backgroundColor: theme.palette.background.paper,
-    width: '100%',
-  },
-  icon: {
-    color: 'rgba(255, 255, 255, 0.54)',
-  },
-  container: {
-    marginTop: 5,
-  },
-  paper: {
-    height: '100vh',
-  },
-}));
+    root: {
+        display: 'flex',
+        flexWrap: 'wrap',
+        justifyContent: 'flex-start',
+        overflow: 'hidden',
+        backgroundColor: theme.palette.background.paper,
+        width: '100%',
+    },
+    icon: {
+        color: 'rgba(255, 255, 255, 0.54)',
+    },
+    container: {
+        marginTop: 5,
+    },
+    paper: {
+        height: '100vh'
+    }
+}))
 
-const MediaCards = inject(
-  'userStore',
-  'mediaStore'
-)(
-  observer((props) => {
-    const location = useLocation();
-    const classes = useStyles();
+const MediaCards = inject('userStore', 'mediaStore')(observer((props) => {
+    const location = useLocation()
+    const classes = useStyles()
 
     let { isLoggedIn, favorites } = props.userStore;
     let { trending, searchResults, loading } = props.mediaStore;
@@ -47,12 +43,13 @@ const MediaCards = inject(
             : { media: trending, header: 'explore', mediaCard: true };
 
     const renderMediaCard = (data) => {
-      return data.map((d) => {
-        return (
-          <MediaCard id={d._id} img={d.img} twitchName={d.twitch} key={d._id} />
-        );
-      });
-    };
+        return data.map((d) => {
+            let isFavorite = favorites.some(d._id === favorites._id )
+            return (
+                <MediaCard id={d._id} img={d.img} isFavorite={isFavorite} twitchName={d.twitch} key={d._id} />
+            )
+        })
+    }
 
     return (
       <>
