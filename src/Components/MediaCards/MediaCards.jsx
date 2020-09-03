@@ -22,6 +22,9 @@ const useStyles = makeStyles((theme) => ({
     container: {
         marginTop: 5,
     },
+    paper: {
+        height: '100vh'
+    }
 }));
 
 const MediaCards = inject('userStore', 'mediaStore')(observer((props) => {
@@ -53,7 +56,7 @@ const MediaCards = inject('userStore', 'mediaStore')(observer((props) => {
             <Header page={header} />
             {header === 'explore' && <CategoryBar />}
             {mediaCard
-                ? <Paper>
+                ? <Paper className={classes.paper}>
                     <Grid container className={header === 'explore' && classes.container}>
                         <GridList cellHeight={180} className={classes.root}>
                             {searchResults.length

@@ -7,7 +7,7 @@ import MediaCards from "./Components/MediaCards/MediaCards";
 import Notifications from "./Components/Notifications/Notifications";
 import CreatorPage from "./Components/CreatorPage/CreatorPage";
 //user params hook
-import { ThemeProvider } from '@material-ui/core'
+import { ThemeProvider, Paper } from '@material-ui/core'
 import darkTheme from './Components/Theme/Theme'
 
 const App = inject("userStore", "mediaStore")(
@@ -15,6 +15,7 @@ const App = inject("userStore", "mediaStore")(
     return (
       <Router>
         <ThemeProvider theme={darkTheme}>
+          <Paper>
         <div id="main-container">
           <Route exact path="/auth/login" render={() => (props.userStore.isLoggedIn ? <Redirect to="/dashboard" /> : <Landing />)} />
           <Route exact path="/auth/register" render={() => (props.userStore.isLoggedIn ? <Redirect to="/dashboard" /> : <Landing />)} />
@@ -23,6 +24,7 @@ const App = inject("userStore", "mediaStore")(
           <Route exact path="/creator/:id" render={() => <CreatorPage />} />
           <Route exact path="/notifications" render={() => <Notifications />} />
         </div>
+        </Paper>
         </ThemeProvider>
       </Router>
     )
