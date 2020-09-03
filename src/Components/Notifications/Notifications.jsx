@@ -1,10 +1,10 @@
 import React from "react"
 import { observer, inject } from "mobx-react"
 import Header from "../Header/Header"
-import { Paper, makeStyles, Grid, Typography, Icon } from "@material-ui/core"
+import Notification from "./Notification"
+import { Paper, makeStyles, Grid, Icon } from "@material-ui/core"
 import YouTubeIcon from "@material-ui/icons/YouTube"
 import TwitterIcon from "@material-ui/icons/Twitter"
-import MoreVertIcon from "@material-ui/icons/MoreVert"
 import pngwave from "../assets/pngwave.png"
 
 const useStyles = makeStyles(theme => ({
@@ -41,12 +41,7 @@ const Notifications = inject("mediaStore")(observer(props => {
                         <Grid item>{}</Grid>
                         <Grid item xs>
                             {notifications.map(n => (
-                                <Typography key={Math.random()}>
-                                    <Grid item>
-                                        <MoreVertIcon fontSize="small" verticalAlign="-webkit-baseline-middle" />
-                                        {n.icon} {n.notification}
-                                    </Grid>
-                                </Typography>
+                                <Notification n={n} />
                             ))}
                         </Grid>
                     </Grid>
