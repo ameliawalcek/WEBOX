@@ -13,7 +13,8 @@ class TwitchAPI {
         game: category
       },
       headers: {
-        'clientId': this.clientId
+        'Accept': 'application/vnd.twitchtv.v5+json',
+        'Client-ID': this.clientId
       }
     }))
       .data.streams.map(stream => stream.channel.name)
@@ -23,7 +24,8 @@ class TwitchAPI {
     return (await axios({
       url: this.baseUrl,
       headers: {
-        'clientId': this.clientId
+        'Accept': 'application/vnd.twitchtv.v5+json',
+        'Client-ID': this.clientId
       }
     }))
       .data.streams.map(stream => stream.channel.name)

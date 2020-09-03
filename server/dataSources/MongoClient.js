@@ -1,19 +1,20 @@
+require('dotenv').config()
 require('mongoose').connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })
 const Models = require('../models/Models')
 
 class MongoClient {
-  async getDocById(collection, id) {
+  getDocById(collection, id) {
     return Models[collection].findById(id)
   }
 
-  async getUserByName(userName) {
+  getUserByName(userName) {
     return Models
       .User
       .findOne({ userName: userName })
       .lean()
   }
 
-  async getUserById(id) {
+  getUserById(id) {
     return Models
       .User
       .findById(id)
@@ -22,7 +23,7 @@ class MongoClient {
       .lean()
   }
 
-  async addUser(userDoc) {
+  addUser(userDoc) {
     return new Models
       .User(userDoc)
   }
@@ -51,21 +52,22 @@ class MongoClient {
       .lean()
   }
 
-  async getAllCreators() {
+  getAllCreators() {
     return Models
       .Creator
       .find({})
+      .select('_id twitch img')
       .lean()
   }
 
-  async getCreatorById(id) {
+  getCreatorById(id) {
     return Models
       .Creator
       .findById(id)
       .lean()
   }
 
-  async saveNotification(notificationDoc) {
+  saveNotification(notificationDoc) {
     return new Models
       .Notification(notificationDoc)
       .save()
@@ -77,7 +79,7 @@ class MongoClient {
       .User
       .findByIdAndUpdate(
         userId,
-        { $pull: { notifications: { _id: notificationDoc._id } } },
+        { $pull: { notifications: notificationDoc._id } },
         { new: true }
       )
       .lean()

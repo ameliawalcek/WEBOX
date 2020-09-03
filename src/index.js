@@ -5,11 +5,13 @@ import App from './App';
 import { Provider } from 'mobx-react'
 import { MediaStore } from './stores/MediaStore';
 import { UserStore } from './stores/UserStore';
+import { CreatorStore } from './stores/CreatorStore';
 
 
 const mediaStore = new MediaStore()
 const userStore = new UserStore()
-const stores = { mediaStore, userStore }
+const creatorStore = new CreatorStore()
+const stores = { mediaStore, userStore, creatorStore }
 
 ReactDOM.render(
   <Provider {...stores}>

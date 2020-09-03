@@ -1,9 +1,8 @@
-import React from 'react';
+import React, {useState} from 'react'
 import { observer, inject } from 'mobx-react'
-import SearchIcon from '@material-ui/icons/Search';
-import { fade, makeStyles } from '@material-ui/core/styles';
+import { fade, makeStyles, InputBase } from '@material-ui/core'
+import SearchIcon from '@material-ui/icons/Search'
 
-import { InputBase} from '@material-ui/core';
 const useStyles = makeStyles((theme) => ({
     search: {
         position: 'relative',
@@ -34,7 +33,6 @@ const useStyles = makeStyles((theme) => ({
     },
     inputInput: {
         padding: theme.spacing(1, 1, 1, 0),
-        // vertical padding + font size from searchIcon
         paddingLeft: `calc(1em + ${theme.spacing(4)}px)`,
         transition: theme.transitions.create('width'),
         width: '100%',
@@ -43,9 +41,19 @@ const useStyles = makeStyles((theme) => ({
         },
     }
 
-}));
+}))
 const SearchBar = inject('userStore', 'mediaStore')(observer((props) => {
-    const classes = useStyles();
+    const classes = useStyles()
+    const [searchInput, setSearchInput] = useState('')
+
+    const handleInput = ({target}) => {
+        // setSearchInput(target.value)
+        searchResult(target.value)
+    }
+
+    const searchResult = async value => {
+        const result = await props.mediaStore.searchCreators(value)
+    }
 
     return (
         <div className={classes.search}>
@@ -59,10 +67,11 @@ const SearchBar = inject('userStore', 'mediaStore')(observer((props) => {
                     input: classes.inputInput,
                 }}
                 inputProps={{ 'aria-label': 'search' }}
+                onChange={handleInput}
             />
         </div>
 
     )
 }))
 
-export default SearchBar;
+export default SearchBar
