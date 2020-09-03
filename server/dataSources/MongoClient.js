@@ -1,5 +1,5 @@
 require('dotenv').config()
-require('mongoose').connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })
+require('mongoose').connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false })
 const Models = require('../models/Models')
 
 class MongoClient {

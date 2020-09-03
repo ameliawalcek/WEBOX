@@ -27,7 +27,6 @@ import HomeIcon from '@material-ui/icons/Home';
 import MenuIcon from '@material-ui/icons/Menu';
 import Brightness4Icon from '@material-ui/icons/Brightness4';
 import { inject, observer } from 'mobx-react';
-import Brightness4OutlinedIcon from '@material-ui/icons/Brightness4Outlined';
 import Brightness2RoundedIcon from '@material-ui/icons/Brightness2Rounded'; const drawerWidth = 180;
 
 const useStyles = makeStyles((theme) => ({
@@ -148,7 +147,6 @@ const Header = inject('userStore')(
 
             <div className={classes.grow} />
             <IconButton
-              button
               component={Link}
               to='/notifications'
               color='inherit'

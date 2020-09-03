@@ -35,7 +35,6 @@ authRouter.post('/signup', async (req, res) => {
 authRouter.post('/login', async (req, res) => {
     const { userName, password } = req.body
     const isUserNameInDB = await mongoClient.getUserByName(userName)
-
     if (!isUserNameInDB) {
         res.status(401).send('User name not in data base')
     } else {
