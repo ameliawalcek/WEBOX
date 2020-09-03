@@ -25,9 +25,10 @@ import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ExploreIcon from '@material-ui/icons/Explore';
 import HomeIcon from '@material-ui/icons/Home';
 import MenuIcon from '@material-ui/icons/Menu';
+import Brightness4Icon from '@material-ui/icons/Brightness4';
 import { inject, observer } from 'mobx-react';
-
-const drawerWidth = 180;
+import Brightness4OutlinedIcon from '@material-ui/icons/Brightness4Outlined';
+import Brightness2RoundedIcon from '@material-ui/icons/Brightness2Rounded'; const drawerWidth = 180;
 
 const useStyles = makeStyles((theme) => ({
   grow: {
@@ -127,11 +128,7 @@ const Header = inject('userStore')(
     return (
       <div className={classes.grow}>
         <AppBar
-          position='sticky'
-          color='primary'
-          className={clsx(classes.appBar, {
-            [classes.appBarShift]: open,
-          })}
+
         >
           <Toolbar>
             <IconButton
@@ -154,7 +151,6 @@ const Header = inject('userStore')(
               button
               component={Link}
               to='/notifications'
-              aria-label='show 17 new notifications'
               color='inherit'
             >
               <Badge badgeContent={17} color='secondary'>
@@ -180,8 +176,8 @@ const Header = inject('userStore')(
               {theme.direction === 'ltr' ? (
                 <ChevronLeftIcon />
               ) : (
-                <ChevronRightIcon />
-              )}
+                  <ChevronRightIcon />
+                )}
             </IconButton>
           </div>
           <Divider />
@@ -205,10 +201,16 @@ const Header = inject('userStore')(
               <ListItemText primary={`Notifications`} />
             </ListItem>
             <ListItem>
+                <ListItemIcon>
+                {darkState
+                  ? <Brightness2RoundedIcon fontSize='small' />
+                  : <Brightness4Icon />
+                }
+              </ListItemIcon>
               <ListItemIcon>
                 <Switch checked={darkState} onChange={handleDarkStateChange} />
               </ListItemIcon>
-              <ListItemText primary={`Dark Mode`} />
+
             </ListItem>
           </List>
         </Drawer>

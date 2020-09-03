@@ -50,15 +50,26 @@ const CategoryBar = inject('mediaStore')(observer((props) => {
     const [value, setValue] = React.useState(0)
 
     useEffect(() => {
-        mediaStore.getTrending(categories[value])
+        mediaStore.getTrending(categories[value].url)
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
-    const categories = ['All', 'Gaming', 'Music', 'Art', 'Fitness', 'News', 'Movies']
+    const categories = [
+        { name: 'All', url: 'All' },
+        { name: 'Live', url: '' },
+        { name: 'Sports & Fitness', url: 'Sports %26 Fitness' },
+        { name: 'Art', url: 'Art' },
+        { name: 'Beauty', url: 'Beauty %26 Body Art' },
+        { name: 'Talk Shows', url: 'Just Chatting' },
+        { name: 'Food & Drink', url: 'Food %26 Drink' },
+        { name: 'Science', url: 'Science %26 Technology' },
+        { name: 'Travel', url: 'Travel %26 Outdoors' }
+    ]
 
     const handleChange = (event, newValue) => {
         setValue(newValue)
-        mediaStore.getTrending(categories[value])
+        mediaStore.getTrending(categories[newValue].url)
+        console.log(categories[value].url)
     }
 
     return (
@@ -66,7 +77,7 @@ const CategoryBar = inject('mediaStore')(observer((props) => {
             <AppBar
                 position='sticky'
                 style={{
-                    paddingTop: 10,
+                    paddingTop: 60,
                     zIndex: 2,
                 }}
                 color='default'
@@ -80,7 +91,7 @@ const CategoryBar = inject('mediaStore')(observer((props) => {
                     scrollButtons='auto'
                 >
                     {categories.map((category) => {
-                        return <Tab key={category} label={category} {...a11yProps(0)} />
+                        return <Tab key={category.name} label={category.name} {...a11yProps(0)} />
                     })}
                 </Tabs>
             </AppBar>
