@@ -1,7 +1,10 @@
-import React from 'react';
+import React from 'react'
 import { Link } from 'react-router-dom'
-import { GridListTile, GridListTileBar, IconButton, Menu, MenuItem, Grid, makeStyles } from '@material-ui/core';
-import MoreVertIcon from '@material-ui/icons/MoreVert';
+import {
+    GridListTile, GridListTileBar, IconButton,
+    Menu, MenuItem, Grid, makeStyles
+} from '@material-ui/core'
+import MoreVertIcon from '@material-ui/icons/MoreVert'
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -15,7 +18,7 @@ const useStyles = makeStyles((theme) => ({
         color: 'rgba(255, 255, 255, 0.54)',
     },
 
-}));
+}))
 
 export default function RecipeReviewCard(props) {
     const { img, twitchName, id } = props
@@ -26,20 +29,20 @@ export default function RecipeReviewCard(props) {
 
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget)
-    };
+    }
 
     const handleClose = () => {
         setAnchorEl(null)
-    };
+    }
 
     const options = [
         'Favorite',
         'Unfavorite',
-    ];
+    ]
 
     return (
         <Grid item xs={6} sm={4} md={4} lg={2}>
-            <div className='media-card'style={{ backgroundImage: `url(${img})`, backgroundSize: '100% 100%' }}>
+            <div className='media-card' style={{ backgroundImage: `url(${img})`, backgroundSize: '100% 100%' }}>
                 <GridListTile className={classes.gridList}>
                     <Link to={`creator/${id}`}>
                         <img className='card-img' src={`https://upload.wikimedia.org/wikipedia/commons/4/48/BLANK_ICON.png`} alt={``} />
@@ -77,5 +80,5 @@ export default function RecipeReviewCard(props) {
                 </GridListTile>
             </div>
         </Grid>
-    );
+    )
 }
