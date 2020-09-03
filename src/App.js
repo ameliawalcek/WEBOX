@@ -12,15 +12,16 @@ import { useTheme } from './hooks/hooks'
 
 const App = inject("userStore", "mediaStore")(
   observer(props => {
-    const darkTheme = useTheme(props.userStore.darkState)
+    const { darkState, isLoggedIn } = props.userStore
+    const darkTheme = useTheme(darkState)
 
     return (
       <Router>
         <ThemeProvider theme={darkTheme}>
           <Paper>
             <div id="main-container">
-              <Route exact path="/auth/login" render={() => (props.userStore.isLoggedIn ? <Redirect to="/dashboard" /> : <Landing />)} />
-              <Route exact path="/auth/register" render={() => (props.userStore.isLoggedIn ? <Redirect to="/dashboard" /> : <Landing />)} />
+              <Route exact path="/auth/login" render={() => (isLoggedIn ? <Redirect to="/dashboard" /> : <Landing />)} />
+              <Route exact path="/auth/register" render={() => (isLoggedIn ? <Redirect to="/dashboard" /> : <Landing />)} />
               <Route exact path="/dashboard" render={() => <MediaCards />} />
               <Route exact path="/explore" render={() => <MediaCards />} />
               <Route exact path="/creator/:id" render={() => <CreatorPage />} />
