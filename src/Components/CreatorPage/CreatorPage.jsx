@@ -3,6 +3,7 @@ import { observer, inject } from 'mobx-react';
 import Header from '../Header/Header';
 import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
+import { useScript } from '../../hooks/hooks';
 
 const CreatorPage = inject('creatorStore')(
   observer((props) => {
@@ -10,11 +11,15 @@ const CreatorPage = inject('creatorStore')(
     const { creator } = creatorStore;
     const { pathname } = useLocation();
 
+    useScript('//cdn.embedly.com/widgets/platform.js');
+    useScript('https://platform.twitter.com/widgets.js');
+
     useEffect(() => {
       creatorStore.getCreatorById(pathname.split('/')[2]);
+
       // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
-    console.log(creator.twitterName);
+
     return (
       <div>
         <Header page={'creator'} />
