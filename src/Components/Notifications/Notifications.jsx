@@ -11,10 +11,12 @@ const useStyles = makeStyles(theme => ({
     root: {
         flexGrow: 1,
         overflow: "hidden",
+        height: '100vh',
         padding: theme.spacing(0, 3)
     },
     paper: {
         maxWidth: 400,
+
         margin: `${theme.spacing(1)}px auto`,
         padding: theme.spacing(2)
     }
@@ -28,31 +30,32 @@ const notifications = [
 ]
 
 const Notifications = inject("mediaStore")(observer(props => {
-        const classes = useStyles()
+    const classes = useStyles()
 
-        return (
-            <div>
-                <Header page={"basic"} />
-                <div className={classes.root}>
-                    <Paper className={classes.paper} {...props} elevation={0}>
-                        <Grid container wrap="nowrap" spacing={2}>
-                            <Grid item>{}</Grid>
-                            <Grid item xs>
-                                {notifications.map(n => (
-                                    <Typography key={Math.random()}>
-                                        <Grid item>
-                                            <MoreVertIcon fontSize="small" verticalAlign="-webkit-baseline-middle" />
-                                            {n.icon} {n.notification}
-                                        </Grid>
-                                    </Typography>
-                                ))}
-                            </Grid>
+    return (
+        <Paper>
+            <Header page={"basic"} />
+            <div className={classes.root}>
+                <Paper className={classes.paper} {...props} elevation={0}>
+                    <Grid container wrap="nowrap" spacing={2}>
+                        <Grid item>{}</Grid>
+                        <Grid item xs>
+                            {notifications.map(n => (
+                                <Typography key={Math.random()}>
+                                    <Grid item>
+                                        <MoreVertIcon fontSize="small" verticalAlign="-webkit-baseline-middle" />
+                                        {n.icon} {n.notification}
+                                    </Grid>
+                                </Typography>
+                            ))}
                         </Grid>
-                    </Paper>
-                </div>
+                    </Grid>
+                </Paper>
             </div>
-        )
-    })
+        </Paper>
+
+    )
+})
 )
 
 export default Notifications;
