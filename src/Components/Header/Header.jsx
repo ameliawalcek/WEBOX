@@ -69,8 +69,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Header = inject('userStore')(
-  observer((props) => {
+const Header = inject('userStore')( observer((props) => {
     const { darkState, handleDarkStateChange } = props.userStore;
     const [open, setOpen] = React.useState(false);
     const [anchorEl, setAnchorEl] = React.useState(null);
