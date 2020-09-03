@@ -69,7 +69,6 @@ const CategoryBar = inject('mediaStore')(observer((props) => {
     const handleChange = (event, newValue) => {
         setValue(newValue)
         mediaStore.getTrending(categories[newValue].url)
-        console.log(categories[value].url)
     }
 
     return (

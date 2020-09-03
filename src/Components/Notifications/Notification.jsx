@@ -1,6 +1,6 @@
 import React from "react"
 import { observer, inject } from "mobx-react"
-import { Menu, MenuItem, IconButton, makeStyles, Grid, Typography } from "@material-ui/core"
+import { Menu, MenuItem, IconButton, makeStyles, Grid } from "@material-ui/core"
 import MoreVertIcon from "@material-ui/icons/MoreVert"
 
 const useStyles = makeStyles(theme => ({
