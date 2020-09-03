@@ -1,12 +1,13 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { observer, inject } from 'mobx-react'
-import { Typography, Grid, Button, CardActions } from '@material-ui/core'
+import { Typography, Grid, Button, CardActions, Paper } from '@material-ui/core'
 
 const EmptyCard = inject('userStore', 'mediaStore')(observer((props) => {
     let { isLoggedIn } = props.userStore
 
     return (
+        <Paper>
         <Grid
             container
             spacing={0}
@@ -38,6 +39,7 @@ const EmptyCard = inject('userStore', 'mediaStore')(observer((props) => {
                 </CardActions >
             </Grid>
         </Grid>
+        </Paper>
     )
 }))
 
