@@ -1,7 +1,7 @@
-import React, {useState} from 'react';
+import React, {useState} from 'react'
 import { observer, inject } from 'mobx-react'
-import SearchIcon from '@material-ui/icons/Search';
-import { fade, makeStyles, InputBase } from '@material-ui/core';
+import { fade, makeStyles, InputBase } from '@material-ui/core'
+import SearchIcon from '@material-ui/icons/Search'
 
 const useStyles = makeStyles((theme) => ({
     search: {
@@ -41,9 +41,9 @@ const useStyles = makeStyles((theme) => ({
         },
     }
 
-}));
+}))
 const SearchBar = inject('userStore', 'mediaStore')(observer((props) => {
-    const classes = useStyles();
+    const classes = useStyles()
     const [searchInput, setSearchInput] = useState('')
 
     const handleInput = ({target}) => {
@@ -74,4 +74,4 @@ const SearchBar = inject('userStore', 'mediaStore')(observer((props) => {
     )
 }))
 
-export default SearchBar;
+export default SearchBar
