@@ -27,12 +27,16 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-const MediaCards = inject('userStore', 'mediaStore')(observer((props) => {
-    const location = useLocation()
-    const classes = useStyles()
+const MediaCards = inject(
+  'userStore',
+  'mediaStore'
+)(
+  observer((props) => {
+    const location = useLocation();
+    const classes = useStyles();
 
-    let { isLoggedIn, favorites } = props.userStore
-    let { trending, searchResults } = props.mediaStore
+    let { isLoggedIn, favorites } = props.userStore;
+    let { trending, searchResults } = props.mediaStore;
 
     const { media, header, mediaCard } =
         location.pathname === '/dashboard' && (!isLoggedIn || !favorites.length)
@@ -44,12 +48,12 @@ const MediaCards = inject('userStore', 'mediaStore')(observer((props) => {
                 : { media: trending, header: 'explore', mediaCard: true }
 
     const renderMediaCard = (data) => {
-        return data.map((d) => {
-            return (
-                <MediaCard id={d._id} img={d.img} twitchName={d.twitch} key={d._id} />
-            )
-        })
-    }
+      return data.map((d) => {
+        return (
+          <MediaCard id={d._id} img={d.img} twitchName={d.twitch} key={d._id} />
+        );
+      });
+    };
 
     return (
         <>
