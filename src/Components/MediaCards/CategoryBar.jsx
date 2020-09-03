@@ -56,7 +56,7 @@ const CategoryBar = inject('mediaStore')(observer((props) => {
 
     const categories = [
         { name: 'All', url: 'All' },
-        { name: 'Live', url: '' },
+        { name: 'Trending', url: '' },
         { name: 'Sports & Fitness', url: 'Sports & Fitness' },
         { name: 'Art', url: 'Art' },
         { name: 'Beauty', url: 'Beauty & Body Art' },
@@ -77,7 +77,7 @@ const CategoryBar = inject('mediaStore')(observer((props) => {
             <AppBar
                 position='sticky'
                 style={{
-                    paddingTop: 10,
+                    paddingTop: 60,
                     zIndex: 2,
                 }}
                 color='default'
@@ -91,7 +91,7 @@ const CategoryBar = inject('mediaStore')(observer((props) => {
                     scrollButtons='auto'
                 >
                     {categories.map((category) => {
-                        return <Tab key={category} label={category.name} {...a11yProps(0)} />
+                        return <Tab key={category.name} label={category.name} {...a11yProps(0)} />
                     })}
                 </Tabs>
             </AppBar>

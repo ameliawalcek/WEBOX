@@ -34,13 +34,13 @@ const Notification = inject("mediaStore")(observer(props => {
     const options = ['Remove']
 
     return (
-        <Typography key={Math.random()}>
+        <>
             <Grid item>
                 <IconButton className={classes.icon} aria-label="more"
                     aria-controls="long-menu"
                     aria-haspopup="true"
                     onClick={handleClick}>
-                    <MoreVertIcon fontSize="small" verticalAlign="-webkit-baseline-middle" />
+                    <MoreVertIcon fontSize="small" />
                 </IconButton>
                 {props.n.icon} {props.n.notification}
             </Grid>
@@ -63,7 +63,7 @@ const Notification = inject("mediaStore")(observer(props => {
                     </MenuItem>
                 ))}
             </Menu>
-        </Typography>
+        </>
     )
 })
 )
