@@ -9,4 +9,6 @@ export class CreatorStore {
     this.creator = (await axios('http://localhost:3001/media/channel/' + id)).data
     this.loading = false
   };
+
+  @action cleanCreatorData = () => { this.creator = {} }
 }

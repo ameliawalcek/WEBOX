@@ -3,13 +3,20 @@ import axios from "axios";
 
 export class UserStore {
     @observable userId = "";
-    @observable favorites = [];
     @observable isLoggedIn = false;
+    @observable favorites = [];
     @observable notifications = [];
-    @observable darkState = false
+    @observable darkState = JSON.parse(localStorage.dark || 'false')
+
+    @action handleDarkStateChange = () => {
+        this.darkState = !this.darkState
+        localStorage.setItem('dark', this.darkState)
+    }
 
     @action async getUser(id) {
-        // let data = await axios.get(`ADDRESS/user/${id}`);
+        let user = await axios.get(`http://localhost:3001/user/${id}`);
+        this.favorites = user.data.favorites
+        this.notifications = user.data.notifications
     }
 
     @action async checkUser(user) {
@@ -30,16 +37,17 @@ export class UserStore {
     }
 
     @action async saveFavorite(id) {
-        let favorite = await axios.post(`ADDRESS/user/favorites/${id}`);
-        this.favorites.push(/*update state with favorite*/);
+        let favorite = await axios.post(`http://localhost:3001/user/favorites/${id}`);
+        this.favorites.push(favorite.data);
     }
 
     @action async deleteFavorite(id) {
-        let deletedFavorite = await axios.delete(`ADDRESS/user/favorites/${id}`);
-        this.favorites.find(/*delete favorite from state*/);
+        await axios.delete(`http://localhost:3001/user/favorites/${id}`)
+        this.favorites = this.favorites.filter(favorite => favorite.id !== id);
     }
 
     @action async deleteNotification(id) {
-        let deletedNotification = await axios.delete(`ADDRESS/user/notifications/${id}`);
+        await axios.delete(`http://localhost:3001/user/notifications/${id}`)
+        this.notification = this.notifications.filter(notification => notification.id !== id)
     }
 }

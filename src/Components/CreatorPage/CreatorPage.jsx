@@ -17,6 +17,9 @@ const CreatorPage = inject('creatorStore')(
     useEffect(() => {
       creatorStore.getCreatorById(pathname.split('/')[2]);
 
+      return () => {
+        creatorStore.cleanCreatorData();
+      };
       // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
