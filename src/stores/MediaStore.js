@@ -2,18 +2,12 @@ import { observable, action } from 'mobx'
 import axios from 'axios'
 
 export class MediaStore {
-    @observable creators = []
     @observable trending = []
     @observable searchResults = []
 
     @action async getTrending(category) {
-        let trending = await axios.get(`http://localhost:3001/media/trending`) //
+        let trending = await axios.get(`http://localhost:3001/media/trending`)
         this.trending = trending.data
-    }
-
-    @action async getCreators() {
-        let creatorsFromDb = await axios.get('/') // 
-        this.creators = creatorsFromDb.data
     }
 
     @action searchCreators(value) {
