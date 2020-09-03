@@ -57,10 +57,10 @@ const CategoryBar = inject('mediaStore')(observer((props) => {
     const categories = [
         { name: 'All', url: 'All' },
         { name: 'Live', url: '' },
-        { name: 'Sports & Fitness', url: 'Sports & Fitness' },
+        { name: 'Sports & Fitness', url: 'Sports %26 Fitness' },
         { name: 'Art', url: 'Art' },
         { name: 'Beauty', url: 'Beauty & Body Art' },
-        { name: 'Talk Shows', url: 'Talk Shows & Podcasts' },
+        { name: 'Talk Shows', url: 'Just Chatting' },
         { name: 'Food & Drink', url: 'Food & Drink' },
         { name: 'Science', url: 'Science & Technology' },
         { name: 'Travel', url: 'Travel & Outdoors' }
