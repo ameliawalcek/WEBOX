@@ -6,7 +6,7 @@ export class MediaStore {
     @observable searchResults = []
 
     @action async getTrending(category) {
-        let trending = await axios.get(`http://localhost:3001/media/trending`)
+        let trending = await axios.get(`http://localhost:3001/media/trending?category=${category}`)
         this.trending = trending.data
     }
 
