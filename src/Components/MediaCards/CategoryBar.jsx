@@ -56,14 +56,14 @@ const CategoryBar = inject('mediaStore')(observer((props) => {
 
     const categories = [
         { name: 'All', url: 'All' },
-        { name: 'Trending', url: '' },
-        { name: 'Sports & Fitness', url: 'Sports & Fitness' },
+        { name: 'Live', url: '' },
+        { name: 'Sports & Fitness', url: 'Sports %26 Fitness' },
         { name: 'Art', url: 'Art' },
-        { name: 'Beauty', url: 'Beauty & Body Art' },
-        { name: 'Talk Shows', url: 'Talk Shows & Podcasts' },
-        { name: 'Food & Drink', url: 'Food & Drink' },
-        { name: 'Science', url: 'Science & Technology' },
-        { name: 'Travel', url: 'Travel & Outdoors' }
+        { name: 'Beauty', url: 'Beauty %26 Body Art' },
+        { name: 'Talk Shows', url: 'Just Chatting' },
+        { name: 'Food & Drink', url: 'Food %26 Drink' },
+        { name: 'Science', url: 'Science %26 Technology' },
+        { name: 'Travel', url: 'Travel %26 Outdoors' }
     ]
 
     const handleChange = (event, newValue) => {

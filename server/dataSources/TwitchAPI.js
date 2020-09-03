@@ -9,9 +9,7 @@ class TwitchAPI {
   async getTrendingByCategory(category) {
     return (await axios({
       url: this.baseUrl,
-      params: {
-        game: category
-      },
+      params: { game: encodeURI(category) },
       headers: {
         'Accept': 'application/vnd.twitchtv.v5+json',
         'Client-ID': this.clientId

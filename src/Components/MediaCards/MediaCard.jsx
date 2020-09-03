@@ -1,5 +1,5 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import {
     GridListTile, GridListTileBar, IconButton,
     Menu, MenuItem, Grid, makeStyles, Snackbar
@@ -9,18 +9,17 @@ import MoreVertIcon from '@material-ui/icons/MoreVert'
 import MuiAlert from '@material-ui/lab/Alert';
 
 const useStyles = makeStyles((theme) => ({
-    root: {
-        display: 'flex',
-        flexWrap: 'wrap',
-        justifyContent: 'space-around',
-        overflow: 'hidden',
-        backgroundColor: theme.palette.background.paper,
-    },
-    icon: {
-        color: 'rgba(255, 255, 255, 0.54)',
-    },
-
-}))
+  root: {
+    display: 'flex',
+    flexWrap: 'wrap',
+    justifyContent: 'space-around',
+    overflow: 'hidden',
+    backgroundColor: theme.palette.background.paper,
+  },
+  icon: {
+    color: 'rgba(255, 255, 255, 0.54)',
+  },
+}));
 
 const MediaCard = inject('userStore', 'mediaStore')(
     observer((props) => {
