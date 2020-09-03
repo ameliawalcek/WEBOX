@@ -6,7 +6,12 @@ export class UserStore {
     @observable favorites = [];
     @observable isLoggedIn = false;
     @observable notifications = [];
-    @observable darkState = false
+    @observable darkState = JSON.parse(localStorage.dark || 'false')
+
+    @action handleDarkStateChange = () => {
+        this.darkState = !this.darkState
+        localStorage.setItem('dark', this.darkState)
+    }
 
     @action async getUser(id) {
         // let data = await axios.get(`ADDRESS/user/${id}`);
