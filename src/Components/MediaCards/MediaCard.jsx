@@ -25,14 +25,13 @@ const MediaCard = inject('userStore', 'mediaStore')(
     observer((props) => {
 
         const ITEM_HEIGHT = 48
-        const { img, twitchName, id, userStore } = props
+        const { img, twitchName, id, userStore, isFavorite } = props
         const classes = useStyles()
         const [anchorEl, setAnchorEl] = React.useState(null)
         const open = Boolean(anchorEl)
         const [openSnack, setOpen] = React.useState(false);
 
-        const menuLabel = props.isFavorite ? 'Unfavorite' : 'Favorite'
-
+        const menuLabel = isFavorite ? 'Unfavorite' : 'Favorite'
         const handleClick = (event) => {
             setAnchorEl(event.currentTarget)
         }
@@ -41,8 +40,9 @@ const MediaCard = inject('userStore', 'mediaStore')(
             return <MuiAlert elevation={6} variant="filled" {...props} />;
         }
 
-        const handleClose = () => {
+        const handleClose = (event, reason) => {
             setAnchorEl(null)
+            if(reason === 'backdropClick') { return }
             if (userStore.isLoggedIn) {
                 menuLabel === 'Favorite'
                     ? userStore.saveFavorite(id)
