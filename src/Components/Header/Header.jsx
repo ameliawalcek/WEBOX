@@ -1,23 +1,12 @@
 import React from 'react';
+import { inject, observer } from 'mobx-react';
 import { Link } from 'react-router-dom';
 import clsx from 'clsx';
 import SearchBar from './SearchBar';
 import CreatorHeader from './CreatorHeader';
 import {
-  AppBar,
-  Toolbar,
-  IconButton,
-  Badge,
-  Menu,
-  Switch,
-  ListItem,
-  ListItemText,
-  Drawer,
-  List,
-  Divider,
-  ListItemIcon,
-  makeStyles,
-  useTheme,
+  AppBar, Toolbar, IconButton, Badge, Menu, Switch, ListItem, ListItemText,
+  Drawer, List, Divider, ListItemIcon, useTheme,
 } from '@material-ui/core';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
@@ -26,194 +15,117 @@ import ExploreIcon from '@material-ui/icons/Explore';
 import HomeIcon from '@material-ui/icons/Home';
 import MenuIcon from '@material-ui/icons/Menu';
 import Brightness4Icon from '@material-ui/icons/Brightness4';
-import { inject, observer } from 'mobx-react';
-import Brightness2RoundedIcon from '@material-ui/icons/Brightness2Rounded'; const drawerWidth = 180;
+import Brightness2RoundedIcon from '@material-ui/icons/Brightness2Rounded';
+import { useStyles } from "../styles/style";
+
+const Header = inject('userStore')(observer((props) => {
+  const { darkState, handleDarkStateChange } = props.userStore;
+
+  const [open, setOpen] = React.useState(false);
+  const [anchorEl, setAnchorEl] = React.useState(null);
  
-const useStyles = makeStyles((theme) => ({
-  grow: {
-    flexGrow: 1,
-  },
-  appBar: {
-    transition: theme.transitions.create(['margin', 'width'], {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen,
-    }),
-  },
-  appBarShift: {
-    width: `calc(100% - ${drawerWidth}px)`,
-    marginLeft: drawerWidth,
-    transition: theme.transitions.create(['margin', 'width'], {
-      easing: theme.transitions.easing.easeOut,
-      duration: theme.transitions.duration.enteringScreen,
-    }),
-  },
-  menuButton: {
-    marginRight: theme.spacing(2),
-  },
-  hide: {
-    display: 'none',
-  },
-  drawer: {
-    width: drawerWidth,
-    flexShrink: 0,
-  },
-  drawerPaper: {
-    width: drawerWidth,
-  },
-  drawerHeader: {
-    display: 'flex',
-    alignItems: 'center',
-    padding: theme.spacing(0, 1),
-    ...theme.mixins.toolbar,
-    justifyContent: 'flex-end',
-  },
-}));
- 
-const Header = inject('userStore')( observer((props) => {
-    const { darkState, handleDarkStateChange } = props.userStore;
-    const [open, setOpen] = React.useState(false);
-    const [anchorEl, setAnchorEl] = React.useState(null);
-    const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
-    const isMenuOpen = Boolean(anchorEl);
-    const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
- 
-    const classes = useStyles();
-    const theme = useTheme();
- 
-    const handleDrawerOpen = () => {
-      setOpen(true);
-    };
- 
-    const handleDrawerClose = () => {
-      setOpen(false);
-    };
- 
-    const handleMobileMenuClose = () => {
-      setMobileMoreAnchorEl(null);
-    };
- 
-    const handleMenuClose = () => {
-      setAnchorEl(null);
-      handleMobileMenuClose();
-    };
- 
-    const menuId = 'primary-search-account-menu';
-    const renderMenu = (
-      <Menu
-        anchorEl={anchorEl}
-        anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
-        id={menuId}
-        keepMounted
-        transformOrigin={{ vertical: 'top', horizontal: 'right' }}
-        open={isMenuOpen}
-        onClose={handleMenuClose}
-      ></Menu>
-    );
- 
-    const mobileMenuId = 'primary-search-account-menu-mobile';
-    const renderMobileMenu = (
-      <Menu
-        anchorEl={mobileMoreAnchorEl}
-        anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
-        id={mobileMenuId}
-        keepMounted
-        transformOrigin={{ vertical: 'top', horizontal: 'right' }}
-        open={isMobileMenuOpen}
-        onClose={handleMobileMenuClose}
-      ></Menu>
-    );
- 
-    return (
-      <div className={classes.grow}>
-        <AppBar
- 
-        >
-          <Toolbar>
-            <IconButton
-              color='inherit'
-              aria-label='open drawer'
-              onClick={handleDrawerOpen}
-              edge='start'
-              className={clsx(classes.menuButton, open && classes.hide)}
-            >
-              <MenuIcon />
-            </IconButton>
-            {props.page === 'explore' ? (
-              <SearchBar />
-            ) : props.page === 'creator' ? (
-              <CreatorHeader />
-            ) : null}
- 
-            <div className={classes.grow} />
-            <IconButton
-              component={Link}
-              to='/notifications'
-              color='inherit'
-            >
-              <Badge badgeContent={17} color='secondary'>
-                <NotificationsIcon />
-              </Badge>
-            </IconButton>
-          </Toolbar>
-        </AppBar>
-        {renderMobileMenu}
-        {renderMenu}
- 
-        <Drawer
-          className={classes.drawer}
-          variant='persistent'
-          anchor='left'
-          open={open}
-          classes={{
-            paper: classes.drawerPaper,
-          }}
-        >
-          <div className={classes.drawerHeader}>
-            <IconButton onClick={handleDrawerClose}>
-              {theme.direction === 'ltr' ? (
-                <ChevronLeftIcon />
-              ) : (
-                  <ChevronRightIcon />
-                )}
-            </IconButton>
-          </div>
-          <Divider />
-          <List>
-            <ListItem button component={Link} to='/dashboard'>
-              <ListItemIcon>
-                <HomeIcon />
-              </ListItemIcon>
-              <ListItemText primary={`Dashboard`} />
-            </ListItem>
-            <ListItem button component={Link} to='/explore'>
-              <ListItemIcon>
-                <ExploreIcon />
-              </ListItemIcon>
-              <ListItemText primary={`Explore`} />
-            </ListItem>
-            <ListItem button component={Link} to='/notifications'>
-              <ListItemIcon>
-                <NotificationsIcon />
-              </ListItemIcon>
-              <ListItemText primary={`Notifications`} />
-            </ListItem>
-            <ListItem>
+  const isMenuOpen = Boolean(anchorEl);
+  const classes = useStyles();
+  const theme = useTheme();
+
+  const icons = [
+    { icon: <HomeIcon />, link: '/dashboard', title: `Dashboard` },
+    { icon: <ExploreIcon />, link: '/explore', title: `Explore` },
+    { icon: <NotificationsIcon />, link: '/notifications', title: `Notifications` }
+  ]
+
+  const handleDrawerOpen = () => setOpen(true);
+  const handleDrawerClose = () => setOpen(false);
+  const handleMenuClose = () => setAnchorEl(null);
+
+  const renderMenu = (
+    <Menu
+      anchorEl={anchorEl}
+      anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+      keepMounted
+      transformOrigin={{ vertical: 'top', horizontal: 'right' }}
+      open={isMenuOpen}
+      onClose={handleMenuClose}
+    ></Menu>
+  );
+
+  return (
+    <div className={classes.growHeader}>
+      <AppBar >
+        <Toolbar>
+          <IconButton
+            color='inherit'
+            aria-label='open drawer'
+            onClick={handleDrawerOpen}
+            edge='start'
+            className={clsx(classes.menuButtonHeader, open && classes.hideHeader)}
+          >
+            <MenuIcon />
+          </IconButton>
+          {props.page === 'explore' ? (
+            <SearchBar />
+          ) : props.page === 'creator' ? (
+            <CreatorHeader />
+          ) : null}
+          <div className={classes.growHeader} />
+          <IconButton
+            component={Link}
+            to='/notifications'
+            color='inherit'
+          >
+            <Badge badgeContent={17} color='secondary'>
+              <NotificationsIcon />
+            </Badge>
+          </IconButton>
+        </Toolbar>
+      </AppBar>
+      {renderMenu}
+      <Drawer
+        className={classes.drawerHeader}
+        variant='persistent'
+        anchor='left'
+        open={open}
+        classes={{
+          paper: classes.drawerPaperHeader,
+        }}
+      >
+        <div className={classes.drawerHeaderHeader}>
+          <IconButton onClick={handleDrawerClose}>
+            {theme.direction === 'ltr' ? (
+              <ChevronLeftIcon />
+            ) : (
+                <ChevronRightIcon />
+              )}
+          </IconButton>
+        </div>
+        <Divider />
+        <List>
+          {icons.map(i => {
+            return (
+              <ListItem button component={Link} to={i.link}>
                 <ListItemIcon>
-                {darkState
-                  ? <Brightness2RoundedIcon fontSize='small' />
-                  : <Brightness4Icon />
-                }
-              </ListItemIcon>
-              <ListItemIcon>
-                <Switch checked={darkState} onChange={handleDarkStateChange} />
-              </ListItemIcon>
- 
-            </ListItem>
-          </List>
-        </Drawer>
-      </div>
-    );
-  })
+                  {i.icon}
+                </ListItemIcon>
+                <ListItemText primary={i.title} />
+              </ListItem>
+            )
+          })}
+          <ListItem>
+            <ListItemIcon>
+              {darkState
+                ? <Brightness2RoundedIcon fontSize='small' />
+                : <Brightness4Icon />
+              }
+            </ListItemIcon>
+            <ListItemIcon>
+              <Switch checked={darkState} onChange={handleDarkStateChange} />
+            </ListItemIcon>
+          </ListItem>
+        </List>
+      </Drawer>
+    </div>
+  );
+})
 );
- 
+
 export default Header;
