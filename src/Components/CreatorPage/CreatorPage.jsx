@@ -4,28 +4,32 @@ import Header from '../Header/Header';
 import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { useScript } from '../../hooks/hooks';
+import { Paper, List} from '@material-ui/core';
+import { useStyles } from "../styles/style";
 
-const CreatorPage = inject('creatorStore')(
-  observer((props) => {
-    const { creatorStore } = props;
-    const { creator } = creatorStore;
-    const { pathname } = useLocation();
+const CreatorPage = inject('creatorStore')(observer((props) => {
+  const { creatorStore } = props;
+  const { creator } = creatorStore;
+  const { pathname } = useLocation();
+  const classes = useStyles()
 
-    useScript('//cdn.embedly.com/widgets/platform.js');
-    useScript('https://platform.twitter.com/widgets.js');
+  useScript('//cdn.embedly.com/widgets/platform.js');
+  useScript('https://platform.twitter.com/widgets.js');
 
-    useEffect(() => {
-      creatorStore.getCreatorById(pathname.split('/')[2]);
+  useEffect(() => {
+    creatorStore.getCreatorById(pathname.split('/')[2]);
 
-      return () => {
-        creatorStore.cleanCreatorData();
-      };
-      // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
+    return () => {
+      creatorStore.cleanCreatorData();
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
-    return (
-      <div>
-        <Header page={'creator'} />
+  return (
+    <>
+      <Paper className={classes.rootCreator}>
+      <Paper className={classes.paperCreator}>
+      <Header page={'creator'} />
         <iframe
           title='twitch-embed'
           src={`https://player.twitch.tv/?channel=${creator.twitchName}&parent=localhost`}
@@ -63,16 +67,22 @@ const CreatorPage = inject('creatorStore')(
           </a>
         )}
         {creator.twitterName && (
-          <a
-            className='twitter-timeline'
-            href={`https://twitter.com/${creator.twitterName}?ref_src=twsrc%5Etfw`}
-          >
-            Tweets by {creator.twitterName}
-          </a>
+          <Paper style={{ maxHeight: 500, overflow: 'auto' }}>
+            <List>
+              <a
+                className='twitter-timeline'
+                href={`https://twitter.com/${creator.twitterName}?ref_src=twsrc%5Etfw`}
+              >
+                Tweets by {creator.twitterName}
+              </a>
+            </List>
+          </Paper>
         )}
-      </div>
-    );
-  })
+      </Paper>
+      </Paper>
+    </>
+  );
+})
 );
 
 export default CreatorPage;

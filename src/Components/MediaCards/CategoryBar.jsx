@@ -1,8 +1,9 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { makeStyles, AppBar, Tab, Tabs, Typography, Box } from '@material-ui/core'
+import { AppBar, Tab, Tabs, Typography, Box } from '@material-ui/core'
 import { inject, observer } from 'mobx-react'
- 
+import { useStyles } from "../styles/style";
+
 function TabPanel(props) {
     const { children, value, index, ...other } = props
  
@@ -36,22 +37,12 @@ function a11yProps(index) {
     }
 }
  
-const useStyles = makeStyles((theme) => ({
-    root: {
-        flexGrow: 1,
-        width: '100%',
-    },
-    tab: {
-        height: '10px'
-    }
-}))
- 
 const CategoryBar = inject('mediaStore')(observer((props) => {
  
     const { mediaStore } = props
     const classes = useStyles()
     const [value, setValue] = React.useState(0)
-
+    
     const categories = [
         { name: 'All', url: 'All' },
         { name: 'Live', url: '' },
@@ -71,7 +62,7 @@ const CategoryBar = inject('mediaStore')(observer((props) => {
     }
  
     return (
-        <div className={classes.root}>
+        <div className={classes.rootMediaTwo}>
             <AppBar
                 position='sticky'
                 style={{

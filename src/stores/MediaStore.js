@@ -4,6 +4,7 @@ import axios from 'axios'
 export class MediaStore {
     @observable loading = true
     @observable trending = []
+    @observable searchInput = ''
     @observable searchResults = []
     @observable category = 'All'
     @observable pageNum = 1
@@ -23,11 +24,5 @@ export class MediaStore {
         let res = await axios.get(`http://localhost:3001/media/trending?category=${category}&page=${pageNum}`)
         this.trending = [...new Set([...this.trending, ...res.data.creators].map(JSON.stringify))].map(JSON.parse)
         this.setHasMore(res.data.creators.length > 0)
-    }
-
-    @action searchCreators(value) {
-        this.loading = true
-        this.searchResults = this.trending.filter(c => c.twitch.toLowerCase().includes(value))
-        this.loading = false
     }
 }

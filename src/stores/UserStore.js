@@ -53,9 +53,8 @@ export class UserStore {
     }
 
     @action async saveFavorite(id) {
-        console.log(id)
         let favorite = await axios.post(`http://localhost:3001/user/favorites`, { creatorId: id, userId: this.userId });
-        this.favorites.push(favorite.data);
+        this.getUser(this.userId)
     }
 
     @action async deleteFavorite(id) {
