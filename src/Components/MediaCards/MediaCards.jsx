@@ -7,13 +7,16 @@ import { inject, observer } from 'mobx-react'
 import { useLocation } from 'react-router-dom'
 import { Grid, GridList, Paper } from '@material-ui/core'
 import { useStyles } from "../styles/style";
+import Loading from '../Loading';
+import { useCreators } from '../../hooks/hooks';
 
 const MediaCards = inject('userStore', 'mediaStore')(observer((props) => {
+    const ref = useCreators(props.mediaStore);
     const location = useLocation()
     const classes = useStyles()
 
-    let { isLoggedIn, favorites } = props.userStore
-    let { trending } = props.mediaStore
+    const { isLoggedIn, favorites } = props.userStore;
+    const { trending, loading } = props.mediaStore;
 
     const { media, header, mediaCard } =
         location.pathname === '/dashboard' && (!isLoggedIn || !favorites.length)
@@ -27,11 +30,14 @@ const MediaCards = inject('userStore', 'mediaStore')(observer((props) => {
     const renderMediaCard = (data) => {
         let isFavorite = favorites.some(f => data._id === f._id)
         let creator = data.twitch.toLowerCase()
-        return (
-            creator.includes(props.mediaStore.searchInput.toLowerCase())
-                ? <MediaCard id={data._id} img={data.img} isFavorite={isFavorite} twitchName={data.twitch} key={data._id} />
-                : <div>No creators</div>
-        )
+        if(creator.includes(props.mediaStore.searchInput.toLowerCase())) {
+          if (location.pathname === '/explore') {
+            if (data.length === i + 1) {
+              return <MediaCard lastRef={ref} id={d._id} img={d.img} isFavorite={isFavorite} twitchName={d.twitch} key={d._id}/>
+            }
+            return <MediaCard id={data._id} img={data.img} isFavorite={isFavorite} twitchName={data.twitch} key={data._id} />
+          }
+        return <div>No creators</div>
     }
 
     return (
@@ -43,6 +49,7 @@ const MediaCards = inject('userStore', 'mediaStore')(observer((props) => {
                     <Grid container className={header === 'explore' && classes.containerMedia}>
                         <GridList cellHeight={180} className={classes.rootMedia}>
                             {media.map(m => renderMediaCard(m))}
+                            {loading && <Loading />}
                         </GridList>
                     </Grid>
                 </Paper>

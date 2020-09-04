@@ -6,12 +6,14 @@ import LandingButton from './LandingButton'
 import { useLocation } from 'react-router-dom'
 import { Link } from '@material-ui/core';
 import { useStyles } from "../styles/style";
+import { useCookie } from '../../hooks/hooks';
 
 const Landing = inject('userStore')(observer((props) => {
   
   const classes = useStyles()
   const location = useLocation()
-  const page = location.pathname.split('/')[2]
+  const page = location.pathname.split('/')[2];
+  const { checkUser, saveUser, userId } = props.userStore;
   const [state, setState] = useState({
     userName: '',
     password: '',
@@ -21,6 +23,7 @@ const Landing = inject('userStore')(observer((props) => {
   const [passwordMessage, setPasswordMessage] = useState('')
   const [emailMessage, setEmailMessage] = useState('')
   const [serverMessage, setServerMessage] = useState('')
+  const { setCookie } = useCookie();
 
   const handleInput = ({ target }) => {
     const value = target.value
@@ -29,6 +32,25 @@ const Landing = inject('userStore')(observer((props) => {
       [target.name]: value,
     })
   }
+  
+  const handleLogin = async (user) => {
+    const result = await checkUser(user);
+    if (result) {
+      return result;
+    }
+    setCookie(userId);
+  };
+  
+  const handleSignup = async (user) => {
+    return saveUser(user).then((res) => {
+      if (res.data) {
+        setCookie(res.data.userId);
+      } 
+      else {
+        return res;
+      }
+    });
+  };
 
   const checkInputs = () => {
     if (state.userName.length < 3) {
@@ -53,8 +75,8 @@ const Landing = inject('userStore')(observer((props) => {
     checkInputs()
     if (inputBoolean()) {
       const dataMassage = page === 'login'
-        ? await props.userStore.checkUser(state)
-        : await props.userStore.saveUser(state)
+        ? await handleLogin(state)
+        : await handleSignup(state)
       if (dataMassage) {
         setServerMessage(dataMassage)
       }
@@ -146,4 +168,4 @@ const Landing = inject('userStore')(observer((props) => {
 })
 )
 
-export default Landing
+export default Landing;

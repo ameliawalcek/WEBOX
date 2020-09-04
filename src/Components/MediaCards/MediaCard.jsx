@@ -11,7 +11,8 @@ import { useStyles } from "../styles/style";
 
 const MediaCard = inject('userStore')(observer((props) => {
 
-    const { img, twitchName, id, userStore, isFavorite } = props
+    const ITEM_HEIGHT = 48
+    const { img, twitchName, id, userStore, isFavorite, lastRef } = props
     const classes = useStyles()
     const [anchorEl, setAnchorEl] = React.useState(null)
     const open = Boolean(anchorEl)
@@ -47,7 +48,7 @@ const MediaCard = inject('userStore')(observer((props) => {
 
     return (
         <Grid item xs={6} sm={3} md={2} lg={2}>
-            <div className='media-card' style={{ backgroundImage: `url(${img})`, backgroundSize: '100% 100%' }}>
+            <div ref={lastRef ? lastRef : null} className='media-card' style={{ backgroundImage: `url(${img})`, backgroundSize: '100% 100%' }}>
                 <GridListTile className={classes.gridListMedia}>
                     <Link to={`creator/${id}`}>
                         <img className='card-img' src={`https://upload.wikimedia.org/wikipedia/commons/4/48/BLANK_ICON.png`} alt={``} />
@@ -83,7 +84,7 @@ const MediaCard = inject('userStore')(observer((props) => {
                     <Snackbar open={openSnack} onClose={handleSnackBarClose} autoHideDuration={3000}>
                         <Alert severity="info" onClose={handleSnackBarClose}>
                             Please login
-                                </Alert>
+                        </Alert>
                     </Snackbar>
                 </GridListTile>
             </div>

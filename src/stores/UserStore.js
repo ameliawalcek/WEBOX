@@ -1,9 +1,10 @@
 import { observable, action } from "mobx";
 import axios from "axios";
+import { parseCookie } from "../utils/utils";
 
 export class UserStore {
     @observable userId = "";
-    @observable isLoggedIn = false;
+    @observable isLoggedIn = false
     @observable favorites = [];
     @observable notifications = [];
     @observable darkState = JSON.parse(localStorage.dark || 'false')
@@ -13,14 +14,28 @@ export class UserStore {
         localStorage.setItem('dark', this.darkState)
     }
 
+    @action cookieLogIn = () => {
+        const cookie = parseCookie()
+        if (cookie) {
+            return axios.post(`http://localhost:3001/auth/cookie`, { cookie })
+                .then(d => {
+                    this.isLoggedIn = true
+                    this.userId = cookie
+                    this.getUser(this.userId)
+                    return d
+                }).catch(e => e.response.data)
+        }
+        return false
+    }
+
     @action async getUser(id) {
         let user = await axios.get(`http://localhost:3001/user/${id}`);
         this.favorites = user.data.favorites
         this.notifications = user.data.notifications
     }
 
-    @action async checkUser(user) {
-        return await axios.post("http://localhost:3001/auth/login", user)
+    @action checkUser = (user) => {
+        return axios.post("http://localhost:3001/auth/login", user)
             .then(d => {
                 this.isLoggedIn = true
                 this.userId = d.data.userId
@@ -28,11 +43,12 @@ export class UserStore {
             }).catch(e => e.response.data)
     }
 
-    @action async saveUser(user) {
+    @action saveUser = (user) => {
         return axios.post("http://localhost:3001/auth/signup", user)
             .then(d => {
                 this.isLoggedIn = true
                 this.userId = d._id
+                return d
             }).catch(e => e.response.data)
     }
 

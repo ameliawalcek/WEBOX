@@ -58,7 +58,7 @@ const CreatorPage = inject('creatorStore')(observer((props) => {
         {creator.instagramPostId && (
           <a
             className='embedly-card'
-            style={{ height: 'auto' }}
+            style={{ height: '50%' }}
             data-card-controls='0'
             data-card-width='100%'
             href={`https://instagram.com/p/${creator.instagramPostId}/`}

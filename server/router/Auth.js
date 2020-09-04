@@ -24,10 +24,20 @@ authRouter.post('/signup', async (req, res) => {
                     notifications: []
                 })
 
+            res.cookie(newUser.userName, await bcrypt.hash(JSON.stringify(newUser._id), 10), { maxAge: (24 * 60 * 60 * 1000) + Date.now(), domain: 'localhost' })
+
             newUser
                 .save()
-                .then(user => { res.status(201).send({ userId: user._id, msg: 'success' }) })
-                .catch(error => { res.status(500).send('Oops the user couldn\'t be saved please try again') })
+                .then(user => {
+                    res
+                        .status(201)
+                        .send({ userId: user._id, msg: 'success' })
+                })
+                .catch(error => {
+                    res
+                        .status(500)
+                        .send('Oops the user couldn\'t be saved please try again')
+                })
         }
     }
 })
@@ -44,6 +54,15 @@ authRouter.post('/login', async (req, res) => {
             :
             res.status(401).send('passwords dont match')
     }
+})
+
+authRouter.post('/cookie', async (req, res) => {
+    const { cookie } = req.body
+    
+    const result = await mongoClient.isCookieValid(cookie).catch(e => false)
+    result
+        ? res.status(200).send(true)
+        : res.status(401).send(false)
 })
 
 module.exports = authRouter
