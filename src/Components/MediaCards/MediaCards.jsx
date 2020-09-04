@@ -6,7 +6,7 @@ import CategoryBar from './CategoryBar'
 import { inject, observer } from 'mobx-react'
 import { useLocation } from 'react-router-dom'
 import { Grid, GridList, makeStyles, Paper } from '@material-ui/core'
-
+ 
 const useStyles = makeStyles((theme) => ({
     root: {
         display: 'flex',
@@ -16,9 +16,6 @@ const useStyles = makeStyles((theme) => ({
         backgroundColor: theme.palette.background.paper,
         width: '100%',
     },
-    icon: {
-        color: 'rgba(255, 255, 255, 0.54)',
-    },
     container: {
         marginTop: 5,
     },
@@ -26,32 +23,32 @@ const useStyles = makeStyles((theme) => ({
         height: '100vh'
     }
 }))
-
+ 
 const MediaCards = inject('userStore', 'mediaStore')(observer((props) => {
     const location = useLocation()
     const classes = useStyles()
-
+ 
     let { isLoggedIn, favorites } = props.userStore
     let { trending, searchResults } = props.mediaStore
-
+ 
     const { media, header, mediaCard } =
         location.pathname === '/dashboard' && (!isLoggedIn || !favorites.length)
             ? { media: [], header: 'basic', mediaCard: false }
-
+ 
             : location.pathname === '/dashboard'
                 ? { media: favorites, header: 'basic', mediaCard: true }
-
+ 
                 : { media: trending, header: 'explore', mediaCard: true }
-
+ 
     const renderMediaCard = (data) => {
-        return data.map((d) => {
+        return data.map(d => {
             let isFavorite = favorites.some(f => d._id === f._id)
             return (
                 <MediaCard id={d._id} img={d.img} isFavorite={isFavorite} twitchName={d.twitch} key={d._id} />
             )
         })
     }
-
+ 
     return (
         <>
             <Header page={header} />
