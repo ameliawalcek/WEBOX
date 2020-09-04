@@ -26,6 +26,8 @@ export class MediaStore {
     }
 
     @action searchCreators(value) {
+        this.loading = true
         this.searchResults = this.trending.filter(c => c.twitch.toLowerCase().includes(value))
+        this.loading = false
     }
 }

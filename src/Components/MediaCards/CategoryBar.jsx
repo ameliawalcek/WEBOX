@@ -2,10 +2,10 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { makeStyles, AppBar, Tab, Tabs, Typography, Box } from '@material-ui/core'
 import { inject, observer } from 'mobx-react'
-
+ 
 function TabPanel(props) {
     const { children, value, index, ...other } = props
-
+ 
     return (
         <div
             role='tabpanel'
@@ -22,29 +22,32 @@ function TabPanel(props) {
         </div>
     )
 }
-
+ 
 TabPanel.propTypes = {
     children: PropTypes.node,
     index: PropTypes.any.isRequired,
     value: PropTypes.any.isRequired,
 }
-
+ 
 function a11yProps(index) {
     return {
         id: `scrollable-auto-tab-${index}`,
         'aria-controls': `scrollable-auto-tabpanel-${index}`,
     }
 }
-
+ 
 const useStyles = makeStyles((theme) => ({
     root: {
         flexGrow: 1,
         width: '100%',
     },
+    tab: {
+        height: '10px'
+    }
 }))
-
+ 
 const CategoryBar = inject('mediaStore')(observer((props) => {
-
+ 
     const { mediaStore } = props
     const classes = useStyles()
     const [value, setValue] = React.useState(0)
@@ -62,11 +65,11 @@ const CategoryBar = inject('mediaStore')(observer((props) => {
     ]
 
     mediaStore.setCategory(categories[value].url)
-    
+
     const handleChange = (event, newValue) => {
         setValue(newValue)
     }
-
+ 
     return (
         <div className={classes.root}>
             <AppBar
@@ -80,11 +83,11 @@ const CategoryBar = inject('mediaStore')(observer((props) => {
                 <Tabs
                     value={value}
                     onChange={handleChange}
-                    indicatorColor='primary'
-                    textColor='primary'
+                    indicatorColor='secondary'
+                    textColor='secondary'
                     variant='scrollable'
                     scrollButtons='auto'
-                >
+                    TabIndicatorProps={{ style: { height: "5px" } }}                >
                     {categories.map((category) => {
                         return <Tab key={category.name} label={category.name} {...a11yProps(0)} />
                     })}
@@ -94,5 +97,5 @@ const CategoryBar = inject('mediaStore')(observer((props) => {
     )
 })
 )
-
+ 
 export default CategoryBar

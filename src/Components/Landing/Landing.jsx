@@ -202,9 +202,7 @@ const Landing = inject(
                     </Button>
                   </Grid>
                   <Grid item>
-                    <Button size='small' component={Link} to='/dashboard'>
-                      Skip
-                    </Button>
+                  <Link to='/dashboard'>Skip</Link>
                   </Grid>
                 </>
               ) : (

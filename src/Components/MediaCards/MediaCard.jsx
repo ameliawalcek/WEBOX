@@ -7,7 +7,7 @@ import {
 import { inject, observer } from 'mobx-react'
 import MoreVertIcon from '@material-ui/icons/MoreVert'
 import MuiAlert from '@material-ui/lab/Alert';
-
+ 
 const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
@@ -20,26 +20,25 @@ const useStyles = makeStyles((theme) => ({
     color: 'rgba(255, 255, 255, 0.54)',
   },
 }));
-
+ 
 const MediaCard = inject('userStore', 'mediaStore')(
     observer((props) => {
-
         const ITEM_HEIGHT = 48
         const { img, twitchName, id, userStore, isFavorite, lastRef } = props
         const classes = useStyles()
         const [anchorEl, setAnchorEl] = React.useState(null)
         const open = Boolean(anchorEl)
         const [openSnack, setOpen] = React.useState(false);
-
+ 
         const menuLabel = isFavorite ? 'Unfavorite' : 'Favorite'
         const handleClick = (event) => {
             setAnchorEl(event.currentTarget)
         }
-
+ 
         function Alert(props) {
             return <MuiAlert elevation={6} variant="filled" {...props} />;
         }
-
+ 
         const handleClose = (event, reason) => {
             setAnchorEl(null)
             if(reason === 'backdropClick') { return }
@@ -51,15 +50,14 @@ const MediaCard = inject('userStore', 'mediaStore')(
                 setOpen(true)
             }
         }
-
+ 
         const handleSnackBarClose = (event, reason) => {
             if (reason === 'clickaway') {
                 return;
             }
-
             setOpen(false);
         }
-
+ 
         return (
             <Grid item xs={6} sm={4} md={4} lg={2}>
                 <div ref={lastRef ? lastRef : null} className='media-card' style={{ backgroundImage: `url(${img})`, backgroundSize: '100% 100%' }}>
@@ -86,8 +84,8 @@ const MediaCard = inject('userStore', 'mediaStore')(
                             onClose={handleClose}
                             PaperProps={{
                                 style: {
-                                    maxHeight: ITEM_HEIGHT * 4.5,
-                                    width: '20ch',
+                                    maxHeight: '5ch',
+                                    width: '15ch',
                                 },
                             }}
                         >
@@ -97,10 +95,10 @@ const MediaCard = inject('userStore', 'mediaStore')(
                         </Menu>
                         <Snackbar open={openSnack} onClose={handleSnackBarClose} autoHideDuration={3000}>
                             <Alert severity="info" onClose={handleSnackBarClose}>
-                                Please loggin to favorite creators
+                                Please login
                                 </Alert>
                         </Snackbar>
-
+ 
                     </GridListTile>
                 </div>
             </Grid>
