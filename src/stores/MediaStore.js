@@ -4,7 +4,7 @@ import axios from 'axios'
 export class MediaStore {
     @observable loading = false
     @observable trending = []
-    @observable searchResults = []
+    @observable searchInput = ''
 
     @action async getTrending(category) {
         this.loading = true
@@ -13,11 +13,5 @@ export class MediaStore {
         setTimeout(() => {
             this.loading = false
         }, 1500)
-    }
-
-    @action searchCreators(value) {
-        this.loading = true
-        this.searchResults = this.trending.filter(c => c.twitch.toLowerCase().includes(value))
-        this.loading = false
     }
 }
