@@ -14,10 +14,18 @@ class MongoClient {
       .lean()
   }
 
+  isCookieValid(cookie) {
+    return Models
+      .User
+      .findById(cookie)
+      .lean()
+  }
+
   getUserById(id) {
     return Models
       .User
       .findById(id)
+      .select('favorites notifications')
       .populate({ path: 'favorites', options: { lean: true } })
       .populate({ path: 'notifications', options: { lean: true } })
       .lean()
@@ -52,6 +60,15 @@ class MongoClient {
       .lean()
   }
 
+  getCreatorsByPage(page) {
+    return Models
+      .Creator
+      .find({})
+      .skip((page - 1) * 12)
+      .limit(12)
+      .lean()
+  }
+
   getAllCreators() {
     return Models
       .Creator
@@ -65,6 +82,12 @@ class MongoClient {
       .Creator
       .findById(id)
       .lean()
+  }
+
+  numOfallCreators() {
+    return Models
+      .Creator
+      .estimatedDocumentCount({})
   }
 
   saveNotification(notificationDoc) {

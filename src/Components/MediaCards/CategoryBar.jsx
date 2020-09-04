@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 import { makeStyles, AppBar, Tab, Tabs, Typography, Box } from '@material-ui/core'
 import { inject, observer } from 'mobx-react'
@@ -49,11 +49,6 @@ const CategoryBar = inject('mediaStore')(observer((props) => {
     const classes = useStyles()
     const [value, setValue] = React.useState(0)
 
-    useEffect(() => {
-        mediaStore.getTrending(categories[value].url)
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [])
-
     const categories = [
         { name: 'All', url: 'All' },
         { name: 'Live', url: '' },
@@ -66,9 +61,10 @@ const CategoryBar = inject('mediaStore')(observer((props) => {
         { name: 'Travel', url: 'Travel %26 Outdoors' }
     ]
 
+    mediaStore.setCategory(categories[value].url)
+    
     const handleChange = (event, newValue) => {
         setValue(newValue)
-        mediaStore.getTrending(categories[newValue].url)
     }
 
     return (

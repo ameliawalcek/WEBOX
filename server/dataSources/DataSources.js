@@ -16,7 +16,7 @@ class DataSources {
     const [youtubeVideoId, instagramPostId] = await Promise.all([
       this.youtubeAPI.getYoutubeLatestByRef(creator.youtube),
       this.instagramAPI.getRecentPostByRef(creator.instagram)
-    ])
+    ]).catch(e => console.log(e.response))
 
     return {
       imgUrl: creator.img,
