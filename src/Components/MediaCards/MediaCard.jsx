@@ -23,8 +23,8 @@ const useStyles = makeStyles((theme) => ({
  
 const MediaCard = inject('userStore', 'mediaStore')(
     observer((props) => {
- 
-        const { img, twitchName, id, userStore, isFavorite } = props
+        const ITEM_HEIGHT = 48
+        const { img, twitchName, id, userStore, isFavorite, lastRef } = props
         const classes = useStyles()
         const [anchorEl, setAnchorEl] = React.useState(null)
         const open = Boolean(anchorEl)
@@ -60,7 +60,7 @@ const MediaCard = inject('userStore', 'mediaStore')(
  
         return (
             <Grid item xs={6} sm={4} md={4} lg={2}>
-                <div className='media-card' style={{ backgroundImage: `url(${img})`, backgroundSize: '100% 100%' }}>
+                <div ref={lastRef ? lastRef : null} className='media-card' style={{ backgroundImage: `url(${img})`, backgroundSize: '100% 100%' }}>
                     <GridListTile className={classes.gridList}>
                         <Link to={`creator/${id}`}>
                             <img className='card-img' src={`https://upload.wikimedia.org/wikipedia/commons/4/48/BLANK_ICON.png`} alt={``} />

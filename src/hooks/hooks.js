@@ -1,6 +1,7 @@
 import { createMuiTheme } from '@material-ui/core'
-import { useEffect } from "react"
- 
+import { useEffect, useRef, useCallback } from "react"
+import { setCookie, parseCookie } from '../utils/utils'
+
 export const useScript = url => {
   const script = document.createElement('script')
  
@@ -40,4 +41,50 @@ export const useTheme = darkState => {
       }
     }
   })
+}
+
+export const useCreators = (store) => {
+  const { getTrending, setLoading, resetTrending, pageNum, category, loading, hasMore, getNextPage } = store
+
+  const observer = useRef();
+  const lastCreatorElementRef = useCallback((node) => {
+    if (loading) { return }
+    if (observer.current) { observer.current.disconnect() }
+    observer.current = new IntersectionObserver(entries => {
+      if (entries[0].isIntersecting && hasMore) {
+        getNextPage()
+      }
+    })
+    if (node) observer.current.observe(node)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [loading, hasMore]);
+
+  useEffect(() => {
+    resetTrending()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [category])
+
+  useEffect(() => {
+    setLoading(true)
+    getTrending(category, pageNum)
+    setLoading(false)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [category, pageNum])
+
+  return lastCreatorElementRef
+}
+
+export const useCookie = () => {
+  return { cookie: parseCookie(), setCookie }
+}
+
+export const useIsAuth = (testFunc) => {
+  const { cookie } = useCookie()
+
+  useEffect(() => {
+    if (cookie) {
+      testFunc()
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 }
