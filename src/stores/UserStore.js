@@ -1,6 +1,6 @@
 import { observable, action } from "mobx";
 import axios from "axios";
-import { parseCookie } from "../utils/utils";
+import { parseCookie, setCookie } from "../utils/utils";
 
 export class UserStore {
     @observable userId = "";
@@ -37,14 +37,16 @@ export class UserStore {
     @action checkUser = (user) => {
         return axios.post("http://localhost:3001/auth/login", user)
             .then(d => {
+                console.log(d.data)
                 this.isLoggedIn = true
                 this.userId = d.data.userId
+                setCookie(this.userId)
                 this.getUser(this.userId)
             }).catch(e => e.response.data)
-    }
-
-    @action saveUser = (user) => {
-        return axios.post("http://localhost:3001/auth/signup", user)
+        }
+        
+        @action saveUser = (user) => {
+            return axios.post("http://localhost:3001/auth/signup", user)
             .then(d => {
                 this.isLoggedIn = true
                 this.userId = d._id
@@ -53,7 +55,7 @@ export class UserStore {
     }
 
     @action async saveFavorite(id) {
-        let favorite = await axios.post(`http://localhost:3001/user/favorites`, { creatorId: id, userId: this.userId });
+        await axios.post(`http://localhost:3001/user/favorites`, { creatorId: id, userId: this.userId });
         this.getUser(this.userId)
     }
 

@@ -27,17 +27,18 @@ const MediaCards = inject('userStore', 'mediaStore')(observer((props) => {
 
                 : { media: trending, header: 'explore', mediaCard: true }
 
-    const renderMediaCard = (data) => {
+    const renderMediaCards = (media) => {
+      return media.map((data, i) => {
         let isFavorite = favorites.some(f => data._id === f._id)
         let creator = data.twitch.toLowerCase()
         if(creator.includes(props.mediaStore.searchInput.toLowerCase())) {
-          if (location.pathname === '/explore') {
-            if (data.length === i + 1) {
-              return <MediaCard lastRef={ref} id={d._id} img={d.img} isFavorite={isFavorite} twitchName={d.twitch} key={d._id}/>
-            }
-            return <MediaCard id={data._id} img={data.img} isFavorite={isFavorite} twitchName={data.twitch} key={data._id} />
+          if (location.pathname === '/explore' && media.length === i + 1) {
+              return <MediaCard lastRef={ref} id={data._id} img={data.img} isFavorite={isFavorite} twitchName={data.twitch} key={data._id}/>
           }
+          return <MediaCard id={data._id} img={data.img} isFavorite={isFavorite} twitchName={data.twitch} key={data._id} />
+        }
         return <div>No creators</div>
+      })
     }
 
     return (
@@ -48,7 +49,7 @@ const MediaCards = inject('userStore', 'mediaStore')(observer((props) => {
                 ? <Paper className={classes.paperMedia}>
                     <Grid container className={header === 'explore' && classes.containerMedia}>
                         <GridList cellHeight={180} className={classes.rootMedia}>
-                            {media.map(m => renderMediaCard(m))}
+                            {renderMediaCards(media)}
                             {loading && <Loading />}
                         </GridList>
                     </Grid>
@@ -58,4 +59,5 @@ const MediaCards = inject('userStore', 'mediaStore')(observer((props) => {
         </>
     )
 }))
+
 export default MediaCards

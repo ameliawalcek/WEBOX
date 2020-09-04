@@ -10,8 +10,6 @@ import MuiAlert from '@material-ui/lab/Alert';
 import { useStyles } from "../styles/style";
 
 const MediaCard = inject('userStore')(observer((props) => {
-
-    const ITEM_HEIGHT = 48
     const { img, twitchName, id, userStore, isFavorite, lastRef } = props
     const classes = useStyles()
     const [anchorEl, setAnchorEl] = React.useState(null)

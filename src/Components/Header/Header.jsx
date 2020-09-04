@@ -6,7 +6,7 @@ import SearchBar from './SearchBar';
 import CreatorHeader from './CreatorHeader';
 import {
   AppBar, Toolbar, IconButton, Badge, Menu, Switch, ListItem, ListItemText,
-  Drawer, List, Divider, ListItemIcon, makeStyles, useTheme,
+  Drawer, List, Divider, ListItemIcon, useTheme,
 } from '@material-ui/core';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';

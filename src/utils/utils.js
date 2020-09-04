@@ -1,5 +1,4 @@
 export const setCookie = (secret) => {
-  console.log(secret)
   if (secret) {
     document.cookie = `user=${secret}; expires=${new Date(Date.now() + 86400000).toUTCString()}`
   }
