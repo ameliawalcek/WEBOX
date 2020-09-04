@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React from 'react'
 import { observer, inject } from 'mobx-react'
 import { fade, makeStyles, InputBase } from '@material-ui/core'
 import SearchIcon from '@material-ui/icons/Search'
@@ -44,15 +44,13 @@ const useStyles = makeStyles((theme) => ({
 }))
 const SearchBar = inject('userStore', 'mediaStore')(observer((props) => {
     const classes = useStyles()
-    const [searchInput, setSearchInput] = useState('')
 
     const handleInput = ({target}) => {
-        // setSearchInput(target.value)
         searchResult(target.value)
     }
 
     const searchResult = async value => {
-        const result = await props.mediaStore.searchCreators(value)
+        await props.mediaStore.searchCreators(value)
     }
 
     return (

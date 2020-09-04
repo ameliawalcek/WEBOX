@@ -161,24 +161,22 @@ const Landing = inject(
                 <>
                   <Grid item>
                     <Button
-                     button component={Link} to='/auth/register'
+                      button component={Link} to='/auth/register'
                       className={classes.button}
                       variant='contained'
                       color='primary'                    >
-                        Sign-up
+                      Sign-up
                     </Button>
                   </Grid>
                   <Grid item>
-                    <Button size='small' component={Link} to='/dashboard'>
-                        Skip
-                    </Button>
+                  <Link to='/dashboard'>Skip</Link>
                   </Grid>
                 </>
               ) : (
                   <>
                     <Grid item>
                       <Button size='small' component={Link} to='/auth/login'>
-                          Login
+                        Login
                       </Button>
                     </Grid>
                   </>

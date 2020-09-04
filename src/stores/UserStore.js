@@ -23,7 +23,7 @@ export class UserStore {
         return await axios.post("http://localhost:3001/auth/login", user)
             .then(d => {
                 this.isLoggedIn = true
-                this.userId = d._id
+                this.userId = d.data.userId
                 this.getUser(this.userId)
             }).catch(e => e.response.data)
     }
@@ -37,13 +37,14 @@ export class UserStore {
     }
 
     @action async saveFavorite(id) {
-        let favorite = await axios.post(`http://localhost:3001/user/favorites/${id}`);
+        console.log(id)
+        let favorite = await axios.post(`http://localhost:3001/user/favorites`, { creatorId: id, userId: this.userId });
         this.favorites.push(favorite.data);
     }
 
     @action async deleteFavorite(id) {
-        await axios.delete(`http://localhost:3001/user/favorites/${id}`)
-        this.favorites = this.favorites.filter(favorite => favorite.id !== id);
+        await axios({ url: `http://localhost:3001/user/favorites`, method: 'DELETE', data: { creatorId: id, userId: this.userId } })
+        this.favorites = this.favorites.filter(favorite => favorite._id !== id)
     }
 
     @action async deleteNotification(id) {

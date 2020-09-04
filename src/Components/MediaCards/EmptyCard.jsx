@@ -37,6 +37,7 @@ const EmptyCard = inject('userStore', 'mediaStore')(observer((props) => {
                     <Button component={Link} to="/explore" size="small" variant="contained" color="primary">
                         Explore </Button>
                 </CardActions >
+                <Link to='/auth/login'>Login</Link>
             </Grid>
         </Grid>
         </Paper>

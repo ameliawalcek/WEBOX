@@ -27,9 +27,8 @@ import HomeIcon from '@material-ui/icons/Home';
 import MenuIcon from '@material-ui/icons/Menu';
 import Brightness4Icon from '@material-ui/icons/Brightness4';
 import { inject, observer } from 'mobx-react';
-import Brightness4OutlinedIcon from '@material-ui/icons/Brightness4Outlined';
 import Brightness2RoundedIcon from '@material-ui/icons/Brightness2Rounded'; const drawerWidth = 180;
-
+ 
 const useStyles = makeStyles((theme) => ({
   grow: {
     flexGrow: 1,
@@ -69,36 +68,35 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: 'flex-end',
   },
 }));
-
-const Header = inject('userStore')(
-  observer((props) => {
+ 
+const Header = inject('userStore')( observer((props) => {
     const { darkState, handleDarkStateChange } = props.userStore;
     const [open, setOpen] = React.useState(false);
     const [anchorEl, setAnchorEl] = React.useState(null);
     const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
     const isMenuOpen = Boolean(anchorEl);
     const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
-
+ 
     const classes = useStyles();
     const theme = useTheme();
-
+ 
     const handleDrawerOpen = () => {
       setOpen(true);
     };
-
+ 
     const handleDrawerClose = () => {
       setOpen(false);
     };
-
+ 
     const handleMobileMenuClose = () => {
       setMobileMoreAnchorEl(null);
     };
-
+ 
     const handleMenuClose = () => {
       setAnchorEl(null);
       handleMobileMenuClose();
     };
-
+ 
     const menuId = 'primary-search-account-menu';
     const renderMenu = (
       <Menu
@@ -111,7 +109,7 @@ const Header = inject('userStore')(
         onClose={handleMenuClose}
       ></Menu>
     );
-
+ 
     const mobileMenuId = 'primary-search-account-menu-mobile';
     const renderMobileMenu = (
       <Menu
@@ -124,11 +122,11 @@ const Header = inject('userStore')(
         onClose={handleMobileMenuClose}
       ></Menu>
     );
-
+ 
     return (
       <div className={classes.grow}>
         <AppBar
-
+ 
         >
           <Toolbar>
             <IconButton
@@ -145,10 +143,9 @@ const Header = inject('userStore')(
             ) : props.page === 'creator' ? (
               <CreatorHeader />
             ) : null}
-
+ 
             <div className={classes.grow} />
             <IconButton
-              button
               component={Link}
               to='/notifications'
               color='inherit'
@@ -161,7 +158,7 @@ const Header = inject('userStore')(
         </AppBar>
         {renderMobileMenu}
         {renderMenu}
-
+ 
         <Drawer
           className={classes.drawer}
           variant='persistent'
@@ -210,7 +207,7 @@ const Header = inject('userStore')(
               <ListItemIcon>
                 <Switch checked={darkState} onChange={handleDarkStateChange} />
               </ListItemIcon>
-
+ 
             </ListItem>
           </List>
         </Drawer>
@@ -218,5 +215,5 @@ const Header = inject('userStore')(
     );
   })
 );
-
+ 
 export default Header;
