@@ -106,7 +106,14 @@ export const useStyles = makeStyles((theme) => ({
     growHeader: {
         flexGrow: 1,
     },
-
+    listHeader: {
+        position: 'absolute',
+        bottom: 30,
+        justifyContent: 'center'
+    },
+    listHightHeader: {
+        height: '100%'
+    },
     menuButtonHeader: {
         marginRight: theme.spacing(2),
     },

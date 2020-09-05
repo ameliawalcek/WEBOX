@@ -6,7 +6,7 @@ import { useStyles } from "../styles/style";
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props
- 
+
     return (
         <div
             role='tabpanel'
@@ -23,26 +23,26 @@ function TabPanel(props) {
         </div>
     )
 }
- 
+
 TabPanel.propTypes = {
     children: PropTypes.node,
     index: PropTypes.any.isRequired,
     value: PropTypes.any.isRequired,
 }
- 
+
 function a11yProps(index) {
     return {
         id: `scrollable-auto-tab-${index}`,
         'aria-controls': `scrollable-auto-tabpanel-${index}`,
     }
 }
- 
+
 const CategoryBar = inject('mediaStore')(observer((props) => {
- 
+
     const { mediaStore } = props
     const classes = useStyles()
     const [value, setValue] = React.useState(0)
-    
+
     const categories = [
         { name: 'All', url: 'All' },
         { name: 'Live', url: '' },
@@ -57,18 +57,13 @@ const CategoryBar = inject('mediaStore')(observer((props) => {
 
     mediaStore.setCategory(categories[value].url)
 
-    const handleChange = (event, newValue) => {
-        setValue(newValue)
-    }
- 
+    const handleChange = (event, newValue) => setValue(newValue)
+
     return (
         <div className={classes.rootMediaTwo}>
             <AppBar
                 position='sticky'
-                style={{
-                    paddingTop: 60,
-                    zIndex: 2,
-                }}
+                style={{ paddingTop: 60, zIndex: 2 }}
                 color='default'
             >
                 <Tabs
@@ -88,5 +83,5 @@ const CategoryBar = inject('mediaStore')(observer((props) => {
     )
 })
 )
- 
+
 export default CategoryBar

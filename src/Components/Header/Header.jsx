@@ -6,7 +6,7 @@ import SearchBar from './SearchBar';
 import CreatorHeader from './CreatorHeader';
 import {
   AppBar, Toolbar, IconButton, Badge, Menu, Switch, ListItem, ListItemText,
-  Drawer, List, Divider, ListItemIcon, useTheme,
+  Drawer, List, Divider, ListItemIcon, useTheme, Button
 } from '@material-ui/core';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
@@ -23,7 +23,7 @@ const Header = inject('userStore')(observer((props) => {
 
   const [open, setOpen] = React.useState(false);
   const [anchorEl, setAnchorEl] = React.useState(null);
- 
+
   const isMenuOpen = Boolean(anchorEl);
   const classes = useStyles();
   const theme = useTheme();
@@ -99,10 +99,10 @@ const Header = inject('userStore')(observer((props) => {
           </IconButton>
         </div>
         <Divider />
-        <List>
+        <List className={classes.listHightHeader}>
           {icons.map(i => {
             return (
-              <ListItem button component={Link} to={i.link}>
+              <ListItem button component={Link} to={i.link} key={Math.random()}>
                 <ListItemIcon>
                   {i.icon}
                 </ListItemIcon>
@@ -120,6 +120,10 @@ const Header = inject('userStore')(observer((props) => {
             <ListItemIcon>
               <Switch checked={darkState} onChange={handleDarkStateChange} />
             </ListItemIcon>
+          </ListItem>
+          <ListItem className={classes.listHeader} >
+            <Button variant="contained" color="primary" href="/auth/login">
+              Login</Button>
           </ListItem>
         </List>
       </Drawer>
