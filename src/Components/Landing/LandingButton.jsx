@@ -8,10 +8,11 @@ function LandingButton(props) {
 
     return (
         <Button
-            button component={RouterLink} to={props.to}
+            button='true' component={RouterLink} to={props.to}
             className={classes.buttonLanding}
             variant='contained'
-            color='primary'                    >
+            color='primary'
+        >
             {props.text}
         </Button>
     )

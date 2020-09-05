@@ -4,7 +4,7 @@ import { TextField, Button, Grid, Paper, Typography } from '@material-ui/core';
 import Header from '../Header/Header';
 import LandingButton from './LandingButton';
 import { useLocation } from 'react-router-dom';
-import { Link } from '@material-ui/core';
+import { Link } from 'react-router-dom';
 import { useStyles } from '../styles/style';
 import { useCookie } from '../../hooks/hooks';
 
@@ -112,10 +112,11 @@ const Landing = inject('userStore')(
                   className={classes.inputLanding}
                   id='standard-basic'
                   label='User Name'
+                  color='secondary'
                   name='userName'
                   onChange={handleInput}
                   helperText={userMessage}
-                  error={userMessage}
+                  error={userMessage.length > 0}
                 />
                 <TextField
                   className={classes.inputLanding}
@@ -123,20 +124,22 @@ const Landing = inject('userStore')(
                   label='Password'
                   name='password'
                   type='password'
+                  color='secondary'
                   onChange={handleInput}
                   helperText={passwordMessage}
-                  error={passwordMessage}
+                  error={passwordMessage.length > 0}
                 />
                 {page === 'register' && (
                   <TextField
                     className={classes.inputLanding}
                     id='standard-basic'
                     name='email'
+                    color='secondary'
                     label='Email'
                     type='email'
                     onChange={handleInput}
                     helperText={emailMessage}
-                    error={emailMessage}
+                    error={emailMessage.length > 0}
                   />
                 )}
               </Grid>
@@ -145,7 +148,7 @@ const Landing = inject('userStore')(
                   className={classes.buttonLanding}
                   variant='contained'
                   onClick={enterClicked}
-                  color='primary'
+                  color='secondary'
                 >
                   Enter
                 </Button>
@@ -154,14 +157,12 @@ const Landing = inject('userStore')(
                 {page === 'login' ? (
                   <LandingButton text={'SIGN UP'} to={'/auth/register'} />
                 ) : (
-                  <LandingButton text={'LOGIN'} to={'/auth/login'} />
-                )}
+                    <LandingButton text={'LOGIN'} to={'/auth/login'} />
+                  )}
               </Grid>
               <Grid item>
                 <Typography color='secondary'>
-                  <Link to='/dashboard' color='secondary'>
-                    Skip
-                  </Link>
+                  <Link to="/dashboard" style={{ textDecoration: 'none' }}>Skip</Link>
                 </Typography>
               </Grid>
               <Grid item>
