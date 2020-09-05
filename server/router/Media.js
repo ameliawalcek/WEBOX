@@ -14,8 +14,8 @@ mediaRouter.get("/trending", async (req, res) => {
     res.send({ creators })
   } else {
     const streamNames = category
-      ? await dataSources.twitchAPI.getTrendingByCategory(category)
-      : await dataSources.twitchAPI.getTrending();
+      ? await dataSources.twitchAPI.getTrendingByCategory(category, page)
+      : await dataSources.twitchAPI.getTrending(page);
     res.send({ creators: creators.filter((c) => streamNames.find(n => n === c.twitch)) })
   }
 });

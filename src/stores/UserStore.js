@@ -37,7 +37,6 @@ export class UserStore {
     @action checkUser = (user) => {
         return axios.post("http://localhost:3001/auth/login", user)
             .then(d => {
-                console.log(d.data)
                 this.isLoggedIn = true
                 this.userId = d.data.userId
                 setCookie(this.userId)

@@ -1,7 +1,8 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { observer, inject } from 'mobx-react'
-import { Typography, Grid, Button, CardActions, Paper } from '@material-ui/core'
+import { Typography, Grid, Paper } from '@material-ui/core'
+import LandingButton from '../Landing/LandingButton'
 
 const EmptyCard = inject('userStore')(observer((props) => {
     let { isLoggedIn } = props.userStore
@@ -19,7 +20,7 @@ const EmptyCard = inject('userStore')(observer((props) => {
             >
                 <Grid item xs={8} sm={6} md={6} lg={6}>
                     {!isLoggedIn
-                        ? <> <Typography backgroundColor="secondary" variant="h6" gutterBottom>
+                        ? <> <Typography variant="h6" gutterBottom>
                             Media Dashboard
                         </Typography>
                             <Typography variant="body2" gutterBottom>
@@ -33,12 +34,9 @@ const EmptyCard = inject('userStore')(observer((props) => {
                                 Find your favorite creators and view their live streams,
                                 videos and posts in one place.</Typography></>
                     }
-                    <CardActions style={{ justifyContent: 'center' }}>
-                        <Button component={Link} to="/explore" size="small" variant="contained" color="primary">
-                            Explore </Button>
-                    </CardActions >
+                    <LandingButton text={'EXPLORE'} to={"/explore"} />
                     {!isLoggedIn &&
-                        <Typography color='secondary.light'>
+                        <Typography color='secondary'>
                             <Link to='/auth/login' style={{ textDecoration: 'none' }}>LOGIN</Link>
                         </Typography>
                     }
