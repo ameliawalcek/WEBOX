@@ -1,6 +1,6 @@
 export const setCookie = (secret) => {
   if (secret) {
-    document.cookie = `user=${secret}; expires=${new Date(Date.now() + 86400000).toUTCString()}`
+    document.cookie = `user=${secret}; expires=${new Date(Date.now() + 86400000).toUTCString()}; path=/`
   }
 }
 
@@ -9,9 +9,8 @@ export const parseCookie = () => {
     .cookie
     .split(' ')
     .find(i => i.includes('user'))
-    .replace(';', '')
 
   return userCookie
-    ? userCookie.split('=')[1]
+    ? userCookie.replace(';', '').split('=')[1]
     : userCookie
 }
