@@ -3,16 +3,15 @@ import { fade, makeStyles } from '@material-ui/core'
 
 export const useStyles = makeStyles((theme) => ({
     rootCreator: {
-        flexGrow: 1,
         height: '100vh',
     },
     paperCreator: {
-        flexGrow: 1,
-        height: '100%',
-        paddingTop: 100,
-        paddingRight: 8,
-        paddingLeft: 8,
-        paddingBottom: 8
+        // flexGrow: 1,
+        height: '100vh',
+        paddingTop: 60,
+        paddingRight: 10,
+        paddingLeft: 10,
+        paddingBottom: 10
     },
     rootNotif: {
         flexGrow: 1,
@@ -40,6 +39,12 @@ export const useStyles = makeStyles((theme) => ({
     paperMedia: {
         height: '100vh'
     },
+    paperTopMedia:{
+        paddingTop: 60
+    },
+    customizeToolbar: {
+        maxHeight: 55
+      },
     iconMedia: {
         color: 'rgba(255, 255, 255, 0.54)',
     },
@@ -143,5 +148,11 @@ export const useStyles = makeStyles((theme) => ({
       largeCreatorTwo: {
         width: theme.spacing(7),
         height: theme.spacing(7),
+        height: 50,
+        marginTop: 5,
+        position: 'relative',
+        left: -20,
+        width: 50,
+        zIndex: 10000000000
       },
 }))

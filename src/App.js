@@ -9,12 +9,13 @@ import CreatorPage from "./Components/CreatorPage/CreatorPage";
 //user params hook
 import { ThemeProvider, Paper } from '@material-ui/core'
 import { useTheme, useIsAuth } from './hooks/hooks'
+import { useStyles } from './Components/styles/style'
 
-const App = inject("userStore", "mediaStore")(
-  observer(props => {
+const App = inject("userStore", "mediaStore")(observer(props => {
     const { darkState, isLoggedIn, cookieLogIn } = props.userStore
     const darkTheme = useTheme(darkState)
     useIsAuth(cookieLogIn)
+    const classes = useStyles()
 
     return (
       <Router>

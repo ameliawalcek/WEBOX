@@ -8,11 +8,12 @@ import { useStyles } from "../styles/style";
 
 const CreatorHeader = inject('creatorStore', 'userStore')(observer((props) => {
   const { creator } = props.creatorStore
-  const { userStore } = props
+  const { userStore, creatorId } = props
   const { favorites, isLoggedIn } = userStore
+  
 
   const classes = useStyles()
-  let isFavorite = favorites.some(f => creator._id === f._id)
+  let isFavorite = favorites.some(f => creatorId === f._id)
   const [open, setOpen] = React.useState(false);
 
   function Alert(props) {
@@ -20,8 +21,8 @@ const CreatorHeader = inject('creatorStore', 'userStore')(observer((props) => {
   }
 
   const handleClick = () => {
-    if (isLoggedIn && isFavorite) userStore.deleteFavorite(creator._id)
-    if (isLoggedIn && !isFavorite) userStore.saveFavorite(creator._id)
+    if (isLoggedIn && isFavorite) userStore.deleteFavorite(creatorId)
+    if (isLoggedIn && !isFavorite) userStore.saveFavorite(creatorId)
     else { setOpen(true) }
   }
 

@@ -10,7 +10,7 @@ import { useStyles } from "../styles/style";
 const notifications = [
     { site: "twitter", icon: <TwitterIcon style={{ color: "#1da1f2" }} fontSize="large" />, notification: "" },
     { site: "youTube", icon: <YouTubeIcon style={{ color: "#FF0000" }} fontSize="large" />, notification: "" },
-    { site: "instegram", icon: <img src={pngwave} alt="instegram" style={{ height: "30px" }} />, notification: "" },
+    { site: "instagram", icon: <img src={pngwave} alt="instagram" style={{ height: "30px" }} />, notification: "" },
     { site: "twitch", icon: <Icon className="fab fa-twitch" fontSize="large" style={{ color: "#9147ff" }} />, notification: "" }
 ]
 

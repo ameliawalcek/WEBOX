@@ -26,8 +26,9 @@ const MediaCards = inject('userStore', 'mediaStore')(observer((props) => {
                 : { media: trending, header: 'explore', mediaCard: true }
 
     const renderMediaCards = (media) => {
+
         return media.map((data, i) => {
-            let isFavorite = favorites.some(f => data._id === f._id)
+            let isFavorite = favorites.some(f => data._id === f._id) 
             let creator = data.twitch.toLowerCase()
 
             if (creator.includes(searchInput.toLowerCase())) {
@@ -42,7 +43,7 @@ const MediaCards = inject('userStore', 'mediaStore')(observer((props) => {
     return (
         <>
             <Header page={header} />
-            {header === 'explore' ? <CategoryBar /> : null}
+            {header === 'explore' ? <CategoryBar /> : <Paper className={classes.paperTopMedia}></Paper>}
             {mediaCard
                 ? <Paper className={classes.paperMedia}>
                     <Grid container className={header === 'explore' && classes.containerMedia}>
