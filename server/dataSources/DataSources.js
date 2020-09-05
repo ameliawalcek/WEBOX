@@ -14,7 +14,7 @@ class DataSources {
   async getCreatorLinksByid(id) {
     const creator = await this.mongoClient.getCreatorById(id)
     const [youtubeVideoId, instagramPostId] = await Promise.all([
-      this.youtubeAPI.getYoutubeLatestByRef(creator.youtube),
+      // this.youtubeAPI.getYoutubeLatestByRef(creator.youtube),
       this.instagramAPI.getRecentPostByRef(creator.instagram)
     ]).catch(e => console.log(e.response))
 
