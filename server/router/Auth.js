@@ -14,7 +14,7 @@ authRouter.post('/signup', async (req, res) => {
         if (isUserNameTaken) {
             res.status(409).send('The user name is already taken')
         } else {
-            const newUser = await mongoClient
+            const newUser = mongoClient
                 .addUser({
                     userName,
                     password: await bcrypt.hash(password, 10),
@@ -24,7 +24,7 @@ authRouter.post('/signup', async (req, res) => {
                     notifications: []
                 })
 
-            res.cookie(newUser.userName, await bcrypt.hash(JSON.stringify(newUser._id), 10), { maxAge: (24 * 60 * 60 * 1000) + Date.now(), domain: 'localhost' })
+            // res.cookie(newUser.userName, await bcrypt.hash(JSON.stringify(newUser._id), 10), { maxAge: (24 * 60 * 60 * 1000) + Date.now(), domain: 'localhost' })
 
             newUser
                 .save()
