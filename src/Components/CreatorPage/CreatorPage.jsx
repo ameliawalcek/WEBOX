@@ -30,7 +30,7 @@ const CreatorPage = inject('creatorStore')(observer((props) => {
     <Paper className={classes.rootCreator}>
       <Paper className={classes.paperCreator}>
         <Header page={'creator'} creatorId={creatorId}/>
-        {/* <iframe
+        <iframe
           title='twitch-embed'
           src={`https://player.twitch.tv/?channel=${creator.twitchName}&parent=localhost`}
           height='500'
@@ -54,7 +54,7 @@ const CreatorPage = inject('creatorStore')(observer((props) => {
             width='100%'
             allowFullScreen={true}
           ></iframe>
-        )} */}
+        )}
         {creator.instagramPostId && (
           <a
             className='embedly-card'
