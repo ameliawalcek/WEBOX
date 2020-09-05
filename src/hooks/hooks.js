@@ -86,5 +86,5 @@ export const useIsAuth = (testFunc) => {
       testFunc()
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  }, [cookie])
 }
