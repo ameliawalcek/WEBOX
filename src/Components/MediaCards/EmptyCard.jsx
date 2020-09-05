@@ -18,7 +18,10 @@ const EmptyCard = inject('userStore')(observer((props) => {
                 align="center"
                 style={{ minHeight: '100vh' }}
             >
-                <Grid item xs={8} sm={6} md={6} lg={6}>
+                <Grid item xs={10} sm={6} md={6} lg={6}>
+                    <Typography color='primary' style={{  fontSize: 60 }}>
+                        <i className="fas fa-home"></i>
+                    </Typography>
                     {!isLoggedIn
                         ? <> <Typography variant="h6" gutterBottom>
                             Media Dashboard
