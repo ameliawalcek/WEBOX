@@ -6,7 +6,7 @@ import SearchBar from './SearchBar';
 import CreatorHeader from './CreatorHeader';
 import {
   AppBar, Toolbar, IconButton, Badge, Menu, Switch, ListItem, ListItemText,
-  Drawer, List, Divider, ListItemIcon, useTheme, Button
+  Drawer, List, Divider, ListItemIcon, useTheme, Button, Avatar
 } from '@material-ui/core';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
@@ -53,8 +53,8 @@ const Header = inject('userStore')(observer((props) => {
 
   return (
     <div className={classes.growHeader}>
-      <AppBar 
-      className={classes.customizeToolbar}
+      <AppBar
+        className={classes.customizeToolbar}
       >
         <Toolbar>
           <IconButton
@@ -68,6 +68,13 @@ const Header = inject('userStore')(observer((props) => {
             {darkState
               ? <img src={LogoDark} alt="Webox" style={{ height: "30px", marginLeft: 10, width: 100 }} />
               : <img src={LogoLight} alt="Webox" style={{ height: "30px", marginLeft: 10, width: 100 }} />
+            }
+            {props.page === 'creator' &&
+              <Avatar
+                alt={''}
+                src={props.img}
+                className={classes.largeCreatorTwo}
+              />
             }
           </IconButton>
           {props.page === 'explore' ? (

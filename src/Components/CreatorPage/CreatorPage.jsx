@@ -25,11 +25,10 @@ const CreatorPage = inject('creatorStore')(observer((props) => {
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
   return (
     <Paper className={classes.rootCreator}>
       <Paper className={classes.paperCreator}>
-        <Header page={'creator'} creatorId={creatorId}/>
+        <Header page={'creator'} creatorId={creatorId} img={creator.imgUrl}/>
         <iframe
           title='twitch-embed'
           src={`https://player.twitch.tv/?channel=${creator.twitchName}&parent=localhost`}
@@ -66,6 +65,7 @@ const CreatorPage = inject('creatorStore')(observer((props) => {
             {' '}
           </a>
         )}
+        
         {creator.twitterName && (
           <Paper style={{ maxHeight: 650, overflow: 'auto' }}>
             <List>
