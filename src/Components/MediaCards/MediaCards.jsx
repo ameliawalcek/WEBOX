@@ -37,6 +37,7 @@ const MediaCards = inject('userStore', 'mediaStore')(observer((props) => {
                 }
                 return <MediaCard id={data._id} img={data.img} isFavorite={isFavorite} twitchName={data.twitch} key={Math.random()} />
             }
+            return null
         })
     }
 
