@@ -67,13 +67,22 @@ class MongoClient {
       .skip((page - 1) * 12)
       .limit(12)
       .lean()
-  }
-
-  getAllCreators() {
-    return Models
+    }
+    
+    getAllCreators() {
+      return Models
       .Creator
       .find({})
       .select('_id twitch img')
+      .lean()
+    }
+    
+    getSearchCreators(input, page) {
+      return Models
+      .Creator
+      .find({ twitch: {$regex: ".*" + input + ".*", $options: 'i' }})
+      .skip((page - 1) * 12)
+      .limit(12)
       .lean()
   }
 
