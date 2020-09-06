@@ -148,7 +148,7 @@ const Landing = inject('userStore')(
                   className={classes.buttonLanding}
                   variant='contained'
                   onClick={enterClicked}
-                  color='secondary'
+                  color='primary'
                 >
                   Enter
                 </Button>
