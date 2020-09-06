@@ -10,13 +10,14 @@ function InputTextField(props) {
     twitter: "",
     instagram: ""
   });
-
+  
   const handleInput = ({ target }) => {
     const value = target.value;
     setState({
       ...state,
       [props.name]: value
-    });
+    })
+   
   };
 
   return (
@@ -27,7 +28,7 @@ function InputTextField(props) {
       id="standard-basic"
       color="secondary"
       name={props.name}
-      label={props.lable}
+      label={props.label}
       onChange={handleInput}
     />
   );

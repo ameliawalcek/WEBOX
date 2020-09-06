@@ -32,49 +32,21 @@ const AddCreator = inject("creatorStore")(
           <Grid container justify="center" alignItems="center" direction="column">
             <Grid item>
               <Typography variant="h4" style={{ marginTop: 30, paddingTop: 100 }}>
-                ADD NEW CREATRO
+                ADD NEW CREATOR
               </Typography>
             </Grid>
             <form className={classes.rootLanding} noValidate autoComplete="off">
               <Grid item>
-                {/* <TextField
-                  className={classes.inputLanding}
-                  id="standard-basic"
-                  label="Twitch User Name"
-                  color="secondary"
-                  name="twitch"
-                /> */}
-                <InputTextField name={"twitch"} label={"Twitch User Name"}  />
+                <InputTextField name={"twitch"} label={"Twitch User Name"} />
               </Grid>
               <Grid item>
-                <TextField
-                  className={classes.inputLanding}
-                  id="standard-basic"
-                  label="Twitter User Name"
-                  name="twitter"
-                  color="secondary"
-                //   onChange={handleInput}
-                />
+                <InputTextField name={"twitter"} label={"Twitter User Name"} />
               </Grid>
               <Grid item>
-                <TextField
-                  className={classes.inputLanding}
-                  id="standard-basic"
-                  color="secondary"
-                  label="Instagram User Name"
-                  name="instagram"
-                //   onChange={handleInput}
-                />
+                <InputTextField name={"instagram"} label={"Instagram User Name"} />
               </Grid>
               <Grid item>
-                <TextField
-                  className={classes.inputLanding}
-                  id="standard-basic"
-                  name="youtube"
-                  color="secondary"
-                  label="Youtube User Name"
-                //   onChange={handleInput}
-                />
+                <InputTextField name={"youtube"} label={"Youtube User Name"} />
               </Grid>
               <Grid item width={200}>
                 <Button className={classes.buttonLanding} variant="contained" onClick={addClicked} color="secondary">
