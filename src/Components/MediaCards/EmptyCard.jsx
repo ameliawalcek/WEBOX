@@ -19,30 +19,33 @@ const EmptyCard = inject('userStore')(observer((props) => {
                 style={{ minHeight: '100vh' }}
             >
                 <Grid item xs={10} sm={6} md={6} lg={6}>
-                    <Typography color='primary' style={{  fontSize: 60 }}>
+                    <Typography color='primary' style={{ fontSize: 60 }}>
                         <i className="fas fa-home"></i>
                     </Typography>
-                    {!isLoggedIn
-                        ? <> <Typography variant="h6" gutterBottom>
-                            Media Dashboard
+                    <>
+                        <Typography variant="h6" gutterBottom>
+                            {
+                                !isLoggedIn
+                                    ? `Media Dashboard`
+                                    : `Your dashboard lives here`
+                            }
                         </Typography>
-                            <Typography variant="body2" gutterBottom>
-                                Login to start favoriting creators and view their live
-                                streams, videos, and posts in one place</Typography></>
 
-                        : <> <Typography variant="h6" gutterBottom>
-                            Your dashboard lives here
+                        <Typography variant="body2" gutterBottom>
+                            {
+                                !isLoggedIn
+                                    ? `Login to start favoriting creators and view their live streams, videos, and posts in one place`
+                                    : `Find your favorite creators and view their live streams,videos and posts in one place.`
+                            }
                         </Typography>
-                            <Typography variant="body2" gutterBottom>
-                                Find your favorite creators and view their live streams,
-                                videos and posts in one place.</Typography></>
-                    }
-                    <LandingButton text={'EXPLORE'} to={"/explore"} />
-                    {!isLoggedIn &&
-                        <Typography color='secondary'>
-                            <Link to='/auth/login' style={{ textDecoration: 'none' }}>LOGIN</Link>
-                        </Typography>
-                    }
+                        <LandingButton text={'EXPLORE'} to={"/explore"} />
+                        {
+                            !isLoggedIn &&
+                            <Typography color='secondary'>
+                                <Link to='/auth/login' style={{ textDecoration: 'none' }}>LOGIN</Link>
+                            </Typography>
+                        }
+                    </>
                 </Grid>
             </Grid>
         </Paper>

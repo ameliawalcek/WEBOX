@@ -40,14 +40,13 @@ const MediaCards = inject('userStore', 'mediaStore')(observer((props) => {
             return null
         })
     }
-
     return (
         <>
             <Header page={header} />
             {header === 'explore' ? <CategoryBar /> : <Paper className={classes.paperTopMedia}></Paper>}
             {mediaCard
                 ? <Paper className={classes.paperMedia}>
-                    <Grid container className={header === 'explore' && classes.containerMedia}>
+                    <Grid container>
                         <GridList cellHeight={180} className={classes.rootMedia}>
                             {renderMediaCards(media)}
                             {loading && <Loading />}

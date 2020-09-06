@@ -22,33 +22,33 @@ const CreatorPage = inject(
 
     useEffect(() => {
       creatorStore.getCreatorById(pathname.split('/')[2]);
-
-      return () => {
-        creatorStore.cleanCreatorData();
-      };
-      // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
-
-    return (
-      <Paper className={classes.rootCreator}>
-        <Paper className={classes.paperCreator}>
-          <Header page={'creator'} creatorId={creatorId} />
-          <iframe
-            title='twitch-embed'
-            src={`https://player.twitch.tv/?channel=${creator.twitchName}&parent=localhost`}
-            height='500'
-            width='100%'
-            frameBorder='0'
-            allowFullScreen={true}
-          ></iframe>
-          <iframe
-            title={creator.twitchName + ' chat'}
-            frameBorder='0'
-            src={`https://www.twitch.tv/embed/${creator.twitchName}/chat?parent=localhost`}
-            height='500'
-            width='100%'
-          ></iframe>
-          {creator.youtubeVideoId && (
+      
+    return () => {
+      creatorStore.cleanCreatorData();
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+    
+  return (
+    <Paper className={classes.rootCreator}>
+      <Paper className={classes.paperCreator}>
+        <Header page={'creator'} creatorId={creatorId} img={creator.imgUrl}/>
+        <iframe
+          title='twitch-embed'
+          src={`https://player.twitch.tv/?channel=${creator.twitchName}&parent=localhost`}
+          height='500'
+          width='100%'
+          frameBorder='0'
+          allowFullScreen={true}
+        ></iframe>
+        <iframe
+          title={creator.twitchName + ' chat'}
+          frameBorder='0'
+          src={`https://www.twitch.tv/embed/${creator.twitchName}/chat?parent=localhost`}
+          height='500'
+          width='100%'
+        ></iframe>
+        {creator.youtubeVideoId && (
             <iframe
               title={creator.youtubeVideoId}
               frameBorder='0'
