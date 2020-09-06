@@ -9,7 +9,6 @@ export const parseCookie = () => {
     .cookie
     .split(' ')
     .find(i => i.includes('user'))
-    .replace(';', '')
 
   return userCookie
     ? userCookie.split('=')[1]
