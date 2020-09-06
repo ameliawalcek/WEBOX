@@ -1,18 +1,16 @@
 import React from 'react'
 import { observer, inject } from 'mobx-react'
-import { Button, Avatar, MenuItem } from '@material-ui/core'
+import { Button } from '@material-ui/core'
 import MuiAlert from '@material-ui/lab/Alert';
-import { Snackbar } from '@material-ui/core'
-
+import { Snackbar, Typography } from '@material-ui/core'
 import { useStyles } from "../styles/style";
 
-const CreatorHeader = inject('creatorStore', 'userStore')(observer((props) => {
-  const { creator } = props.creatorStore
+const CreatorHeader = inject('userStore')(observer((props) => {
   const { userStore, creatorId } = props
   const { favorites, isLoggedIn } = userStore
-  
+  const classes = useStyles();
 
-  const classes = useStyles()
+
   let isFavorite = favorites.some(f => creatorId === f._id)
   const [open, setOpen] = React.useState(false);
 
@@ -33,18 +31,12 @@ const CreatorHeader = inject('creatorStore', 'userStore')(observer((props) => {
 
   return (
     <>
-      <MenuItem>
-        <div className={classes.rootCreatorTwo}>
-          <Avatar
-            alt={creator.twitchName}
-            src={creator.imgUrl}
-            className={classes.largeCreatorTwo}
-          />
-        </div>
-      </MenuItem>
       {isFavorite
         ? <Button size='small' variant='outlined' color='secondary' onClick={handleClick}>
-          Unfavorite </Button>
+          <Typography className={classes.typography}>
+          Unfavorite 
+          </Typography>
+          </Button>
         : <Button size='small' variant='contained' color='secondary' onClick={handleClick}>
           Favorite</Button>
       }

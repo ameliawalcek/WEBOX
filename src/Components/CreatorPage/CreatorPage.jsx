@@ -3,33 +3,36 @@ import { observer, inject } from 'mobx-react';
 import Header from '../Header/Header';
 import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
-import { useScript } from '../../hooks/hooks';
 import { Paper, List } from '@material-ui/core';
-import { useStyles } from "../styles/style";
+import { useStyles } from '../styles/style';
+import { TwitterTimelineEmbed } from 'react-twitter-embed';
+import InstagramEmbed from 'react-instagram-embed';
 
-const CreatorPage = inject('creatorStore')(observer((props) => {
-  const { creatorStore } = props;
-  const { creator } = creatorStore;
-  const { pathname } = useLocation();
-  const creatorId = pathname.split('/')[2]
-  const classes = useStyles()
+const CreatorPage = inject(
+  'creatorStore',
+  'userStore'
+)(
+  observer((props) => {
+    const { creatorStore, userStore } = props;
+    const { creator } = creatorStore;
+    const { pathname } = useLocation();
 
-  useScript('//cdn.embedly.com/widgets/platform.js');
-  useScript('https://platform.twitter.com/widgets.js');
+    const creatorId = pathname.split('/')[2];
+    const classes = useStyles();
 
-  useEffect(() => {
-    creatorStore.getCreatorById(pathname.split('/')[2]);
-
+    useEffect(() => {
+      creatorStore.getCreatorById(pathname.split('/')[2]);
+      
     return () => {
       creatorStore.cleanCreatorData();
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
+    
   return (
     <Paper className={classes.rootCreator}>
       <Paper className={classes.paperCreator}>
-        <Header page={'creator'} creatorId={creatorId}/>
+        <Header page={'creator'} creatorId={creatorId} img={creator.imgUrl}/>
         <iframe
           title='twitch-embed'
           src={`https://player.twitch.tv/?channel=${creator.twitchName}&parent=localhost`}
@@ -46,42 +49,45 @@ const CreatorPage = inject('creatorStore')(observer((props) => {
           width='100%'
         ></iframe>
         {creator.youtubeVideoId && (
-          <iframe
-            title={creator.youtubeVideoId}
-            frameBorder='0'
-            src={`https://www.youtube.com/embed/${creator.youtubeVideoId}`}
-            height='250px'
-            width='100%'
-            allowFullScreen={true}
-          ></iframe>
-        )}
-        {creator.instagramPostId && (
-          <a
-            className='embedly-card'
-            style={{ height: '50%' }}
-            data-card-controls='0'
-            data-card-width='100%'
-            href={`https://instagram.com/p/${creator.instagramPostId}/`}
-          >
-            {' '}
-          </a>
-        )}
-        {creator.twitterName && (
-          <Paper style={{ maxHeight: 650, overflow: 'auto' }}>
-            <List>
-              <a
-                className='twitter-timeline'
-                href={`https://twitter.com/${creator.twitterName}?ref_src=twsrc%5Etfw`}
-              >
-                Tweets by {creator.twitterName}
-              </a>
-            </List>
-          </Paper>
-        )}
+            <iframe
+              title={creator.youtubeVideoId}
+              frameBorder='0'
+              src={`https://www.youtube.com/embed/${creator.youtubeVideoId}`}
+              height='250px'
+              width='100%'
+              allowFullScreen={true}
+            ></iframe>
+          )}
+          {creator.instagramPostId && (
+            <InstagramEmbed
+              url={'https://instagr.am/p/CEr9mwghtMk/'}
+              maxWidth={1000}
+              hideCaption={false}
+              containerTagName='div'
+              protocol=''
+              injectScript
+              onLoading={() => {}}
+              onSuccess={() => {}}
+              onAfterRender={() => {}}
+              onFailure={() => {}}
+            />
+          )}
+          {creator.twitterName && (
+            <Paper style={{ maxHeight: 650, overflow: 'auto', width: '100%' }}>
+              <List>
+                <TwitterTimelineEmbed
+                  sourceType='profile'
+                  screenName={creator.twitterName}
+                  options={{ height: 600 }}
+                  theme={userStore.darkState ? 'dark' : 'light'}
+                />
+              </List>
+            </Paper>
+          )}
+        </Paper>
       </Paper>
-    </Paper>
-  );
-})
+    );
+  })
 );
 
 export default CreatorPage;

@@ -1,13 +1,11 @@
-
 import { fade, makeStyles } from '@material-ui/core'
 
 export const useStyles = makeStyles((theme) => ({
     rootCreator: {
-        height: '100vh',
+        width: '100%',
+        height: 'auto'
     },
     paperCreator: {
-        // flexGrow: 1,
-        height: '100vh',
         paddingTop: 60,
         paddingRight: 10,
         paddingLeft: 10,
@@ -148,11 +146,14 @@ export const useStyles = makeStyles((theme) => ({
       largeCreatorTwo: {
         width: theme.spacing(7),
         height: theme.spacing(7),
-        height: 50,
+        height: 45,
         marginTop: 5,
         position: 'relative',
-        left: -20,
-        width: 50,
-        zIndex: 10000000000
+        left: 10,
+        width: 45,
+        bottom: 2
+      },
+      typography: {
+        fontSize: 10,
       },
 }))
