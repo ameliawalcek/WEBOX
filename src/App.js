@@ -10,8 +10,7 @@ import CreatorPage from "./Components/CreatorPage/CreatorPage";
 import { ThemeProvider, Paper } from '@material-ui/core'
 import { useTheme, useIsAuth } from './hooks/hooks'
 
-const App = inject("userStore", "mediaStore")(
-  observer(props => {
+const App = inject("userStore", "mediaStore")(observer(props => {
     const { darkState, isLoggedIn, cookieLogIn } = props.userStore
     const darkTheme = useTheme(darkState)
     useIsAuth(cookieLogIn)

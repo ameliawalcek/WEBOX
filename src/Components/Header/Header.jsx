@@ -6,7 +6,7 @@ import SearchBar from './SearchBar';
 import CreatorHeader from './CreatorHeader';
 import {
   AppBar, Toolbar, IconButton, Badge, Menu, Switch, ListItem, ListItemText,
-  Drawer, List, Divider, ListItemIcon, useTheme, Button
+  Drawer, List, Divider, ListItemIcon, useTheme, Button, Avatar
 } from '@material-ui/core';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
@@ -17,9 +17,11 @@ import MenuIcon from '@material-ui/icons/Menu';
 import Brightness4Icon from '@material-ui/icons/Brightness4';
 import Brightness2RoundedIcon from '@material-ui/icons/Brightness2Rounded';
 import { useStyles } from "../styles/style";
+import LogoDark from "../assets/LogoDark.png"
+import LogoLight from "../assets/LogoLight.png"
 
 const Header = inject('userStore')(observer((props) => {
-  const { darkState, handleDarkStateChange } = props.userStore;
+  const { darkState, handleDarkStateChange, isLoggedIn } = props.userStore;
 
   const [open, setOpen] = React.useState(false);
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -51,7 +53,9 @@ const Header = inject('userStore')(observer((props) => {
 
   return (
     <div className={classes.growHeader}>
-      <AppBar >
+      <AppBar
+        className={classes.customizeToolbar}
+      >
         <Toolbar>
           <IconButton
             color='inherit'
@@ -61,11 +65,22 @@ const Header = inject('userStore')(observer((props) => {
             className={clsx(classes.menuButtonHeader, open && classes.hideHeader)}
           >
             <MenuIcon />
+            {darkState
+              ? <img src={LogoDark} alt="Webox" style={{ height: "30px", marginLeft: 10, width: 100 }} />
+              : <img src={LogoLight} alt="Webox" style={{ height: "30px", marginLeft: 10, width: 100 }} />
+            }
+            {props.page === 'creator' &&
+              <Avatar
+                alt={''}
+                src={props.img}
+                className={classes.largeCreatorTwo}
+              />
+            }
           </IconButton>
           {props.page === 'explore' ? (
             <SearchBar />
           ) : props.page === 'creator' ? (
-            <CreatorHeader />
+            <CreatorHeader creatorId={props.creatorId} />
           ) : null}
           <div className={classes.growHeader} />
           <IconButton
@@ -121,10 +136,12 @@ const Header = inject('userStore')(observer((props) => {
               <Switch checked={darkState} onChange={handleDarkStateChange} />
             </ListItemIcon>
           </ListItem>
-          <ListItem className={classes.listHeader} >
-            <Button variant="contained" color="primary" href="/auth/login">
-              Login</Button>
-          </ListItem>
+          {!isLoggedIn &&
+            <ListItem className={classes.listHeader} >
+              <Button variant="contained" color="primary" href="/auth/login">
+                Login</Button>
+            </ListItem>
+          }
         </List>
       </Drawer>
     </div>
