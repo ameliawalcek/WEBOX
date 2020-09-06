@@ -2,11 +2,10 @@ import { fade, makeStyles } from '@material-ui/core'
 
 export const useStyles = makeStyles((theme) => ({
     rootCreator: {
-        height: '100vh',
+        width: '100%',
+        height: 'auto'
     },
     paperCreator: {
-        // flexGrow: 1,
-        height: '100vh',
         paddingTop: 60,
         paddingRight: 10,
         paddingLeft: 10,
