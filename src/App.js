@@ -7,7 +7,7 @@ import MediaCards from "./Components/MediaCards/MediaCards";
 import Notifications from "./Components/Notifications/Notifications";
 import CreatorPage from "./Components/CreatorPage/CreatorPage";
 import AddCreator from "./Components/CreatorPage/AddCreator"
-import { ThemeProvider, Paper } from '@material-ui/core'
+import { ThemeProvider } from '@material-ui/core'
 import { useTheme, useIsAuth } from './hooks/hooks'
 
 const App = inject("userStore", "mediaStore")(observer(props => {
