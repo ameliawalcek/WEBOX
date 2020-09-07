@@ -7,7 +7,7 @@ deploy:
   provider: elasticbeanstalk
   region: 'eu-central-1'
   app: 'Webox'
-  env: 'webox-env'
+  env: 'webox-env-1'
   bucket_name: 'elasticbeanstalk-eu-central-1-562669185924'
   bucket_path: 'Webox'
   on:
