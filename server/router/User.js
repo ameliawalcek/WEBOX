@@ -57,6 +57,7 @@ userRouter.post("/notifications", async (req, res) => {
   if (mediaType === "youtube") {
     notification = {
       creatorId: creator._id,
+      creatorName: creator.twitch,
       mediaSource: "youtube",
       post: "new video was posted",
     };

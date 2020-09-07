@@ -1,35 +1,79 @@
-import React from "react"
-import Header from "../Header/Header"
-import Notification from "./Notification"
-import { Paper, Grid, Icon } from "@material-ui/core"
-import YouTubeIcon from "@material-ui/icons/YouTube"
-import TwitterIcon from "@material-ui/icons/Twitter"
-import pngwave from "../assets/pngwave.png"
+import React from "react";
+import Header from "../Header/Header";
+import { inject, observer } from "mobx-react";
+import Notification from "./Notification";
+import { Paper, Grid, Icon } from "@material-ui/core";
+import YouTubeIcon from "@material-ui/icons/YouTube";
+import TwitterIcon from "@material-ui/icons/Twitter";
+import pngwave from "../assets/pngwave.png";
 import { useStyles } from "../styles/style";
 
-const notifications = [
-    { site: "twitter", icon: <TwitterIcon style={{ color: "#1da1f2" }} fontSize="large" />, notification: "" },
-    { site: "youTube", icon: <YouTubeIcon style={{ color: "#FF0000" }} fontSize="large" />, notification: "" },
-    { site: "instagram", icon: <img src={pngwave} alt="instagram" style={{ height: "30px" }} />, notification: "" },
-    { site: "twitch", icon: <Icon className="fab fa-twitch" fontSize="large" style={{ color: "#9147ff" }} />, notification: "" }
-]
+const notificationDesign = [
+  {
+    site: "twitter",
+    icon: <TwitterIcon style={{ color: "#1da1f2" }} fontSize="large" />,
+    notification: "just went live!",
+  },
+  {
+    site: "youTube",
+    icon: <YouTubeIcon style={{ color: "#FF0000" }} fontSize="large" />,
+    notification: "released a new video",
+  },
+  {
+    site: "instagram",
+    icon: <img src={pngwave} alt="instagram" style={{ height: "30px" }} />,
+    notification: "shared a new photo",
+  },
+  {
+    site: "twitch",
+    icon: (
+      <Icon
+        className="fab fa-twitch"
+        fontSize="large"
+        style={{ color: "#9147ff" }}
+      />
+    ),
+    notification: "is live!",
+  },
+];
 
-function Notifications(props) {
-    const classes = useStyles()
+const Notifications = inject("userStore")(
+  observer((props) => {
+    const classes = useStyles();
+
+    const { notifications } = props.userStore;
+    console.log(notifications)
 
     return (
-        <Paper className={classes.rootNotif}>
-            <Header page={"basic"} />
-            <Paper className={classes.paperNotif} {...props} elevation={0}>
-                <Grid container wrap="nowrap" spacing={2}>
-                    <Grid item xs>
-                        {notifications.map(n => (
-                            <Notification n={n} key={n.site} />
-                        ))}
-                    </Grid>
-                </Grid>
-            </Paper>
+      <Paper className={classes.rootNotif}>
+        <Header page={"basic"} />
+        <Paper className={classes.paperNotif} {...props} elevation={0}>
+          <Grid container wrap="nowrap" spacing={2}>
+            <Grid item xs>
+              {notifications.map((n) => {
+                if (n.mediaType === "twitter") {
+                  return (
+                    <Notification n={notificationDesign[0]} key={n.creatorName} name={n.creatorName} />
+                  );
+                } else if (n.mediaType === "youtube") {
+                  return (
+                    <Notification n={notificationDesign[1]} key={n.creatorName} name={n.creatorName} />
+                  );
+                } else if (n.mediaType === "instagram") {
+                  return (
+                    <Notification n={notificationDesign[2]} key={n.creatorName} name={n.creatorName} />
+                  );
+                } else {
+                  return (
+                    <Notification n={notificationDesign[3]} key={n.creatorName} name={n.creatorName} />
+                  );
+                }
+              })}
+            </Grid>
+          </Grid>
         </Paper>
-    )
-}
+      </Paper>
+    );
+  })
+);
 export default Notifications;

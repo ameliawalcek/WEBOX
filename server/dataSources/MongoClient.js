@@ -4,6 +4,7 @@ require("mongoose").connect(process.env.MONGO_URI, {
   useUnifiedTopology: true,
   useFindAndModify: false,
 });
+
 const Models = require("../models/Models");
 
 class MongoClient {
@@ -19,8 +20,8 @@ class MongoClient {
     return Models.User.findById(cookie).lean();
   }
 
-  getUserById(id) {
-    return Models.User.findById(id)
+  async getUserById(id) {
+    return await Models.User.findById(id)
       .select("favorites notifications")
       .populate({ path: "favorites", options: { lean: true } })
       .populate({ path: "notifications", options: { lean: true } })
@@ -90,9 +91,9 @@ class MongoClient {
       .lean();
   }
 
-  getCreatorById(id) {
-    return Models.Creator.findById(id).lean();
-  }
+  getCreatorById = async (id) => {
+    return await Models.Creator.findById(id).lean();
+  };
 
   getCreatorByMedia(mediaType, mediaId) {
     return Models.Creator.findOne({ [mediaType]: mediaId });
@@ -102,9 +103,9 @@ class MongoClient {
     return Models.Creator.estimatedDocumentCount({});
   }
 
-  saveNotification(notificationDoc) {
-    return new Models.Notification(notificationDoc).save();
-  }
+  saveNotification = async (notificationDoc) => {
+    return await new Models.Notification(notificationDoc).save();
+  };
 
   async removeNotificationFromUser(notificationId, userId) {
     const notificationDoc = await this.getDocById(

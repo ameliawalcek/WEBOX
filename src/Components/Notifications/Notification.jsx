@@ -13,7 +13,9 @@ function Notification(props) {
 
     const options = ['Remove']
 
+    console.log(props)
     return (
+
         <>
             <Grid item>
                 <IconButton
@@ -22,7 +24,7 @@ function Notification(props) {
                     onClick={handleClick}>
                     <MoreVertIcon fontSize="small" />
                 </IconButton>
-                {props.n.icon} {props.n.notification}
+                {props.n.icon} {props.name} {props.n.notification}
             </Grid>
             <Menu
                 id="long-menu"
