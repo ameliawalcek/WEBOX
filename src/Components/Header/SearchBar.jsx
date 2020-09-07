@@ -7,8 +7,9 @@ import { useStyles } from "../styles/style";
 const SearchBar = inject('mediaStore')(observer((props) => {
     const classes = useStyles()
 
-    const handleInput = ({ target }) => {
-        props.mediaStore.searchInput = target.value
+    const handleSearch = ({ target }) => {
+        props.mediaStore.resetTrending()
+        props.mediaStore.handleSearch(target.value)
     }
 
     return (
@@ -23,7 +24,7 @@ const SearchBar = inject('mediaStore')(observer((props) => {
                     input: classes.inputInputSearch,
                 }}
                 inputProps={{ 'aria-label': 'search' }}
-                onChange={handleInput}
+                onChange={handleSearch}
             />
         </div>
     )
