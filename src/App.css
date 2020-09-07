@@ -6,6 +6,10 @@ body {
   overflow-x:  hidden !important;
 }
 
+::-webkit-scrollbar {
+  display: none;
+}
+
 .card-img{
   max-width: 100%;
   height: auto;

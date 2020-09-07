@@ -16,9 +16,9 @@ const EmptyCard = inject('userStore')(observer((props) => {
                 alignItems="center"
                 justify="center"
                 align="center"
-                style={{ minHeight: '100vh' }}
+                style={{ minHeight: '100vh'}}
             >
-                <Grid item xs={10} sm={6} md={6} lg={6}>
+                <Grid item xs={10} sm={6} md={6} lg={6} style={{position: 'fixed' }}>
                     <Typography color='primary' style={{ fontSize: 60 }}>
                         <i className="fas fa-home"></i>
                     </Typography>
@@ -31,7 +31,7 @@ const EmptyCard = inject('userStore')(observer((props) => {
                             }
                         </Typography>
 
-                        <Typography variant="body2" gutterBottom>
+                        <Typography variant="body2" gutterBottom >
                             {
                                 !isLoggedIn
                                     ? `Login to start favoriting creators and view their live streams, videos, and posts in one place`
