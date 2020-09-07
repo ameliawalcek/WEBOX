@@ -7,8 +7,8 @@ export const useStyles = makeStyles((theme) => ({
     },
     paperCreator: {
         paddingTop: 60,
-        paddingRight: 10,
-        paddingLeft: 10,
+        paddingRight: 16,
+        paddingLeft: 16,
         paddingBottom: 10
     },
     rootNotif: {
@@ -37,12 +37,12 @@ export const useStyles = makeStyles((theme) => ({
     paperMedia: {
         height: '100vh'
     },
-    paperTopMedia:{
+    paperTopMedia: {
         paddingTop: 60
     },
     customizeToolbar: {
         maxHeight: 55
-      },
+    },
     iconMedia: {
         color: 'rgba(255, 255, 255, 0.54)',
     },
@@ -140,20 +140,23 @@ export const useStyles = makeStyles((theme) => ({
     rootCreatorTwo: {
         display: 'flex',
         '& > *': {
-          margin: theme.spacing(1),
+            margin: theme.spacing(1),
         },
-      },
-      largeCreatorTwo: {
-        width: theme.spacing(7),
-        height: theme.spacing(7),
+    },
+    largeCreatorTwo: {
         height: 45,
         marginTop: 5,
         position: 'relative',
         left: 10,
         width: 45,
-        bottom: 2
-      },
-      typography: {
+        bottom: 3
+    },
+    typography: {
         fontSize: 10,
-      },
+    },
+    instagram: {
+        display: 'flex',
+        justifyContent: 'center',
+        color: 'white'
+    },
 }))

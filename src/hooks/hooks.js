@@ -6,7 +6,7 @@ export const useTheme = darkState => {
   const palletType = darkState ? "dark" : "light"
   const mainPrimaryColor = darkState ? '#303030' : '#673ab7'
   const mainSecondaryColor = darkState ? '#954bb4' : '#009688'
-  
+
   return createMuiTheme({
     palette: {
       type: palletType,
@@ -35,7 +35,9 @@ export const useTheme = darkState => {
 }
 
 export const useCreators = (store) => {
-  const { getTrending, setLoading, resetTrending, pageNum, category, loading, hasMore, getNextPage } = store
+  const {
+    searchInput, getTrending, setLoading, resetTrending, pageNum,
+    category, loading, hasMore, getNextPage } = store
 
   const observer = useRef();
   const lastCreatorElementRef = useCallback((node) => {
@@ -57,10 +59,10 @@ export const useCreators = (store) => {
 
   useEffect(() => {
     setLoading(true)
-    getTrending(category, pageNum)
+    getTrending(category, pageNum, searchInput)
     setLoading(false)
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [category, pageNum])
+  }, [category, pageNum, searchInput])
 
   return lastCreatorElementRef
 }
