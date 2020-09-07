@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import Header from '../Header/Header'
 import MediaCard from './MediaCard'
 import EmptyCard from './EmptyCard'
@@ -16,7 +16,7 @@ const MediaCards = inject('userStore', 'mediaStore')(observer((props) => {
     const classes = useStyles()
 
     const { isLoggedIn, favorites } = props.userStore;
-    const { trending, loading, searchInput } = props.mediaStore;
+    const { trending, loading } = props.mediaStore;
     
     const { media, header, mediaCard } =
         location.pathname === '/dashboard' && (!isLoggedIn || !favorites.length)
@@ -28,14 +28,11 @@ const MediaCards = inject('userStore', 'mediaStore')(observer((props) => {
     const renderMediaCards = (media) => {
         return media.map((data, i) => {
             let isFavorite = favorites.some(f => data._id === f._id)
-            let creator = data.twitch.toLowerCase()
 
-            // if (creator.includes(searchInput.toLowerCase())) {
                 if (header === 'explore' && media.length === i + 1) {
                     return <MediaCard lastRef={ref} id={data._id} img={data.img} isFavorite={isFavorite} twitchName={data.twitch} key={data._id} />
                 }
                 return <MediaCard id={data._id} img={data.img} isFavorite={isFavorite} twitchName={data.twitch} key={Math.random()} />
-            // }
         })
     }
     return (

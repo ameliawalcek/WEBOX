@@ -6,7 +6,7 @@ mediaRouter.get("/trending", async (req, res) => {
   const { category, page, input } = req.query;
 
   if (input.length) {
-    res.send({ creators: await dataSources.mongoClient.getSearchCreators(input, page)})
+    res.send({ creators: await dataSources.mongoClient.getSearchCreators(input, page) })
   } else {
     const creators = category === 'All'
       ? await dataSources.mongoClient.getCreatorsByPage(page)
@@ -25,7 +25,7 @@ mediaRouter.get("/trending", async (req, res) => {
 
 mediaRouter.get("/channel/:id", async (req, res) => {
   const { id } = req.params;
-  let response = await dataSources.getCreatorLinksByid(id)
+  res.send(await dataSources.getCreatorLinksByid(id))
 });
 
 module.exports = mediaRouter
