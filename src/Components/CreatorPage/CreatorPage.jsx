@@ -61,7 +61,7 @@ const CreatorPage = inject(
           {creator.instagramPostId && (
             <div className={classes.instagram}>
               <InstagramEmbed
-                url={'https://instagr.am/p/CEr9mwghtMk/'}
+                url={`https://instagr.am/p/${creator.instagramPostId}/`}
                 maxWidth={1000}
                 hideCaption={false}
                 containerTagName='div'
