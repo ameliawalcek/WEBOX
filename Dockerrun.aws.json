@@ -14,6 +14,12 @@
       "memory": 300,
       "links": [
         "redis-server"
+      ],
+      "portMappings": [
+        {
+          "hostPort": 80,
+          "containerPort": 3001
+        }
       ]
     }
   ]
