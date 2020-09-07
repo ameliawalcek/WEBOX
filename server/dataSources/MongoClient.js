@@ -66,6 +66,7 @@ class MongoClient {
       .find({})
       .skip((page - 1) * 12)
       .limit(12)
+      .select('_id twitch img')
       .lean()
     }
     
@@ -83,6 +84,7 @@ class MongoClient {
       .find({ twitch: {$regex: ".*" + input + ".*", $options: 'i' }})
       .skip((page - 1) * 12)
       .limit(12)
+      .select('_id twitch img')
       .lean()
   }
 

@@ -17,7 +17,6 @@ class DataSources {
       this.instagramAPI.getRecentPostByRef(creator.instagram),
       this.youtubeAPI.getYoutubeLatestByRef(creator.youtube)
     ]).catch(e => console.log(e.response))
-    console.log(instagramPostId)
     return {
       imgUrl: creator.img,
       twitchName: creator.twitch,
