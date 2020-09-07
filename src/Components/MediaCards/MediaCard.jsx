@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import {
     GridListTile, GridListTileBar, IconButton,
-    Menu, MenuItem, Grid, Snackbar
+    Menu, MenuItem, Grid, Snackbar, Typography
 } from '@material-ui/core'
 import { inject, observer } from 'mobx-react'
 import MoreVertIcon from '@material-ui/icons/MoreVert'
@@ -81,7 +81,9 @@ const MediaCard = inject('userStore')(observer((props) => {
                     </Menu>
                     <Snackbar open={openSnack} onClose={handleSnackBarClose} autoHideDuration={3000}>
                         <Alert severity="info" onClose={handleSnackBarClose}>
-                            Please login
+                            <Typography>
+                                <Link to='/auth/login' style={{ textDecoration: 'none', color: 'white' }}>Please login</Link>
+                            </Typography>
                         </Alert>
                     </Snackbar>
                 </GridListTile>

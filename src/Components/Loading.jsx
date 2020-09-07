@@ -1,10 +1,13 @@
 import React from 'react';
 import Loader from 'react-loader-spinner';
+import { useStyles } from "./styles/style";
 
 function Loading() {
+  const classes = useStyles()
+
   return (
-    <div style={{ marginLeft: '40vw' }}>
-      <Loader type='TailSpin' color='#00BFFF' height={250} width={250} />
+    <div className={classes.loader}>
+      <Loader type='TailSpin' color='#954bb4' height={150} width={150} />
     </div>
   );
 }

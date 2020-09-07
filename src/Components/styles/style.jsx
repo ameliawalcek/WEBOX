@@ -61,7 +61,7 @@ export const useStyles = makeStyles((theme) => ({
         alignItems: 'center',
         flexDirection: 'column',
         margin: 10,
-        width: '80%',
+        width: '90%',
         overflow: 'hidden',
         padding: 10,
     },
@@ -84,6 +84,13 @@ export const useStyles = makeStyles((theme) => ({
             marginLeft: theme.spacing(3),
             width: 'auto',
         },
+    },
+    loader: {
+        left: '50%',
+        top: '50%',
+        marginLeft: -75,
+        marginTop: -75,
+        position: 'absolute'
     },
     searchIconSearch: {
         padding: theme.spacing(0, 2),

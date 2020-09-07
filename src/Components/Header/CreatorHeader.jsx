@@ -4,6 +4,7 @@ import { Button } from '@material-ui/core'
 import MuiAlert from '@material-ui/lab/Alert';
 import { Snackbar, Typography } from '@material-ui/core'
 import { useStyles } from "../styles/style";
+import { Link } from 'react-router-dom'
 
 const CreatorHeader = inject('userStore')(observer((props) => {
   const { userStore, creatorId } = props
@@ -34,16 +35,19 @@ const CreatorHeader = inject('userStore')(observer((props) => {
       {isFavorite
         ? <Button size='small' variant='outlined' color='secondary' onClick={handleClick}>
           <Typography className={classes.typography}>
-          Unfavorite 
+            Unfavorite
           </Typography>
-          </Button>
+        </Button>
         : <Button size='small' variant='contained' color='secondary' onClick={handleClick}>
           Favorite</Button>
       }
       {!isLoggedIn &&
         <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
           <Alert onClose={handleClose} severity="info">
-            Please login</Alert>
+            <Typography>
+              <Link to='/auth/login' style={{ textDecoration: 'none', color: 'white' }}>Please login</Link>
+            </Typography>
+          </Alert>
         </Snackbar>
       }
     </>

@@ -10,10 +10,12 @@ import AddCreator from "./Components/CreatorPage/AddCreator"
 import { ThemeProvider } from '@material-ui/core'
 import { useTheme, useIsAuth } from './hooks/hooks'
 
-const App = inject("userStore", "mediaStore")(observer(props => {
+const App = inject("userStore", "mediaStore", 'notificationStore')(observer(props => {
     const { darkState, isLoggedIn, cookieLogIn } = props.userStore
     const darkTheme = useTheme(darkState)
     useIsAuth(cookieLogIn)
+
+    props.notificationStore.sendNotification()
 
     return (
       <Router>
