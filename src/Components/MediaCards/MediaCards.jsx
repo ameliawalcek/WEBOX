@@ -3,11 +3,11 @@ import Header from '../Header/Header'
 import MediaCard from './MediaCard'
 import EmptyCard from './EmptyCard'
 import CategoryBar from './CategoryBar'
+import Loading from '../Loading'
 import { inject, observer } from 'mobx-react'
 import { useLocation } from 'react-router-dom'
 import { Grid, GridList, Paper } from '@material-ui/core'
 import { useStyles } from "../styles/style";
-import Loading from '../Loading';
 import { useCreators } from '../../hooks/hooks';
 
 const MediaCards = inject('userStore', 'mediaStore')(observer((props) => {
