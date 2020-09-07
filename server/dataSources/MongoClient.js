@@ -1,5 +1,6 @@
 require('dotenv').config()
-require('mongoose').connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false })
+const { MONGO_USER_NAME, MONGO_PASSWORD, MONGO_DB_NAME } = process.env
+require('mongoose').connect(`mongodb+srv://${MONGO_USER_NAME}:${MONGO_PASSWORD}@${MONGO_DB_NAME}?retryWrites=true&w=majority`, { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false })
 const Models = require('../models/Models')
 
 class MongoClient {
