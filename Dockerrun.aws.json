@@ -1,0 +1,20 @@
+{
+  "AWSEBDockerrunVersion": 2,
+  "containerDefinitions": [
+    {
+      "name": "redis-server",
+      "image": "redis",
+      "essential": true,
+      "memory": 200
+    },
+    {
+      "name": "node-app",
+      "image": "chen572/webox",
+      "essential": true,
+      "memory": 300,
+      "links": [
+        "redis-server"
+      ]
+    }
+  ]
+}
