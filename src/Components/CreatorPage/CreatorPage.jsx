@@ -22,33 +22,33 @@ const CreatorPage = inject(
 
     useEffect(() => {
       creatorStore.getCreatorById(pathname.split('/')[2]);
-      
-    return () => {
-      creatorStore.cleanCreatorData();
-    };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-    
-  return (
-    <Paper className={classes.rootCreator}>
-      <Paper className={classes.paperCreator}>
-        <Header page={'creator'} creatorId={creatorId} img={creator.imgUrl}/>
-        <iframe
-          title='twitch-embed'
-          src={`https://player.twitch.tv/?channel=${creator.twitchName}&parent=localhost`}
-          height='500'
-          width='100%'
-          frameBorder='0'
-          allowFullScreen={true}
-        ></iframe>
-        <iframe
-          title={creator.twitchName + ' chat'}
-          frameBorder='0'
-          src={`https://www.twitch.tv/embed/${creator.twitchName}/chat?parent=localhost`}
-          height='500'
-          width='100%'
-        ></iframe>
-        {creator.youtubeVideoId && (
+
+      return () => {
+        creatorStore.cleanCreatorData();
+      };
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
+
+    return (
+      <Paper className={classes.rootCreator}>
+        <Paper className={classes.paperCreator}>
+          <Header page={'creator'} creatorId={creatorId} img={creator.imgUrl} />
+          <iframe
+            title='twitch-embed'
+            src={`https://player.twitch.tv/?channel=${creator.twitchName}&parent=localhost`}
+            height='500'
+            width='100%'
+            frameBorder='0'
+            allowFullScreen={true}
+          ></iframe>
+          <iframe
+            title={creator.twitchName + ' chat'}
+            frameBorder='0'
+            src={`https://www.twitch.tv/embed/${creator.twitchName}/chat?parent=localhost`}
+            height='500'
+            width='100%'
+          ></iframe>
+          {creator.youtubeVideoId && (
             <iframe
               title={creator.youtubeVideoId}
               frameBorder='0'
@@ -59,30 +59,30 @@ const CreatorPage = inject(
             ></iframe>
           )}
           {creator.instagramPostId && (
-            <InstagramEmbed
-              url={'https://instagr.am/p/CEr9mwghtMk/'}
-              maxWidth={1000}
-              hideCaption={false}
-              containerTagName='div'
-              protocol=''
-              injectScript
-              onLoading={() => {}}
-              onSuccess={() => {}}
-              onAfterRender={() => {}}
-              onFailure={() => {}}
-            />
+            <div className={classes.instagram}>
+              <InstagramEmbed
+                url={`https://instagr.am/p/${creator.instagramPostId}/`}
+                maxWidth={1000}
+                hideCaption={false}
+                containerTagName='div'
+                protocol=''
+                injectScript
+                onLoading={() => { }}
+                onSuccess={() => { }}
+                onAfterRender={() => { }}
+                onFailure={() => { }}
+              />
+            </div>
           )}
           {creator.twitterName && (
-            <Paper style={{ maxHeight: 650, overflow: 'auto', width: '100%' }}>
-              <List>
-                <TwitterTimelineEmbed
-                  sourceType='profile'
-                  screenName={creator.twitterName}
-                  options={{ height: 600 }}
-                  theme={userStore.darkState ? 'dark' : 'light'}
-                />
-              </List>
-            </Paper>
+            <List>
+              <TwitterTimelineEmbed
+                sourceType='profile'
+                screenName={creator.twitterName}
+                options={{ height: 550 }}
+                theme={userStore.darkState ? 'dark' : 'light'}
+              />
+            </List>
           )}
         </Paper>
       </Paper>

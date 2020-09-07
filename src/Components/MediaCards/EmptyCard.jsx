@@ -24,10 +24,9 @@ const EmptyCard = inject('userStore')(observer((props) => {
                     </Typography>
                     <>
                         <Typography variant="h6" gutterBottom>
-                            {
-                                !isLoggedIn
-                                    ? `Media Dashboard`
-                                    : `Your dashboard lives here`
+                            {!isLoggedIn
+                                ? `Media Dashboard`
+                                : `Your dashboard lives here`
                             }
                         </Typography>
 
