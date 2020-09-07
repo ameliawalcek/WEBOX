@@ -7,7 +7,6 @@ import MediaCards from "./Components/MediaCards/MediaCards";
 import Notifications from "./Components/Notifications/Notifications";
 import CreatorPage from "./Components/CreatorPage/CreatorPage";
 import AddCreator from "./Components/CreatorPage/AddCreator"
-//user params hook
 import { ThemeProvider, Paper } from '@material-ui/core'
 import { useTheme, useIsAuth } from './hooks/hooks'
 
@@ -19,7 +18,6 @@ const App = inject("userStore", "mediaStore")(observer(props => {
     return (
       <Router>
         <ThemeProvider theme={darkTheme}>
-          <Paper>
             <div id="main-container">
               <Route exact path='/' render={() => isLoggedIn ? <Redirect to='/dashboard' /> : <Redirect to='/auth/login' />} />
               <Route exact path="/auth/login" render={() => (isLoggedIn ? <Redirect to="/dashboard" /> : <Landing />)} />
@@ -30,7 +28,6 @@ const App = inject("userStore", "mediaStore")(observer(props => {
               <Route exact path="/notifications" render={() => <Notifications />} />
               <Route exact path="/creator/add" render={() => <AddCreator/>} />
             </div>
-          </Paper>
         </ThemeProvider>
       </Router>
     )
