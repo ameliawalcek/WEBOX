@@ -3,6 +3,7 @@ import Header from '../Header/Header'
 import MediaCard from './MediaCard'
 import EmptyCard from './EmptyCard'
 import CategoryBar from './CategoryBar'
+import Loading from '../Loading'
 import { inject, observer } from 'mobx-react'
 import { useLocation } from 'react-router-dom'
 import { Grid, GridList, Paper } from '@material-ui/core'
@@ -15,7 +16,7 @@ const MediaCards = inject('userStore', 'mediaStore')(observer((props) => {
     const classes = useStyles()
 
     const { isLoggedIn, favorites } = props.userStore;
-    const { trending } = props.mediaStore;
+    const { trending, loading } = props.mediaStore;
     
     const { media, header, mediaCard } =
         location.pathname === '/dashboard' && (!isLoggedIn || !favorites.length)
@@ -43,6 +44,7 @@ const MediaCards = inject('userStore', 'mediaStore')(observer((props) => {
                     <Grid container>
                         <GridList cellHeight={180} className={classes.rootMedia}>
                             {renderMediaCards(media)}
+                            {loading && <Loading />}
                         </GridList>
                     </Grid>
                 </Paper>
