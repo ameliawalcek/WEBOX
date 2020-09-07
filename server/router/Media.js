@@ -27,8 +27,8 @@ const checkCreatorInCache = (req, res, next) => {
 };
 
 const checkPageInCache = (req, res, next) => {
-  const { category, page } = req.query;
-  if (category) {
+  const { category, page, input } = req.query;
+  if (category || input) {
     next()
   } else {
     client.get(page, (err, data) => {
@@ -48,21 +48,25 @@ const checkPageInCache = (req, res, next) => {
 };
 
 mediaRouter.get("/trending", checkPageInCache, async (req, res) => {
-  const { category, page } = req.query;
+  const { category, page, input } = req.query
 
-  const creators = category === 'All'
-    ? await dataSources.mongoClient.getCreatorsByPage(page)
-    : await dataSources.mongoClient.getAllCreators()
-
-  if (category === 'All') {
-    res.send({ creators })
+  if (input.length) {
+    res.send({ creators: await dataSources.mongoClient.getSearchCreators(input, page) })
   } else {
-    const streamNames = category
-      ? await dataSources.twitchAPI.getTrendingByCategory(category, page)
-      : await dataSources.twitchAPI.getTrending(page);
-    res.send({ creators: creators.filter((c) => streamNames.find(n => n === c.twitch)) })
+    const creators = category === 'All'
+      ? await dataSources.mongoClient.getCreatorsByPage(page)
+      : await dataSources.mongoClient.getAllCreators()
+
+    if (category === 'All') {
+      res.send({ creators })
+    } else {
+      const streamNames = category
+        ? await dataSources.twitchAPI.getTrendingByCategory(category, page)
+        : await dataSources.twitchAPI.getTrending(page);
+      res.send({ creators: creators.filter((c) => streamNames.find(n => n === c.twitch)) })
+    }
   }
-});
+})
 
 mediaRouter.get("/channel/:id", checkCreatorInCache, async (req, res) => {
   const { id } = req.params;
