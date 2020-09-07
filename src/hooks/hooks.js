@@ -57,8 +57,9 @@ export const useCreators = (store) => {
 
   useEffect(() => {
     setLoading(true)
-    getTrending(category, pageNum)
-    setLoading(false)
+    getTrending(category, pageNum).then(() => {
+      setLoading(false)
+    })
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [category, pageNum])
 

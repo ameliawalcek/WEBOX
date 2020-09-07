@@ -7,7 +7,7 @@ export class CreatorStore {
   @observable creatorTOAdd = {}
 
   @action async getCreatorById(id) {
-    this.creator = (await axios('http://localhost:3001/media/channel/' + id)).data
+    this.creator = (await axios('/media/channel/' + id)).data
     this.loading = false
   };
 

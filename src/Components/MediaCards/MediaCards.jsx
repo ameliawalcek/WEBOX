@@ -7,7 +7,6 @@ import { inject, observer } from 'mobx-react'
 import { useLocation } from 'react-router-dom'
 import { Grid, GridList, Paper } from '@material-ui/core'
 import { useStyles } from "../styles/style";
-import Loading from '../Loading';
 import { useCreators } from '../../hooks/hooks';
 
 const MediaCards = inject('userStore', 'mediaStore')(observer((props) => {
@@ -16,7 +15,7 @@ const MediaCards = inject('userStore', 'mediaStore')(observer((props) => {
     const classes = useStyles()
 
     const { isLoggedIn, favorites } = props.userStore;
-    const { trending, loading, searchInput } = props.mediaStore;
+    const { trending, searchInput } = props.mediaStore;
 
     const { media, header, mediaCard } =
         location.pathname === '/dashboard' && (!isLoggedIn || !favorites.length)
@@ -49,7 +48,6 @@ const MediaCards = inject('userStore', 'mediaStore')(observer((props) => {
                     <Grid container>
                         <GridList cellHeight={180} className={classes.rootMedia}>
                             {renderMediaCards(media)}
-                            {loading && <Loading />}
                         </GridList>
                     </Grid>
                 </Paper>

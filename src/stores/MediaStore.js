@@ -21,8 +21,8 @@ export class MediaStore {
     @action getNextPage = () => { this.pageNum++ }
 
     @action getTrending = async (category, pageNum) => {
-        let res = await axios.get(`http://localhost:3001/media/trending?category=${category}&page=${pageNum}`)
-        this.trending = [...new Set([...this.trending, ...res.data.creators].map(JSON.stringify))].map(JSON.parse)
+        const res = await axios.get(`/media/trending?category=${category}&page=${pageNum}`)
+        this.trending = [...this.trending, ...res.data.creators]
         this.setHasMore(res.data.creators.length > 0)
     }
 }

@@ -1,8 +1,53 @@
 const express = require("express");
 const dataSources = require("../dataSources/DataSources");
+const redis = require('redis')
 const mediaRouter = express.Router();
 
-mediaRouter.get("/trending", async (req, res) => {
+const client = redis.createClient({
+  host: 'redis-server',
+  port: 6379
+})
+
+const checkCreatorInCache = (req, res, next) => {
+  const { id } = req.params;
+
+  client.get(id, (err, data) => {
+    if (err) {
+      console.log(err);
+      res.status(500).send(err);
+    }
+    //if no match found
+    if (data != null) {
+      res.send(data);
+    } else {
+      //proceed to next middleware function
+      next();
+    }
+  });
+};
+
+const checkPageInCache = (req, res, next) => {
+  const { category, page } = req.query;
+  if (category) {
+    next()
+  } else {
+    client.get(page, (err, data) => {
+      if (err) {
+        console.log(err);
+        res.status(500).send(err);
+      }
+      //if no match found
+      if (data != null) {
+        res.send(data);
+      } else {
+        //proceed to next middleware function
+        next();
+      }
+    });
+  }
+};
+
+mediaRouter.get("/trending", checkPageInCache, async (req, res) => {
   const { category, page } = req.query;
 
   const creators = category === 'All'
@@ -19,9 +64,13 @@ mediaRouter.get("/trending", async (req, res) => {
   }
 });
 
-mediaRouter.get("/channel/:id", async (req, res) => {
+mediaRouter.get("/channel/:id", checkCreatorInCache, async (req, res) => {
   const { id } = req.params;
-  res.send(await dataSources.getCreatorLinksByid(id))
+  const result = await dataSources.getCreatorLinksByid(id)
+
+  client.setex(id, 3600, JSON.stringify(result))
+
+  res.send(result)
 });
 
 module.exports = mediaRouter

@@ -17,7 +17,7 @@ export class UserStore {
     @action cookieLogIn = () => {
         const cookie = parseCookie()
         if (cookie) {
-            return axios.post(`http://localhost:3001/auth/cookie`, { cookie })
+            return axios.post(`/auth/cookie`, { cookie })
                 .then(d => {
                     this.isLoggedIn = true
                     this.userId = cookie
@@ -29,13 +29,13 @@ export class UserStore {
     }
 
     @action async getUser(id) {
-        let user = await axios.get(`http://localhost:3001/user/${id}`);
+        let user = await axios.get(`/user/${id}`);
         this.favorites = user.data.favorites
         this.notifications = user.data.notifications
     }
 
     @action checkUser = (user) => {
-        return axios.post("http://localhost:3001/auth/login", user)
+        return axios.post("/auth/login", user)
             .then(d => {
                 this.isLoggedIn = true
                 this.userId = d.data.userId
@@ -45,7 +45,7 @@ export class UserStore {
         }
         
         @action saveUser = (user) => {
-            return axios.post("http://localhost:3001/auth/signup", user)
+            return axios.post("/auth/signup", user)
             .then(d => {
                 this.isLoggedIn = true
                 this.userId = d._id
@@ -54,17 +54,17 @@ export class UserStore {
     }
 
     @action async saveFavorite(id) {
-        await axios.post(`http://localhost:3001/user/favorites`, { creatorId: id, userId: this.userId });
+        await axios.post(`/user/favorites`, { creatorId: id, userId: this.userId });
         this.getUser(this.userId)
     }
 
     @action async deleteFavorite(id) {
-        await axios({ url: `http://localhost:3001/user/favorites`, method: 'DELETE', data: { creatorId: id, userId: this.userId } })
+        await axios({ url: `/user/favorites`, method: 'DELETE', data: { creatorId: id, userId: this.userId } })
         this.favorites = this.favorites.filter(favorite => favorite._id !== id)
     }
 
     @action async deleteNotification(id) {
-        await axios.delete(`http://localhost:3001/user/notifications/${id}`)
+        await axios.delete(`/user/notifications/${id}`)
         this.notification = this.notifications.filter(notification => notification.id !== id)
     }
 }
