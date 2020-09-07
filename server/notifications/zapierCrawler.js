@@ -98,8 +98,9 @@ const youtubeSubscriber = async (channelID) => {
   const zapName = await page.$("span.css-cwhdyc-Text--subtitle800--black");
   await zapName.click();
   await page.type("nav h1", channelID);
+  await page.keyboard.press('Enter')
 
-  await page.waitFor(2000);
+  await page.waitFor(4000);
 
   await page.evaluate(() => {
     const activateZap = document.querySelectorAll("button")[1];
