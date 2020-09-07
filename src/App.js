@@ -26,7 +26,7 @@ const App = inject("userStore", "mediaStore")(observer(props => {
               <Route exact path="/explore" render={() => <MediaCards />} />
               <Route exact path="/creator/:id" render={() => <CreatorPage />} />
               <Route exact path="/notifications" render={() => <Notifications />} />
-              <Route exact path="/creator/add" render={() => <AddCreator/>} />
+              <Route exact path="/add/creator" render={() => <AddCreator/>} />
             </div>
         </ThemeProvider>
       </Router>

@@ -17,7 +17,7 @@ const MediaCards = inject('userStore', 'mediaStore')(observer((props) => {
 
     const { isLoggedIn, favorites } = props.userStore;
     const { trending, loading } = props.mediaStore;
-
+    
     const { media, header, mediaCard } =
         location.pathname === '/dashboard' && (!isLoggedIn || !favorites.length)
             ? { media: [], header: 'basic', mediaCard: false }
@@ -29,10 +29,10 @@ const MediaCards = inject('userStore', 'mediaStore')(observer((props) => {
         return media.map((data, i) => {
             let isFavorite = favorites.some(f => data._id === f._id)
 
-            if (header === 'explore' && media.length === i + 1) {
-                return <MediaCard lastRef={ref} id={data._id} img={data.img} isFavorite={isFavorite} twitchName={data.twitch} key={data._id} />
-            }
-            return <MediaCard id={data._id} img={data.img} isFavorite={isFavorite} twitchName={data.twitch} key={Math.random()} />
+                if (header === 'explore' && media.length === i + 1) {
+                    return <MediaCard lastRef={ref} id={data._id} img={data.img} isFavorite={isFavorite} twitchName={data.twitch} key={data._id} />
+                }
+                return <MediaCard id={data._id} img={data.img} isFavorite={isFavorite} twitchName={data.twitch} key={Math.random()} />
         })
     }
     return (
