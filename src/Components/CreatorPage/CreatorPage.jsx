@@ -35,7 +35,7 @@ const CreatorPage = inject(
           <Header page={'creator'} creatorId={creatorId} img={creator.imgUrl} />
           <iframe
             title='twitch-embed'
-            src={`https://player.twitch.tv/?channel=${creator.twitchName}&parent=localhost`}
+            src={`https://player.twitch.tv/?channel=${creator.twitchName}&parent=http://webox.eu-central-1.elasticbeanstalk.com/creator/5f53d01a43b93b3808b880dc`}
             height='500'
             width='100%'
             frameBorder='0'
@@ -44,7 +44,7 @@ const CreatorPage = inject(
           <iframe
             title={creator.twitchName + ' chat'}
             frameBorder='0'
-            src={`https://www.twitch.tv/embed/${creator.twitchName}/chat?parent=localhost`}
+            src={`https://www.twitch.tv/embed/${creator.twitchName}/chat?parent=http://webox.eu-central-1.elasticbeanstalk.com/creator/5f53d01a43b93b3808b880dc`}
             height='500'
             width='100%'
           ></iframe>
