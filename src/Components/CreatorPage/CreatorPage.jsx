@@ -30,7 +30,7 @@ const CreatorPage = inject(
     }, []);
 
     return (
-      <Paper className={classes.rootCreator}>
+      // <Paper className={classes.rootCreator}>
         <Paper className={classes.paperCreator}>
           <Header page={'creator'} creatorId={creatorId} img={creator.imgUrl} />
           <iframe
@@ -84,8 +84,8 @@ const CreatorPage = inject(
               />
             </List>
           )}
-        </Paper>
-      </Paper>
+         </Paper>
+      // </Paper>
     );
   })
 );

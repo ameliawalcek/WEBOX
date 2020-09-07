@@ -16,9 +16,9 @@ const EmptyCard = inject('userStore')(observer((props) => {
                 alignItems="center"
                 justify="center"
                 align="center"
-                style={{ minHeight: '100vh'}}
+                style={{ height: '100vh', width: '100wh' }}
             >
-                <Grid item xs={10} sm={6} md={6} lg={6} style={{position: 'fixed' }}>
+                <Grid item xs={10} sm={6} md={6} lg={6}  style={{ height: '100vh', width: '100wh' }}>
                     <Typography color='primary' style={{ fontSize: 60 }}>
                         <i className="fas fa-home"></i>
                     </Typography>

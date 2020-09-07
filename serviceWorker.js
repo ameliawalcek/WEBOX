@@ -21,7 +21,7 @@ const isLocalhost = Boolean(
 );
 
 export function register(config) {
-  if (process.env.NODE_ENV === 'production' && 'serviceWorker' in navigator) {
+  if ('serviceWorker' in navigator) {
     // The URL constructor is available in all browsers that support SW.
     const publicUrl = new URL(process.env.PUBLIC_URL, window.location.href);
     if (publicUrl.origin !== window.location.origin) {
@@ -133,9 +133,19 @@ export function unregister() {
     navigator.serviceWorker.ready
       .then(registration => {
         registration.unregister();
+
       })
       .catch(error => {
         console.error(error.message);
       });
   }
 }
+//added this
+self.addEventListener("push", e => {
+  const data = e.data.json();
+  console.log("Push Recieved...");
+  self.registration.showNotification(data.title, {
+    body: "Notified by Traversy Media!",
+    icon: "http://image.ibb.co/frYOFd/tmlogo.png"
+  });
+});
