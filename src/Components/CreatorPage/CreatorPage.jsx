@@ -53,7 +53,7 @@ const CreatorPage = inject(
               title={creator.youtubeVideoId}
               frameBorder='0'
               src={`https://www.youtube.com/embed/${creator.youtubeVideoId}`}
-              height='250px'
+              height='500'
               width='100%'
               allowFullScreen={true}
             ></iframe>

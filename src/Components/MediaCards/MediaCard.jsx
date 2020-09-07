@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { Link } from 'react-router-dom';
 import {
     GridListTile, GridListTileBar, IconButton,
@@ -12,9 +12,9 @@ import { useStyles } from "../styles/style";
 const MediaCard = inject('userStore')(observer((props) => {
     const { img, twitchName, id, userStore, isFavorite, lastRef } = props
     const classes = useStyles()
-    const [anchorEl, setAnchorEl] = React.useState(null)
+    const [anchorEl, setAnchorEl] = useState(null)
     const open = Boolean(anchorEl)
-    const [openSnack, setOpen] = React.useState(false);
+    const [openSnack, setOpen] = useState(false);
 
     const menuLabel = isFavorite ? 'Unfavorite' : 'Favorite'
     const handleClick = (event) => {
