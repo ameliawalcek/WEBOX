@@ -1,6 +1,6 @@
 import React from "react";
 import { useStyles } from "../styles/style";
-import { TextField, Grid, Paper } from "@material-ui/core";
+import { TextField, Grid } from "@material-ui/core";
 
 function InputTextField(props) {
   const classes = useStyles();
