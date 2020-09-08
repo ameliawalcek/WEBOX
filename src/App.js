@@ -8,21 +8,24 @@ import Notifications from "./Components/Notifications/Notifications";
 import CreatorPage from "./Components/CreatorPage/CreatorPage";
 import AddCreator from "./Components/CreatorPage/AddCreator";
 import io from "socket.io-client";
-
-
+import * as dotenv from 'dotenv'
 //user params hook
 import { ThemeProvider, Paper } from "@material-ui/core";
 import { useTheme, useIsAuth } from "./hooks/hooks";
 import { MapsLocalHospital } from "material-ui/svg-icons";
 
-const PORT = 3001 
+dotenv.config()
 
-let socket = io(`localhost:${PORT}`)
+let socket = io('http://localhost:3001')
 
 socket.on('connect', () => {
   socket.on('newNotification', (data) => {
     console.log(data)
-  })  
+  })
+})
+
+socket.on('test', (test) => {
+  console.log(test)
 })
 
 socket.on('connection', () => console.log('sup'))
@@ -49,8 +52,8 @@ const App = inject(
                   isLoggedIn ? (
                     <Redirect to="/dashboard" />
                   ) : (
-                    <Redirect to="/auth/login" />
-                  )
+                      <Redirect to="/auth/login" />
+                    )
                 }
               />
               <Route

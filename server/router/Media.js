@@ -1,6 +1,5 @@
 const express = require("express");
 const dataSources = require("../dataSources/DataSources");
-const { default: Axios } = require("axios");
 const mediaRouter = express.Router();
 
 mediaRouter.get("/trending", async (req, res) => {

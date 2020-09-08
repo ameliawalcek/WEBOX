@@ -1,20 +1,11 @@
 const express = require("express");
 const app = express();
+const socket = require('socket.io')
 const bodyParser = require("body-parser");
 require("dotenv").config();
 const authRoutes = require("./server/router/Auth.js");
 const mediaRouter = require("./server/router/Media");
 const userRouter = require("./server/router/User");
-const http = require('http')
-const server = http.createServer(app);
-const socketio = require("socket.io");
-const io = socketio(server);
-
-io.on('connection', (socket) => {
-    
-    console.log("in")
-    socket.emit('newNotification', {new: 'value'})
-})
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -36,8 +27,16 @@ app.use("/media", mediaRouter);
 app.use("/user", userRouter);
 
 const { PORT } = process.env
-server.listen(PORT, () => {
+const server = app.listen(PORT, () => {
   console.log(`Server is up on port ${PORT}`);
 });
 
+const io = socket(server)
 
+io.on('connection', (socket) => {
+  console.log('connect')
+})
+
+app.post('/notification', (req, res) => {
+  io.emit('test', { test: 'test' })
+})
