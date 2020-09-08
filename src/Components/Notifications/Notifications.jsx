@@ -42,7 +42,6 @@ const Notifications = inject("userStore")(
     const classes = useStyles();
 
     const { notifications } = props.userStore;
-    console.log(notifications)
 
     return (
       <Paper className={classes.rootNotif}>

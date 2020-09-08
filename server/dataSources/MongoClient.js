@@ -52,11 +52,10 @@ class MongoClient {
       {
         $push: {
           notifications: notificationId,
-        },
+        },  
       },
       { multi: true }
     );
-    console.log(res);
     return res;
   }
 

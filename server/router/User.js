@@ -1,7 +1,12 @@
 const express = require("express");
+const app = express();
 const userRouter = express.Router();
 const dataSources = require("../dataSources/DataSources");
 const NotificationHandler = require("../notifications/notificationHandler");
+const http = require("http");
+const server = http.createServer(app);
+const socketio = require("socket.io");
+const io = socketio(server);
 
 userRouter.get("/:id", async (req, res) => {
   const { id } = req.params;
@@ -45,15 +50,20 @@ userRouter.delete("/favorites", async (req, res) => {
 });
 
 userRouter.post("/notifications", async (req, res) => {
+    io.connect();
+    io.on('connection', (socket) => {
+        console.log("in")
+        socket.emit('newNotification', {new: 'value'})
+    })
+    
+
   const { mediaId } = req.body;
   const mediaType = mediaId.includes("UC") ? "youtube" : false;
-  console.log(mediaId, mediaType);
   const creator = await dataSources.mongoClient.getCreatorByMedia(
     mediaType,
     mediaId
   );
-  console.log(creator);
-  let notification = ''
+  let notification;
   if (mediaType === "youtube") {
     notification = {
       creatorId: creator._id,
@@ -62,14 +72,14 @@ userRouter.post("/notifications", async (req, res) => {
       post: "new video was posted",
     };
   }
-  const newNotification = await dataSources.mongoClient.saveNotification(notification);
-  const updateSubscribedUsers = await dataSources.mongoClient.updateSubscribedUsers(
-    creator._id, newNotification._id
+  const newNotification = await dataSources.mongoClient.saveNotification(
+    notification
   );
-
-  console.log(newNotification, updateSubscribedUsers);  
-
-  res.end();
+  const users = await dataSources.mongoClient.updateSubscribedUsers(
+    creator._id,
+    newNotification._id
+  );
+  res.send(users);
 });
 
 userRouter.delete("/notifications", async (req, res) => {

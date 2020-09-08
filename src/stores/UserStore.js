@@ -31,7 +31,6 @@ export class UserStore {
     @action async getUser(id) {
         console.log(id)
         let user = await axios.get(`http://localhost:3001/user/${id}`);
-        console.log(user)
         this.favorites = user.data.favorites
         this.notifications = user.data.notifications
     }
