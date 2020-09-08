@@ -10,15 +10,16 @@ import InstagramEmbed from 'react-instagram-embed';
 
 const CreatorPage = inject(
   'creatorStore',
-  'userStore'
+  'userStore', 
+  'mediaStore'
 )(
   observer((props) => {
-    const { creatorStore, userStore } = props;
+    const { creatorStore, userStore, mediaStore} = props;
     const { creator } = creatorStore;
     const { pathname } = useLocation();
-
     const creatorId = pathname.split('/')[2];
     const classes = useStyles();
+    mediaStore.setInput('')
 
     useEffect(() => {
       creatorStore.getCreatorById(pathname.split('/')[2]);

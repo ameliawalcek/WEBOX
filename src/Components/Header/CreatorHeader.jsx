@@ -38,7 +38,7 @@ const CreatorHeader = inject('userStore')(observer((props) => {
             Unfavorite
           </Typography>
         </Button>
-        : <Button size='small' variant='contained' color='secondary' onClick={handleClick}>
+        : <Button size='small' className={classes.typographyTwo} variant='contained' color='secondary' onClick={handleClick}>
           Favorite</Button>
       }
       {!isLoggedIn &&

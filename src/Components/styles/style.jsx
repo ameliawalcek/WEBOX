@@ -117,9 +117,9 @@ export const useStyles = makeStyles((theme) => ({
         flexGrow: 1,
     },
     listHeader: {
-        position: 'absolute',
+        position: 'fixed',
         bottom: 30,
-        justifyContent: 'center'
+        left: 25
     },
     listHightHeader: {
         height: '100%'
@@ -160,6 +160,9 @@ export const useStyles = makeStyles((theme) => ({
     },
     typography: {
         fontSize: 10,
+    },
+    typographyTwo: {
+        fontSize: 11,
     },
     instagram: {
         display: 'flex',
