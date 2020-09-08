@@ -1,8 +1,8 @@
-const client = require('../../server')
+const { client } = require('../../server')
 
 const checkCreatorInCache = (req, res, next) => {
   const { id } = req.params;
-
+  
   client.get(id, (err, data) => {
     if (err) {
       console.log(err);

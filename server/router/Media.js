@@ -1,7 +1,7 @@
 const express = require("express")
 const dataSources = require("../dataSources/DataSources")
 const { checkPageInCache, checkCreatorInCache } = require('../middleWare/middleWares')
-const client = require('../../server')
+const { client } = require('../../server')
 const mediaRouter = express.Router()
 
 mediaRouter.get("/trending", checkPageInCache, async (req, res) => {
