@@ -1,9 +1,11 @@
 const express = require('express')
 const bodyParser = require('body-parser')
+const webPush = require("web-push");
 require('dotenv').config()
 const authRoutes = require('./server/router/Auth.js')
 const mediaRouter = require('./server/router/Media')
 const userRouter = require('./server/router/User')
+const subscribeRouter = require('./server/router/Subscribe')
 
 const app = express()
 
@@ -22,6 +24,7 @@ app.use(function(req, res, next) {
 app.use('/auth', authRoutes)
 app.use('/media', mediaRouter)
 app.use('/user', userRouter)
+app.use('/subscribe', subscribeRouter)
 
 const { PORT } = process.env
 app.listen(PORT, () => {

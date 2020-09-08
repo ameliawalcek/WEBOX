@@ -5,7 +5,7 @@ import { setCookie, parseCookie } from '../utils/utils'
 export const useTheme = darkState => {
   const palletType = darkState ? "dark" : "light"
   const mainPrimaryColor = darkState ? '#303030' : '#673ab7'
-  const mainSecondaryColor = darkState ? '#954bb4' : '#009688'
+  const mainSecondaryColor = darkState ? '#9f66b7' : '#009688'
 
   return createMuiTheme({
     palette: {
@@ -59,8 +59,9 @@ export const useCreators = (store) => {
 
   useEffect(() => {
     setLoading(true)
-    getTrending(category, pageNum, searchInput)
-    setLoading(false)
+    getTrending(category, pageNum, searchInput).then(() => {
+      setLoading(false)
+    })
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [category, pageNum, searchInput])
 

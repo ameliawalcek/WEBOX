@@ -162,7 +162,7 @@ const Landing = inject('userStore')(
               </Grid>
               <Grid item>
                 <Typography color='secondary'>
-                  <Link to="/dashboard" style={{ textDecoration: 'none' }}>Skip</Link>
+                  <Link to="/dashboard" style={{ textDecoration: 'none', color: '#9f66b7' }}>Skip</Link>
                 </Typography>
               </Grid>
               <Grid item>

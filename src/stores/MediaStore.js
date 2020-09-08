@@ -4,6 +4,7 @@ import axios from 'axios'
 export class MediaStore {
     @observable loading = true
     @observable trending = []
+    @observable results = true
     @observable searchInput = ''
     @observable pageNum = 1
     @observable searchResults = []
@@ -16,6 +17,10 @@ export class MediaStore {
 
     @action setLoading = (bool) => { this.loading = bool }
 
+    @action setResults = (bool) => { this.results = bool }
+
+    @action setInput = () => { this.searchInput = '' }
+
     @action setHasMore = (bool) => { this.hasMore = bool }
 
     @action getNextPage = () => { this.pageNum++ }
@@ -23,8 +28,8 @@ export class MediaStore {
     @action handleSearch = (searchInput) => { this.searchInput = searchInput; this.pageNum = 1 }
 
     @action getTrending = async (category, pageNum, input) => {
-        this.loading = true
-        this.error = false
+        this.setLoading(true)
+        this.setResults(true)
         let cancel
         axios({
             method: 'GET',
@@ -34,11 +39,11 @@ export class MediaStore {
             this.trending =
                 [...new Set([...this.trending, ...res.data.creators]
                     .map(JSON.stringify))].map(JSON.parse)
+            if (!this.trending.length) { this.setResults(false) }
             this.setHasMore(res.data.creators.length > 0)
-            this.loading = false
+            this.setLoading(false)
         }).catch(e => {
             if (axios.isCancel(e)) return
-            this.error = true
         })
         return () => cancel
     }

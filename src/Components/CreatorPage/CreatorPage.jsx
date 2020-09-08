@@ -10,15 +10,16 @@ import InstagramEmbed from 'react-instagram-embed';
 
 const CreatorPage = inject(
   'creatorStore',
-  'userStore'
+  'userStore', 
+  'mediaStore'
 )(
   observer((props) => {
-    const { creatorStore, userStore } = props;
+    const { creatorStore, userStore, mediaStore} = props;
     const { creator } = creatorStore;
     const { pathname } = useLocation();
-
     const creatorId = pathname.split('/')[2];
     const classes = useStyles();
+    mediaStore.setInput('')
 
     useEffect(() => {
       creatorStore.getCreatorById(pathname.split('/')[2]);
@@ -30,7 +31,7 @@ const CreatorPage = inject(
     }, []);
 
     return (
-      <Paper className={classes.rootCreator}>
+      // <Paper className={classes.rootCreator}>
         <Paper className={classes.paperCreator}>
           <Header page={'creator'} creatorId={creatorId} img={creator.imgUrl} />
           <iframe
@@ -84,8 +85,8 @@ const CreatorPage = inject(
               />
             </List>
           )}
-        </Paper>
-      </Paper>
+         </Paper>
+      // </Paper>
     );
   })
 );
