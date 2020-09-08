@@ -6,7 +6,6 @@ import { useLocation } from 'react-router-dom';
 import { Paper, List } from '@material-ui/core';
 import { useStyles } from '../styles/style';
 import { TwitterTimelineEmbed } from 'react-twitter-embed';
-import { TwitchEmbed, TwitchChat } from 'react-twitch-embed';
 import InstagramEmbed from 'react-instagram-embed';
 
 const CreatorPage = inject(
