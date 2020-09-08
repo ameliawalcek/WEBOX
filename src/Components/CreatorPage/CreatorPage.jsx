@@ -6,7 +6,7 @@ import { useLocation } from 'react-router-dom';
 import { Paper, List } from '@material-ui/core';
 import { useStyles } from '../styles/style';
 import { TwitterTimelineEmbed } from 'react-twitter-embed';
-import { TwitchEmbed, TwitchChat } from 'react-twitch-embed'
+import { TwitchEmbed, TwitchChat } from 'react-twitch-embed';
 import InstagramEmbed from 'react-instagram-embed';
 
 const CreatorPage = inject(
@@ -34,30 +34,21 @@ const CreatorPage = inject(
       <Paper className={classes.rootCreator}>
         <Paper className={classes.paperCreator}>
           <Header page={'creator'} creatorId={creatorId} img={creator.imgUrl} />
-          {/* <iframe
+          <iframe
             title='twitch-embed'
-            src={`https://player.twitch.tv/?channel=${creator.twitchName}&parent=http://webox.eu-central-1.elasticbeanstalk.com/`}
+            src={`https://player.twitch.tv/?channel=${creator.twitchName}&parent=webox-hub.com`}
             height='500'
             width='100%'
             frameBorder='0'
             allowFullScreen={true}
-          ></iframe> */}
-          <TwitchEmbed 
-            channel={creator.twitchName}
-            id={creator.twitchName}
-            theme={userStore.darkState ? 'dark' : 'light'}
-            />
-          {/* <iframe
+          ></iframe>
+          <iframe
             title={creator.twitchName + ' chat'}
             frameBorder='0'
-            src={`https://www.twitch.tv/embed/${creator.twitchName}/chat?parent=http://webox.eu-central-1.elasticbeanstalk.com/`}
+            src={`https://www.twitch.tv/embed/${creator.twitchName}/chat?parent=webox-hub.com`}
             height='500'
             width='100%'
-          ></iframe> */}
-          <TwitchChat 
-            channel={creator.twitchName}
-            theme={userStore.darkState ? 'dark' : 'light'}
-          />
+          ></iframe>
           {creator.youtubeVideoId && (
             <iframe
               title={creator.youtubeVideoId}
