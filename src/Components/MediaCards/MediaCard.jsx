@@ -91,7 +91,7 @@ const MediaCard = inject('userStore')(observer((props) => {
                     </Snackbar>
 
                     <Snackbar open={openFavoriteSnack} onClose={handleSnackBarClose} autoHideDuration={8000}>
-                        <Alert severity={!isFavorite ? "success" : 'warning'} onClose={handleSnackBarClose}>
+                        <Alert color={!isFavorite ? "default" : 'warning'} severity={!isFavorite ? "success" : 'warning'} onClose={handleSnackBarClose}>
                             <Typography>
                                 {!isFavorite ? 'Favorite added' : 'Favorite removed'}
                             </Typography>

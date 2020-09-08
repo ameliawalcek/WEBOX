@@ -88,7 +88,7 @@ const Header = inject('userStore')(observer((props) => {
             to='/notifications'
             color='inherit'
           >
-            <Badge badgeContent={notificationLength} color='secondary'>
+            <Badge badgeContent={notificationLength || 0} color='secondary'>
               <NotificationsIcon />
             </Badge>
           </IconButton>
