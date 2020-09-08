@@ -15,7 +15,9 @@ const MediaCard = inject('userStore')(observer((props) => {
     const [anchorEl, setAnchorEl] = useState(null)
     const open = Boolean(anchorEl)
     const [openSnack, setOpen] = useState(false);
+
     const [openFavoriteSnack, setFavoriteOpen] = useState(false);
+
     const menuLabel = isFavorite ? 'Unfavorite' : 'Favorite'
 
     const handleClick = (event) => {
