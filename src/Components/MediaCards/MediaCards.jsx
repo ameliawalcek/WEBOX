@@ -16,7 +16,7 @@ const MediaCards = inject('userStore', 'mediaStore')(observer((props) => {
     const location = useLocation()
     const classes = useStyles()
     const { isLoggedIn, favorites } = props.userStore;
-    const { trending, loading } = props.mediaStore;
+    const { trending, loading, results } = props.mediaStore;
 
     const { media, header, mediaCard } =
         location.pathname === '/dashboard' && (!isLoggedIn || !favorites.length)
@@ -39,14 +39,15 @@ const MediaCards = inject('userStore', 'mediaStore')(observer((props) => {
     return (
         <>
             <Header page={header} />
-            {header === 'explore' ? <CategoryBar /> : <Paper className={classes.paperTopMedia}></Paper>}
+            {header === 'explore' && <CategoryBar />}
+            {header === 'dashboard' && <Paper className={classes.paperTopMedia}></Paper>}
             {mediaCard
                 ? <Paper className={classes.paperMedia}>
                     <Grid container>
                         <GridList cellHeight={180} className={classes.rootMedia}>
-                            {!trending.length && !loading && <NoResults />}
                             {!loading && renderMediaCards(media)}
                             {loading && <Loading />}
+                            {!results && <NoResults />}
                         </GridList>
                     </Grid>
                 </Paper>
