@@ -1,8 +1,48 @@
 const express = require("express")
 const dataSources = require("../dataSources/DataSources")
-const { checkPageInCache, checkCreatorInCache } = require('../middleWare/middleWares')
-const { client } = require('../../server')
+const redis = require('redis')
 const mediaRouter = express.Router()
+
+const client = redis.createClient({
+  host: 'redis-server',
+  port: 6379
+})
+
+
+const checkCreatorInCache = (req, res, next) => {
+  const { id } = req.params;
+  
+  client.get(id, (err, data) => {
+    if (err) {
+      console.log(err);
+      res.status(500).send(err);
+    }
+    if (data != null) {
+      res.send(data);
+    } else {
+      next();
+    }
+  });
+};
+
+const checkPageInCache = (req, res, next) => {
+  const { category, page, input } = req.query;
+  if (category || input) {
+    next()
+  } else {
+    client.get(page, (err, data) => {
+      if (err) {
+        console.log(err);
+        res.status(500).send(err);
+      }
+      if (data != null) {
+        res.send(data);
+      } else {
+        next();
+      }
+    });
+  }
+};
 
 mediaRouter.get("/trending", checkPageInCache, async (req, res) => {
   const { category, page, input } = req.query

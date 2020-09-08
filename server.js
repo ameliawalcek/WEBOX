@@ -1,5 +1,4 @@
 const express = require('express')
-const redis = require('redis')
 const bodyParser = require('body-parser')
 const path = require('path')
 require('dotenv').config()
@@ -8,12 +7,6 @@ const mediaRouter = require('./server/router/Media')
 const userRouter = require('./server/router/User')
 
 const app = express()
-module.exports = {
-  client: redis.createClient({
-    host: 'redis-server',
-    port: 6379
-  })
-}
 
 app.use((req, res, next) => {
   if (!req.secure && req.headers["x-forwarded-proto"] !== "https") {
