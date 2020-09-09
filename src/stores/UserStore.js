@@ -36,29 +36,25 @@ export class UserStore {
     this.favorites = user.data.favorites;
     this.notifications = user.data.notifications;
   }
-
+  
   @action checkUser = async (user) => {
-    return await axios
-      .post("http://localhost:3001/auth/login", user)
-      .then((d) => {
-        this.isLoggedIn = true;
-        this.userId = d.data.userId;
-        setCookie(this.userId);
-        this.getUser(this.userId);
-      })
-      .catch((e) => e.response.data);
-  };
-
+      return await axios.post("http://localhost:3001/auth/login", user)
+          .then(d => {
+              this.isLoggedIn = true
+              this.userId = d.data.userId
+              setCookie(this.userId)
+              this.getUser(this.userId)
+          }).catch(e => e.response.data)
+  }
+        
   @action saveUser = async (user) => {
-    return await axios
-      .post("http://localhost:3001/auth/signup", user)
-      .then((d) => {
-        this.isLoggedIn = true;
-        this.userId = d._id;
-        return d;
-      })
-      .catch((e) => e.response.data);
-  };
+      return await axios.post("http://localhost:3001/auth/signup", user)
+        .then(d => {
+            this.isLoggedIn = true
+            this.userId = d._id
+            return d
+        }).catch(e => e.response.data)
+  }
 
   @action async saveFavorite(id) {
     await axios.post(`http://localhost:3001/user/favorites`, {
@@ -83,11 +79,10 @@ export class UserStore {
       method: "DELETE",
       data: { notificationId: notificationId, userId: userId },
     });
-    res && this.getUser(userId);
+    this.notification = this.notifications.filter(notification => notification.id !== id)
   }
 
-
-  @computed get notificationLength() {
-    return this.notifications.length;
-  }
+    @computed get notificationLength(){
+        return this.notifications.length
+    } 
 }
