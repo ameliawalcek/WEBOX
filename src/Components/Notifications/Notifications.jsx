@@ -1,12 +1,13 @@
-import React from "react";
-import Header from "../Header/Header";
-import { inject, observer } from "mobx-react";
-import Notification from "./Notification";
-import { Paper, Grid, Icon } from "@material-ui/core";
-import YouTubeIcon from "@material-ui/icons/YouTube";
-import TwitterIcon from "@material-ui/icons/Twitter";
-import pngwave from "../assets/pngwave.png";
+import React from "react"
+import Header from "../Header/Header"
+import Notification from "./Notification"
+import NoResults from "../MediaCards/NoResults"
+import { Paper, Grid, Icon } from "@material-ui/core"
+import YouTubeIcon from "@material-ui/icons/YouTube"
+import TwitterIcon from "@material-ui/icons/Twitter"
+import pngwave from "../assets/pngwave.png"
 import { useStyles } from "../styles/style";
+import { inject, observer } from 'mobx-react'
 
 const notificationDesign = [
   {
@@ -35,7 +36,7 @@ const notificationDesign = [
     ),
     notification: "is live!",
   },
-];
+]
 
 const Notifications = inject("userStore")(
   observer((props) => {
@@ -44,31 +45,34 @@ const Notifications = inject("userStore")(
     return (
       <Paper className={classes.rootNotif}>
         <Header page={"basic"} />
-        <Paper className={classes.paperNotif} {...props} elevation={0} style={{marginTop: 50}} >
-          <Grid container wrap="nowrap" spacing={2} >
-            <Grid item xs>
-              {notifications.map((n) => {
-                if (n.mediaSource === "twitter") {
-                  return (
-                    <Notification  notification={n} p={props.userStore} n={notificationDesign[0]} key={n._id} name={n.creatorName} />
-                 );
-                } else if (n.mediaSource === "youtube") {
-                  return (
-                    <Notification notification={n} p={props.userStore} n={notificationDesign[1]} key={n._id} name={n.creatorName} />
-                  );
-                } else if (n.mediaSource === "instagram") {
-                  return (
-                    <Notification notification={n} p={props.userStore} n={notificationDesign[2]} key={n._id} name={n.creatorName} />
-                  );
-                } else {
-                  return (
-                    <Notification notification={n} p={props.userStore} n={notificationDesign[3]} key={n._id} name={n.creatorName} />
-                  );
+        {notifications.length
+         ? <Paper className={classes.paperNotif} {...props} elevation={0} style={{marginTop: 50}} >
+              <Grid container wrap="nowrap" spacing={2} >
+                <Grid item xs>
+                  {notifications.map((n) => {
+                    if (n.mediaSource === "twitter") {
+                      return (
+                        <Notification  notification={n} p={props.userStore} n={notificationDesign[0]} key={n._id} name={n.creatorName} />
+                    );
+                    } else if (n.mediaSource === "youtube") {
+                      return (
+                        <Notification notification={n} p={props.userStore} n={notificationDesign[1]} key={n._id} name={n.creatorName} />
+                      );
+                    } else if (n.mediaSource === "instagram") {
+                      return (
+                        <Notification notification={n} p={props.userStore} n={notificationDesign[2]} key={n._id} name={n.creatorName} />
+                    );
+                      } else {
+                        return (
+                          <Notification notification={n} p={props.userStore} n={notificationDesign[3]} key={n._id} name={n.creatorName} />
+                    );
                 }
               })}
             </Grid>
           </Grid>
         </Paper>
+          : <NoResults />
+        }
       </Paper>
     );
   })
