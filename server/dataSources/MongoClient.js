@@ -121,7 +121,7 @@ class MongoClient {
       .User
       .findByIdAndUpdate(
         userId,
-        { $pull: { notifications: notificationDoc._id } },
+        { $pull: { notifications: notificationId } },
         { new: true }
       ).lean()
   }

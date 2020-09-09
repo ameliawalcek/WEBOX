@@ -1,7 +1,6 @@
 const express = require("express");
 const userRouter = express.Router();
 const dataSources = require("../dataSources/DataSources");
-const NotificationHandler = require("../notifications/notificationHandler");
 
 userRouter.get("/:id", async (req, res) => {
   const { id } = req.params
@@ -37,7 +36,7 @@ userRouter.post("/notifications", async (req, res) => {
   let notification;
   if (mediaType === "youtube") {
     notification = {
-      creatorId: creator._id,
+      creatorId: creator,
       creatorName: creator.twitch,
       mediaSource: "youtube",
       post: "new video was posted",
