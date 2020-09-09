@@ -1,10 +1,11 @@
 const express = require("express");
+const app = express();
+const socket = require('socket.io')
 const bodyParser = require("body-parser");
 require("dotenv").config();
 const authRoutes = require("./server/router/Auth.js");
 const mediaRouter = require("./server/router/Media");
 const userRouter = require("./server/router/User");
-const app = express();
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -21,7 +22,17 @@ app.use("/auth", authRoutes);
 app.use("/media", mediaRouter);
 app.use("/user", userRouter);
 
-const { PORT } = process.env;
-app.listen(PORT, () => {
+const { PORT } = process.env
+const server = app.listen(PORT, () => {
   console.log(`Server is up on port ${PORT}`);
 });
+
+const io = socket(server)
+
+io.on('connection', (socket) => {
+  console.log('connect')
+})
+
+app.post('/notification', (req, res) => {
+  io.emit('test', { test: 'test' })
+})

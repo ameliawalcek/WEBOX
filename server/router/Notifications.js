@@ -18,7 +18,6 @@ notificationsRouter.post('/twitch/callback', async (req, res) => {
       mediaSource: 'Twitch',
       post: `${notification.user_name} just went live!`
     })
-    const 
   }
 })
 
