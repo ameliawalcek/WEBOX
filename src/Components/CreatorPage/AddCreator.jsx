@@ -11,7 +11,7 @@ import pngwave from "../assets/pngwave.png"
 const AddCreator = inject("creatorStore", "mediaStore")(observer(props => {
   const classes = useStyles();
   const {setInput, findCreator} = props.mediaStore
-  setInput('')
+  setInput()
   
   const [state, setState] = useState({
     twitch: "",
@@ -40,7 +40,7 @@ const AddCreator = inject("creatorStore", "mediaStore")(observer(props => {
   ]
 
   return (
-    <Paper elevation={0} style={{ width: "100vw", height: "100vh" }}>
+    <Paper elevation={0}  square='true' style={{ width: "100vw", height: "100vh" }}>
       <Header page={"basic"} />
       <Grid container justify="center" alignItems="center" direction="column">
         <Grid item>

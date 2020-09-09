@@ -35,10 +35,19 @@ export const useStyles = makeStyles((theme) => ({
         marginTop: 5,
     },
     paperMedia: {
-        height: '100vh'
+        height: '100%',
+        width: '100%',
+    },
+    snackbarNotif: {
+        [theme.breakpoints.down('xs')]: {
+            bottom: 90,
+        }
     },
     paperTopMedia: {
-        paddingTop: 52
+        paddingTop: 50
+    },
+    paperTopMediaTwo: {
+        paddingTop: 105
     },
     customizeToolbar: {
         maxHeight: 55
@@ -78,7 +87,7 @@ export const useStyles = makeStyles((theme) => ({
             backgroundColor: fade(theme.palette.common.white, 0.25),
         },
         marginRight: theme.spacing(2),
-        marginLeft: 0,
+        marginLeft: 10,
         width: '100%',
         [theme.breakpoints.up('sm')]: {
             marginLeft: theme.spacing(3),

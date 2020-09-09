@@ -1,6 +1,6 @@
 import { createMuiTheme } from '@material-ui/core'
 import { useEffect, useRef, useCallback } from "react"
-import { setCookie, parseCookie } from '../utils/utils'
+import { setCookie, parseCookie, deleteCookie } from '../utils/utils'
 
 export const useTheme = darkState => {
   const palletType = darkState ? "dark" : "light"
@@ -69,7 +69,7 @@ export const useCreators = (store) => {
 }
 
 export const useCookie = () => {
-  return { cookie: parseCookie(), setCookie }
+  return { cookie: parseCookie(), setCookie, deleteCookie }
 }
 
 export const useIsAuth = (testFunc) => {

@@ -45,13 +45,13 @@ const CategoryBar = inject('mediaStore')(observer((props) => {
 
     const categories = [
         { name: 'All', url: 'All' },
-        { name: 'Live', url: '' },
+        { name: 'Trending', url: '' },
+        { name: 'Talk Shows', url: 'Just Chatting' },
+        { name: 'Science', url: 'Science %26 Technology' },
         { name: 'Sports & Fitness', url: 'Sports %26 Fitness' },
         { name: 'Art', url: 'Art' },
         { name: 'Beauty', url: 'Beauty %26 Body Art' },
-        { name: 'Talk Shows', url: 'Just Chatting' },
         { name: 'Food & Drink', url: 'Food %26 Drink' },
-        { name: 'Science', url: 'Science %26 Technology' },
         { name: 'Travel', url: 'Travel %26 Outdoors' }
     ]
 
@@ -65,7 +65,7 @@ const CategoryBar = inject('mediaStore')(observer((props) => {
     return (
         <div className={classes.rootMediaTwo}>
             <AppBar
-                position='sticky'
+                position='fixed'
                 style={{ paddingTop: 60, zIndex: 2 }}
                 color='default'
             >

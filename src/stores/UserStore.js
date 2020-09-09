@@ -1,14 +1,15 @@
-import { observable, action, computed } from "mobx";
-import axios from "axios";
-import io from "socket.io-client";
-import { parseCookie, setCookie } from "../utils/utils";
+import { observable, action, computed } from "mobx"
+import axios from "axios"
+
+import io from "socket.io-client"
+import { parseCookie, setCookie, deleteCookie } from "../utils/utils"
 
 export class UserStore {
-  @observable userId = ""
+  @observable userId = "";
   @observable isLoggedIn = false
-  @observable favorites = []
-  @observable notifications = []
-  @observable darkState = JSON.parse(localStorage.dark || "false")
+  @observable favorites = [];
+  @observable notifications = [];
+  @observable darkState = JSON.parse(localStorage.dark || 'false')
 
   socket = io('http://localhost:3001')
 
@@ -19,10 +20,12 @@ export class UserStore {
       this.notifications = [...this.notifications, notification]
     })
   }
-
+  
   disconnectUserSocket = () => {
     this.socket.emit('disconnect', this.userId)
   }
+        
+  @action cookieLogOut = () => deleteCookie()
 
   @action handleDarkStateChange = () => {
     this.darkState = !this.darkState

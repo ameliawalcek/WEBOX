@@ -6,7 +6,7 @@ import LandingButton from '../Landing/LandingButton'
 const NoResults = inject('userStore')(observer((props) => {
 
     return (
-        <Paper style={{ width: '100vw' }}>
+        <Paper style={{ width: '100vw', position: 'fixed' }}>
             <Grid
                 container
                 spacing={0}
@@ -17,7 +17,7 @@ const NoResults = inject('userStore')(observer((props) => {
                 style={{ height: '100vh', width: '100wh' }}
             >
                 <Grid item xs={10} sm={6} md={6} lg={6} style={{ height: '100vh', width: '100wh', justify: 'center', align: 'center' }}>
-                    <Typography color='primary' style={{ fontSize: 60 }}>
+                    <Typography color='primary' style={{ fontSize: 60, paddingTop: 30 }}>
                         <i className="fas fa-user-plus"></i>
                     </Typography>
                     <Typography variant="h6" gutterBottom>
