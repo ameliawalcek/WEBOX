@@ -43,7 +43,7 @@ export class MediaStore {
         }).catch(e => {
             if (axios.isCancel(e)) return
         })
-        return () => {cancel(); this.setInput()}
+        return () => cancel()
     }
 
     @action findCreator = async (creator) => {
