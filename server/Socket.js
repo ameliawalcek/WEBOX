@@ -26,9 +26,12 @@ class Socket {
 
   emitToAllSubscribedUsers(userIds, notification) {
     userIds.forEach(userId => {
-      this.onlineClients
-        .find(socket => socket[userId._id])[userId._id]
-        .emit('newNotification', notification)
+      if (this.onlineClients.length) {
+        const clientSocket = this.onlineClients.find(socket => socket[userId._id])
+        if (clientSocket) {
+          clientSocket[userId._id].emit('newNotification', notification)
+        }
+      }
     })
   }
 }

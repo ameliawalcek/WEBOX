@@ -1,5 +1,5 @@
 import { createMuiTheme } from '@material-ui/core'
-import { useEffect, useRef, useCallback } from "react"
+import { useEffect, useRef, useCallback, useState } from "react"
 import { setCookie, parseCookie, deleteCookie } from '../utils/utils'
 
 export const useTheme = darkState => {
@@ -81,4 +81,16 @@ export const useIsAuth = (testFunc) => {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [cookie])
+}
+
+export const useNewNotification = (notificationLength) => {
+  const [notificationNum, setNotificationNum] = useState(notificationLength)
+  const [open, setOpen] = useState(false)
+
+  useEffect(() => {
+    if (notificationLength > notificationNum) setOpen(true)
+    setNotificationNum(notificationLength)
+  }, [notificationLength, notificationNum])
+
+  return { open, setOpen }
 }

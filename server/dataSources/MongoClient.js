@@ -12,14 +12,14 @@ class MongoClient {
     return Models
       .User
       .findOne({ userName: userName })
-      .lean();
+      .lean()
   }
 
   isCookieValid(cookie) {
     return Models
       .User
       .findById(cookie)
-      .lean();
+      .lean()
   }
 
   async getUserById(id) {
@@ -27,7 +27,7 @@ class MongoClient {
       .select("favorites notifications")
       .populate({ path: "favorites", options: { lean: true } })
       .populate({ path: "notifications", options: { lean: true } })
-      .lean();
+      .lean()
   }
 
   addUser(userDoc) {
@@ -40,7 +40,7 @@ class MongoClient {
       userId,
       { $push: { favorites: creatorDoc } },
       { new: true }
-    ).lean();
+    ).lean()
   }
 
   CreatorInFavourites(creatorId) {
@@ -61,10 +61,12 @@ class MongoClient {
   }
 
   updateSubscribedUsers(creatorId, notificationId) {
-    return Models.User.updateMany(
-      { favorites: creatorId, subscribed: true },
-      { $push: { notifications: notificationId } }
-    )
+    return Models
+      .User
+      .updateMany(
+        { favorites: creatorId, subscribed: true },
+        { $push: { notifications: notificationId } }
+      )
   }
 
   async removeFavoriteFromUser(creatorId, userId) {
@@ -115,12 +117,6 @@ class MongoClient {
     return Models
       .Creator
       .findOne({ [mediaType]: mediaId })
-  }
-
-  getCreatorByTwitchName(mediaType, name) {
-    return Models
-      .Creator
-      .findOne({ [mediaType]: name })
   }
 
   numOfallCreators() {

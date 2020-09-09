@@ -20,7 +20,7 @@ authRouter.post('/signup', async (req, res) => {
                     password: await bcrypt.hash(password, 10),
                     email,
                     favorites: [],
-                    subscribed: false,
+                    subscribed: true,
                     notifications: []
                 })
 
