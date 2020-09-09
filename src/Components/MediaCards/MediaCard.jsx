@@ -32,9 +32,12 @@ const MediaCard = inject('userStore')(observer((props) => {
         setAnchorEl(null)
         if (reason === 'backdropClick') { return }
         if (userStore.isLoggedIn) {
-            menuLabel === 'Favorite'
-                ? userStore.saveFavorite(id) && setFavoriteOpen(true)
-                : userStore.deleteFavorite(id) && setFavoriteOpen(true)
+            menuLabel === 'Favorite' ? setFavoriteOpen(true) : setFavoriteOpen(true)
+            setTimeout(function () {
+                menuLabel === 'Favorite'
+                    ? userStore.saveFavorite(id)
+                    : userStore.deleteFavorite(id)
+            }, 1000)
         } else {
             setOpen(true)
         }
@@ -90,7 +93,7 @@ const MediaCard = inject('userStore')(observer((props) => {
                         </Alert>
                     </Snackbar>
 
-                    <Snackbar open={openFavoriteSnack} onClose={handleSnackBarClose} autoHideDuration={8000}>
+                    <Snackbar open={openFavoriteSnack} onClose={handleSnackBarClose} autoHideDuration={80000}>
                         <Alert color={!isFavorite ? "info" : 'warning'} severity={!isFavorite ? "success" : 'warning'} onClose={handleSnackBarClose}>
                             <Typography>
                                 {!isFavorite ? 'Favorite added' : 'Favorite removed'}

@@ -33,12 +33,12 @@ const CreatorHeader = inject('userStore')(observer((props) => {
   return (
     <>
       {isFavorite
-        ? <Button size='small' variant='outlined' color='secondary' onClick={handleClick}>
+        ? <Button style={{marginLeft: 20}} size='small' variant='outlined' color='secondary' onClick={handleClick}>
           <Typography className={classes.typography}>
             Unfavorite
           </Typography>
         </Button>
-        : <Button size='small' className={classes.typographyTwo} variant='contained' color='secondary' onClick={handleClick}>
+        : <Button size='small' style={{marginLeft: 20}} className={classes.typographyTwo} variant='contained' color='secondary' onClick={handleClick}>
           Favorite</Button>
       }
       {!isLoggedIn &&

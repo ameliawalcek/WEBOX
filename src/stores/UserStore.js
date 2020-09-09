@@ -1,12 +1,12 @@
 import { observable, action, computed } from "mobx";
 import axios from "axios";
-import { parseCookie, setCookie } from "../utils/utils";
+import { parseCookie, setCookie, deleteCookie } from "../utils/utils";
 
 export class UserStore {
     @observable userId = "";
     @observable isLoggedIn = false
     @observable favorites = [];
-    @observable notifications = [];
+    @observable notifications = [8];
     @observable darkState = JSON.parse(localStorage.dark || 'false')
 
     @action handleDarkStateChange = () => {
@@ -28,6 +28,8 @@ export class UserStore {
         return false
     }
 
+    @action cookieLogOut = () => deleteCookie()
+
     @action async getUser(id) {
         let user = await axios.get(`http://localhost:3001/user/${id}`);
         this.favorites = user.data.favorites
@@ -42,10 +44,10 @@ export class UserStore {
                 setCookie(this.userId)
                 this.getUser(this.userId)
             }).catch(e => e.response.data)
-        }
-        
-        @action saveUser = async (user) => {
-            return await axios.post("http://localhost:3001/auth/signup", user)
+    }
+
+    @action saveUser = async (user) => {
+        return await axios.post("http://localhost:3001/auth/signup", user)
             .then(d => {
                 this.isLoggedIn = true
                 this.userId = d._id
@@ -68,7 +70,7 @@ export class UserStore {
         this.notification = this.notifications.filter(notification => notification.id !== id)
     }
 
-    @computed get notificationLength(){
+    @computed get notificationLength() {
         return this.notifications.length
-    } 
+    }
 }

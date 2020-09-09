@@ -8,7 +8,7 @@ const EmptyCard = inject('userStore')(observer((props) => {
     let { isLoggedIn } = props.userStore
 
     return (
-        <Paper>
+        <Paper style={{position: 'fixed'}}>
             <Grid
                 container
                 spacing={0}
@@ -19,7 +19,7 @@ const EmptyCard = inject('userStore')(observer((props) => {
                 style={{ height: '100vh', width: '100wh' }}
             >
                 <Grid item xs={10} sm={6} md={6} lg={6}  style={{ height: '100vh', width: '100wh' }}>
-                    <Typography color='primary' style={{ fontSize: 60, marginTop: 30 }}>
+                    <Typography color='primary' style={{ fontSize: 60, marginTop: 60 }}>
                         <i className="fas fa-home"></i>
                     </Typography>
                     <>
