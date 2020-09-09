@@ -27,7 +27,7 @@ export class MediaStore {
 
     @action handleSearch = (searchInput) => { this.searchInput = searchInput; this.pageNum = 1 }
 
-    @action getTrending = async (category, pageNum, input) => {
+    @action getTrending = (category, pageNum, input) => {
         this.setLoading(true)
         this.setResults(true)
         let cancel
@@ -43,6 +43,6 @@ export class MediaStore {
         }).catch(e => {
             if (axios.isCancel(e)) return
         })
-        return () => cancel()
+        return () => {cancel(); this.setInput()}
     }
 }
