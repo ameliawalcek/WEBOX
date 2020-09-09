@@ -1,18 +1,12 @@
 const express = require('express')
 const bodyParser = require('body-parser')
 const path = require('path')
-require('dotenv').config()
 const authRoutes = require('./server/router/Auth.js')
 const mediaRouter = require('./server/router/Media')
 const userRouter = require('./server/router/User')
-
 const app = express()
 const appSocket = require('./server/Socket')
-const bodyParser = require("body-parser")
 require("dotenv").config()
-const authRoutes = require("./server/router/Auth.js")
-const mediaRouter = require("./server/router/Media")
-const userRouter = require("./server/router/User")
 const notificationRouter = require('./server/router/Notifications')
 
 app.use((req, res, next) => {
