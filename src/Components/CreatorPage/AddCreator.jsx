@@ -33,7 +33,7 @@ const AddCreator = inject("creatorStore", "mediaStore")(observer(props => {
   };
 
   const media = [
-    { name: 'twitch', label: 'Twitch', icon: <Icon className="fab fa-twitch" fontSize="large" style={{ color: "#9147ff" }} />},
+    { name: 'twitch', label: 'Twitch', icon: <Icon className="fab fa-twitch" fontSize="large" style={{ color: "#9853ff" }} />},
     { name: 'instagram', label: 'Instagram', icon: <img src={pngwave} alt="instagram" style={{ height: "30px" }} /> },
     { name: 'youtube', label: 'YouTube', icon:  <YouTubeIcon style={{ color: "#FF0000" }} fontSize="large" /> },
     { name: 'twitter', label: 'Twitter', icon: <TwitterIcon style={{ color: "#1da1f2" }} fontSize="large" /> }

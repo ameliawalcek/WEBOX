@@ -36,7 +36,7 @@ const CreatorPage = inject(
     return (
       <Paper className={classes.paperCreator} square='true' >
         <Header page={'creator'} creatorId={creatorId} img={creator.imgUrl} />
-        <Icon className="fab fa-twitch" fontSize="large" style={{ color: "#9147ff", height: "30px", paddingTop: 5, paddingBottom: 10 }} />
+        <Icon className="fab fa-twitch" fontSize="large" style={{ color: "#9853ff", height: "30px", paddingTop: 5, paddingBottom: 10 }} />
         <iframe
           title='twitch-embed'
           src={`https://player.twitch.tv/?channel=${creator.twitchName}&parent=localhost`}

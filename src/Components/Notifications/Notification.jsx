@@ -26,11 +26,13 @@ function Notification(props) {
           aria-haspopup="true"
           onClick={handleClick}
         >
-          <MoreVertIcon fontSize="small" />
-        </IconButton>
-        <Link to={`creator/${props.n.creatorId}`}>
-          {props.n.icon} {props.name} {props.n.notification}
+          <MoreVertIcon  />
+        </ IconButton >
+        {props.n.icon} 
+        <Link to={`creator/${props.n.creatorId}`} style={{ color: "#9853ff" ,textDecoration: 'none', fontWeight: 900 , marginLeft: 15, marginRight: 5 }}> 
+         {props.name}   
         </Link>
+         {props.n.notification}
       </Grid>
       <Menu
         id="long-menu"
