@@ -1,36 +1,34 @@
-import React, { useState } from "react";
+import React from "react";
 import { useStyles } from "../styles/style";
-import { TextField } from "@material-ui/core";
+import { TextField, Grid } from "@material-ui/core";
 
 function InputTextField(props) {
   const classes = useStyles();
-  const [state, setState] = useState({
-    twitch: "",
-    youtube: "",
-    twitter: "",
-    instagram: ""
-  });
-  
+
   const handleInput = ({ target }) => {
-    const value = target.value;
-    setState({
-      ...state,
-      [props.name]: value
-    })
-   
-  };
+    props.handleInput({ target })
+  }
 
   return (
-    <TextField
-      className={classes.inputLanding}
-      key={props.name}
-      type="text"
-      id="standard-basic"
-      color="secondary"
-      name={props.name}
-      label={props.label}
-      onChange={handleInput}
-    />
+    <Grid container spacing={0} justify="center" alignItems="center"
+
+    >
+      <Grid item xs={3} align="center">
+        {props.icon}
+      </Grid>
+      <Grid item xs={9} align="center">
+        <TextField
+          className={classes.inputLanding}
+          key={props.name}
+          type="text"
+          id={props.name}
+          color="secondary"
+          name={props.name}
+          label={props.label}
+          onChange={handleInput}
+        />
+      </Grid>
+    </Grid>
   );
 }
 

@@ -91,7 +91,7 @@ const Landing = inject('userStore')(
     return (
       <div>
         <Header page='basic' />
-        <Paper elevation={0} style={{ width: '100vw', height: '100vh' }}>
+        <Paper elevation={0} square={true}  style={{ width: '100vw', height: '100vh' }}>
           <Grid
             container
             justify='center'
@@ -162,7 +162,7 @@ const Landing = inject('userStore')(
               </Grid>
               <Grid item>
                 <Typography color='secondary'>
-                  <Link to="/dashboard" style={{ textDecoration: 'none' }}>Skip</Link>
+                  <Link to="/dashboard" style={{ textDecoration: 'none', color: '#9f66b7' }}>Skip</Link>
                 </Typography>
               </Grid>
               <Grid item>

@@ -74,4 +74,9 @@ mediaRouter.get("/channel/:id", checkCreatorInCache, async (req, res) => {
   res.send(result)
 });
 
+mediaRouter.get('/addCreator', async (req, res) => {
+  const { creator } = req.params
+  res.send(await dataSources.findNewCreator(creator))
+})
+
 module.exports = mediaRouter

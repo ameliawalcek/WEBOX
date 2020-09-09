@@ -3,6 +3,7 @@ const Schema = mongoose.Schema
 
 const NotificationSchema = new Schema({
   creatorId: { type: Schema.Types.ObjectId, ref: 'Creator' },
+  creatorName: String,
   mediaSource: String,
   post: String
 })

@@ -1,11 +1,11 @@
 import { createMuiTheme } from '@material-ui/core'
-import { useEffect, useRef, useCallback } from "react"
-import { setCookie, parseCookie } from '../utils/utils'
+import { useEffect, useRef, useCallback, useState } from "react"
+import { setCookie, parseCookie, deleteCookie } from '../utils/utils'
 
 export const useTheme = darkState => {
   const palletType = darkState ? "dark" : "light"
   const mainPrimaryColor = darkState ? '#303030' : '#673ab7'
-  const mainSecondaryColor = darkState ? '#954bb4' : '#009688'
+  const mainSecondaryColor = darkState ? '#9f66b7' : '#009688'
 
   return createMuiTheme({
     palette: {
@@ -69,7 +69,7 @@ export const useCreators = (store) => {
 }
 
 export const useCookie = () => {
-  return { cookie: parseCookie(), setCookie }
+  return { cookie: parseCookie(), setCookie, deleteCookie }
 }
 
 export const useIsAuth = (testFunc) => {
@@ -81,4 +81,16 @@ export const useIsAuth = (testFunc) => {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [cookie])
+}
+
+export const useNewNotification = (notificationLength) => {
+  const [notificationNum, setNotificationNum] = useState(notificationLength)
+  const [open, setOpen] = useState(false)
+
+  useEffect(() => {
+    if (notificationLength > notificationNum) setOpen(true)
+    setNotificationNum(notificationLength)
+  }, [notificationLength, notificationNum])
+
+  return { open, setOpen }
 }

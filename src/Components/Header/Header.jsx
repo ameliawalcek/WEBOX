@@ -8,20 +8,20 @@ import {
   AppBar, Toolbar, IconButton, Badge, Menu, Switch, ListItem, ListItemText,
   Drawer, List, Divider, ListItemIcon, useTheme, Button, Avatar
 } from '@material-ui/core';
+import Brightness2RoundedIcon from '@material-ui/icons/Brightness2Rounded';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
+import Brightness4Icon from '@material-ui/icons/Brightness4';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ExploreIcon from '@material-ui/icons/Explore';
 import HomeIcon from '@material-ui/icons/Home';
 import MenuIcon from '@material-ui/icons/Menu';
-import Brightness4Icon from '@material-ui/icons/Brightness4';
-import Brightness2RoundedIcon from '@material-ui/icons/Brightness2Rounded';
 import { useStyles } from "../styles/style";
 import LogoDark from "../assets/LogoDark.png"
 import LogoLight from "../assets/LogoLight.png"
 
 const Header = inject('userStore')(observer((props) => {
-  const { darkState, handleDarkStateChange, isLoggedIn } = props.userStore;
+  const { darkState, handleDarkStateChange, isLoggedIn, notificationLength, cookieLogOut } = props.userStore;
 
   const [open, setOpen] = React.useState(false);
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -39,6 +39,7 @@ const Header = inject('userStore')(observer((props) => {
   const handleDrawerOpen = () => setOpen(true);
   const handleDrawerClose = () => setOpen(false);
   const handleMenuClose = () => setAnchorEl(null);
+  const handleLogOut = () => cookieLogOut()
 
   const renderMenu = (
     <Menu
@@ -58,6 +59,7 @@ const Header = inject('userStore')(observer((props) => {
       >
         <Toolbar>
           <IconButton
+            style={{ margin: 0 }}
             color='inherit'
             aria-label='open drawer'
             onClick={handleDrawerOpen}
@@ -65,18 +67,18 @@ const Header = inject('userStore')(observer((props) => {
             className={clsx(classes.menuButtonHeader, open && classes.hideHeader)}
           >
             <MenuIcon />
-            {darkState
-              ? <img src={LogoDark} alt="Webox" style={{ height: "30px", marginLeft: 10, width: 100 }} />
-              : <img src={LogoLight} alt="Webox" style={{ height: "30px", marginLeft: 10, width: 100 }} />
-            }
-            {props.page === 'creator' &&
-              <Avatar
-                alt={''}
-                src={props.img}
-                className={classes.largeCreatorTwo}
-              />
-            }
           </IconButton>
+          {darkState
+            ? <Link to='/explore' ><img src={LogoDark} alt="Webox" style={{ height: "30px", width: 95 }} /></Link>
+            : <Link to='/explore' ><img src={LogoLight} alt="Webox" style={{ height: "30px", width: 95 }} /></Link>
+          }
+          {props.page === 'creator' &&
+            <Avatar
+              alt={''}
+              src={props.img}
+              className={classes.largeCreatorTwo}
+            />
+          }
           {props.page === 'explore' ? (
             <SearchBar />
           ) : props.page === 'creator' ? (
@@ -88,7 +90,7 @@ const Header = inject('userStore')(observer((props) => {
             to='/notifications'
             color='inherit'
           >
-            <Badge badgeContent={17} color='secondary'>
+            <Badge badgeContent={notificationLength} color='secondary'>
               <NotificationsIcon />
             </Badge>
           </IconButton>
@@ -97,7 +99,8 @@ const Header = inject('userStore')(observer((props) => {
       {renderMenu}
       <Drawer
         className={classes.drawerHeader}
-        variant='persistent'
+        variant='temporary'
+        onBackdropClick={handleDrawerClose}
         anchor='left'
         open={open}
         classes={{
@@ -136,15 +139,21 @@ const Header = inject('userStore')(observer((props) => {
               <Switch checked={darkState} onChange={handleDarkStateChange} />
             </ListItemIcon>
           </ListItem>
-          {!isLoggedIn &&
-            <ListItem className={classes.listHeader} >
-              <Button variant="contained" color="primary" href="/auth/login">
-                Login</Button>
+          {!isLoggedIn
+            ? < ListItem className={classes.listHeader} >
+              <Button variant="contained" color="secondary" href="/auth/login">
+                Login
+                </Button>
+            </ListItem>
+            : <ListItem className={classes.listHeader} >
+              <Button variant="contained" onClick={handleLogOut} color="primary" href="/auth/login">
+                Logout
+              </Button>
             </ListItem>
           }
         </List>
       </Drawer>
-    </div>
+    </div >
   );
 })
 );
