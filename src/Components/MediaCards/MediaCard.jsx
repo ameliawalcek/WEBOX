@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import {
     GridListTile, GridListTileBar, IconButton,
-    Menu, MenuItem, Grid, Snackbar
+    Menu, MenuItem, Grid, Snackbar, Typography
 } from '@material-ui/core'
 import { inject, observer } from 'mobx-react'
 import MoreVertIcon from '@material-ui/icons/MoreVert'
@@ -12,11 +12,14 @@ import { useStyles } from "../styles/style";
 const MediaCard = inject('userStore')(observer((props) => {
     const { img, twitchName, id, userStore, isFavorite, lastRef } = props
     const classes = useStyles()
-    const [anchorEl, setAnchorEl] = React.useState(null)
+    const [anchorEl, setAnchorEl] = useState(null)
     const open = Boolean(anchorEl)
-    const [openSnack, setOpen] = React.useState(false);
+    const [openSnack, setOpen] = useState(false);
+
+    const [openFavoriteSnack, setFavoriteOpen] = useState(false);
 
     const menuLabel = isFavorite ? 'Unfavorite' : 'Favorite'
+
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget)
     }
@@ -30,8 +33,8 @@ const MediaCard = inject('userStore')(observer((props) => {
         if (reason === 'backdropClick') { return }
         if (userStore.isLoggedIn) {
             menuLabel === 'Favorite'
-                ? userStore.saveFavorite(id)
-                : userStore.deleteFavorite(id)
+                ? userStore.saveFavorite(id) && setFavoriteOpen(true)
+                : userStore.deleteFavorite(id) && setFavoriteOpen(true)
         } else {
             setOpen(true)
         }
@@ -79,9 +82,19 @@ const MediaCard = inject('userStore')(observer((props) => {
                             {menuLabel}
                         </MenuItem>
                     </Menu>
-                    <Snackbar open={openSnack} onClose={handleSnackBarClose} autoHideDuration={3000}>
+                    <Snackbar open={openSnack} onClose={handleSnackBarClose} autoHideDuration={4000}>
                         <Alert severity="info" onClose={handleSnackBarClose}>
-                            Please login
+                            <Typography>
+                                <Link to='/auth/login' style={{ textDecoration: 'none', color: 'white' }}>Please login</Link>
+                            </Typography>
+                        </Alert>
+                    </Snackbar>
+
+                    <Snackbar open={openFavoriteSnack} onClose={handleSnackBarClose} autoHideDuration={8000}>
+                        <Alert color={!isFavorite ? "info" : 'warning'} severity={!isFavorite ? "success" : 'warning'} onClose={handleSnackBarClose}>
+                            <Typography>
+                                {!isFavorite ? 'Favorite added' : 'Favorite removed'}
+                            </Typography>
                         </Alert>
                     </Snackbar>
                 </GridListTile>

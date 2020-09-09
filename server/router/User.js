@@ -3,10 +3,6 @@ const app = express();
 const userRouter = express.Router();
 const dataSources = require("../dataSources/DataSources");
 const NotificationHandler = require("../notifications/notificationHandler");
-const http = require("http");
-const server = http.createServer(app);
-const socketio = require("socket.io");
-const io = socketio(server);
 
 userRouter.get("/:id", async (req, res) => {
   const { id } = req.params;

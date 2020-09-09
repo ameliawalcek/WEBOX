@@ -6,41 +6,14 @@ import { observer, inject } from "mobx-react";
 import MediaCards from "./Components/MediaCards/MediaCards";
 import Notifications from "./Components/Notifications/Notifications";
 import CreatorPage from "./Components/CreatorPage/CreatorPage";
-import AddCreator from "./Components/CreatorPage/AddCreator";
-import io from "socket.io-client";
-
-
-//user params hook
-import { ThemeProvider, Paper } from "@material-ui/core";
-import { useTheme, useIsAuth } from "./hooks/hooks";
-import { MapsLocalHospital } from "material-ui/svg-icons";
-
-const PORT = 3001 
-
-let socket = io(`localhost:${PORT}`)
-
-socket.on('connect', () => {
-  socket.on('newNotification', (data) => {
-    console.log(data)
-  })  
-})
-
-socket.on('connection', () => console.log('sup'))
-
-const App = inject(
-  "userStore",
-  "mediaStore"
-)(
-  observer((props) => {
-    const { darkState, isLoggedIn, cookieLogIn } = props.userStore;
-    const darkTheme = useTheme(darkState);
-    useIsAuth(cookieLogIn);
+import AddCreator from "./Components/CreatorPage/AddCreator"
+import { ThemeProvider } from '@material-ui/core'
+import { useTheme, useIsAuth } from './hooks/hooks'
 
 
     return (
       <Router>
         <ThemeProvider theme={darkTheme}>
-          <Paper>
             <div id="main-container">
               <Route
                 exact
@@ -77,11 +50,9 @@ const App = inject(
               />
               <Route exact path="/add/creator" render={() => <AddCreator />} />
             </div>
-          </Paper>
         </ThemeProvider>
       </Router>
     );
-  })
-);
+  
 
 export default App;

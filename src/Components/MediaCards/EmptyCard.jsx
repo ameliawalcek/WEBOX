@@ -16,10 +16,10 @@ const EmptyCard = inject('userStore')(observer((props) => {
                 alignItems="center"
                 justify="center"
                 align="center"
-                style={{ minHeight: '100vh' }}
+                style={{ height: '100vh', width: '100wh' }}
             >
-                <Grid item xs={10} sm={6} md={6} lg={6}>
-                    <Typography color='primary' style={{ fontSize: 60 }}>
+                <Grid item xs={10} sm={6} md={6} lg={6}  style={{ height: '100vh', width: '100wh' }}>
+                    <Typography color='primary' style={{ fontSize: 60, marginTop: 30 }}>
                         <i className="fas fa-home"></i>
                     </Typography>
                     <>
@@ -30,7 +30,7 @@ const EmptyCard = inject('userStore')(observer((props) => {
                             }
                         </Typography>
 
-                        <Typography variant="body2" gutterBottom>
+                        <Typography variant="body2" gutterBottom >
                             {
                                 !isLoggedIn
                                     ? `Login to start favoriting creators and view their live streams, videos, and posts in one place`
@@ -41,7 +41,7 @@ const EmptyCard = inject('userStore')(observer((props) => {
                         {
                             !isLoggedIn &&
                             <Typography color='secondary'>
-                                <Link to='/auth/login' style={{ textDecoration: 'none' }}>LOGIN</Link>
+                                <Link to='/auth/login' style={{ textDecoration: 'none', color: '#9f66b7' }}>LOGIN</Link>
                             </Typography>
                         }
                     </>

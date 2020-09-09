@@ -1,4 +1,4 @@
-import { observable, action } from "mobx";
+import { observable, action, computed } from "mobx";
 import axios from "axios";
 import { parseCookie, setCookie } from "../utils/utils";
 
@@ -35,8 +35,8 @@ export class UserStore {
         this.notifications = user.data.notifications
     }
 
-    @action checkUser = (user) => {
-        return axios.post("http://localhost:3001/auth/login", user)
+    @action checkUser = async (user) => {
+        return await axios.post("http://localhost:3001/auth/login", user)
             .then(d => {
                 this.isLoggedIn = true
                 this.userId = d.data.userId
@@ -45,8 +45,8 @@ export class UserStore {
             }).catch(e => e.response.data)
         }
         
-        @action saveUser = (user) => {
-            return axios.post("http://localhost:3001/auth/signup", user)
+        @action saveUser = async (user) => {
+            return await axios.post("http://localhost:3001/auth/signup", user)
             .then(d => {
                 this.isLoggedIn = true
                 this.userId = d._id
@@ -68,4 +68,8 @@ export class UserStore {
         await axios.delete(`http://localhost:3001/user/notifications/${id}`)
         this.notification = this.notifications.filter(notification => notification.id !== id)
     }
+
+    @computed get notificationLength(){
+        return this.notifications.length
+    } 
 }

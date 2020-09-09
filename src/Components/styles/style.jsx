@@ -38,13 +38,13 @@ export const useStyles = makeStyles((theme) => ({
         height: '100vh'
     },
     paperTopMedia: {
-        paddingTop: 60
+        paddingTop: 52
     },
     customizeToolbar: {
         maxHeight: 55
     },
     iconMedia: {
-        color: 'rgba(255, 255, 255, 0.54)',
+        color: 'white',
     },
     rootMediaTwo: {
         flexGrow: 1,
@@ -61,7 +61,7 @@ export const useStyles = makeStyles((theme) => ({
         alignItems: 'center',
         flexDirection: 'column',
         margin: 10,
-        width: '80%',
+        width: '90%',
         overflow: 'hidden',
         padding: 10,
     },
@@ -84,6 +84,13 @@ export const useStyles = makeStyles((theme) => ({
             marginLeft: theme.spacing(3),
             width: 'auto',
         },
+    },
+    loader: {
+        left: '50%',
+        top: '50%',
+        marginLeft: -75,
+        marginTop: -75,
+        position: 'absolute'
     },
     searchIconSearch: {
         padding: theme.spacing(0, 2),
@@ -110,9 +117,9 @@ export const useStyles = makeStyles((theme) => ({
         flexGrow: 1,
     },
     listHeader: {
-        position: 'absolute',
+        position: 'fixed',
         bottom: 30,
-        justifyContent: 'center'
+        left: 25
     },
     listHightHeader: {
         height: '100%'
@@ -153,6 +160,9 @@ export const useStyles = makeStyles((theme) => ({
     },
     typography: {
         fontSize: 10,
+    },
+    typographyTwo: {
+        fontSize: 11,
     },
     instagram: {
         display: 'flex',

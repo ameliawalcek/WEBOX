@@ -25,6 +25,14 @@ class DataSources {
       instagramPostId
     }
   }
+
+  async findNewCreator(creator) {
+
+    return {
+      imgUrl: creator.img,
+      twitchName: creator.twitch,
+    }
+  }
 }
 
 const dataSources = new DataSources()
