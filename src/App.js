@@ -12,9 +12,17 @@ import { useTheme, useIsAuth } from './hooks/hooks'
 import MuiAlert from '@material-ui/lab/Alert'
 
 const App = inject("userStore", "mediaStore")(observer(props => {
-  const { darkState, isLoggedIn, cookieLogIn, notificationLength } = props.userStore
+  const { darkState, isLoggedIn, cookieLogIn, notificationLength, connectUserSocket, disconnectUserSocket } = props.userStore
   const darkTheme = useTheme(darkState)
   useIsAuth(cookieLogIn)
+  
+  useEffect(() => {
+    if (isLoggedIn) {
+      connectUserSocket()
+    }
+    return () => disconnectUserSocket()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isLoggedIn])
 
   const [notificationNum, setNotificationNum] = useState(notificationLength)
   const [open, setOpen] = useState(false)
