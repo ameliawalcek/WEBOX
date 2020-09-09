@@ -22,7 +22,7 @@ const App = inject("userStore", "mediaStore")(observer(props => {
   useEffect(() => {
     if (notificationLength > notificationNum) setOpen(true)
     setNotificationNum(notificationLength)
-  }, [notificationLength])
+  }, [notificationLength, notificationNum])
 
   function Alert(props) {
     return <MuiAlert elevation={6} variant="filled" {...props} />
