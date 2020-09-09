@@ -1,27 +1,63 @@
 const express = require('express')
 const { mongoClient } = require('../dataSources/DataSources')
-const notificationsRouter = express.Router()
+const notificationRouter = express.Router()
+const appSocket = require('../Socket')
 
-notificationsRouter.get('/twitch/callback', (req, res) => {
+notificationRouter.get('/twitch/callback', (req, res) => {
   res.type('text/plain').send('hub.challenge ' + req.query['hub.challenge'])
 })
 
-notificationsRouter.post('/twitch/callback', async (req, res) => {
+notificationRouter.post('/twitch/callback', async (req, res) => {
   res.sendStatus(200)
   const { data } = req.body
+
   if (data.length) {
     const notification = data[0]
-    const creatorDoc = await mongoClient.getCreatorByTwitchName(notification.user_name)
+    const creatorDoc = await mongoClient.getCreatorByTwitchName('twitch', notification.user_name)
+
     const notificationDoc = await mongoClient.saveNotification({
       creatorId: creatorDoc,
       creatorName: notification.user_name,
-      mediaSource: 'Twitch',
+      mediaSource: 'twitch',
       post: `${notification.user_name} just went live!`
     })
+
+    mongoClient.updateSubscribedUsers(creatorDoc._id, notificationDoc._id)
+    appSocket.emitToAllSubscribedUsers(await mongoClient.getSubscribedUsersIds(creatorDoc._id), notificationDoc)
   }
 })
 
-module.exports = notificationsRouter
+notificationRouter.get('/youtube/callback', async (req, res) => {
+
+})
+
+notificationRouter.post('/youtube/callback', async (req, res) => {
+  const { mediaId } = req.body;
+  const mediaType = mediaId.includes("UC") ? "youtube" : false;
+  const creator = await mongoClient.getCreatorByMedia(
+    mediaType,
+    mediaId
+  );
+  let notification;
+  if (mediaType === "youtube") {
+    notification = {
+      creatorId: creator,
+      creatorName: creator.twitch,
+      mediaSource: "youtube",
+      post: "new video was posted",
+    };
+  }
+  const newNotification = await mongoClient.saveNotification(
+    notification
+  );
+  const users = await mongoClient.updateSubscribedUsers(
+    creator._id,
+    newNotification._id
+  );
+  res.send(users);
+});
+
+module.exports = notificationRouter
 
 
 // {

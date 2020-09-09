@@ -49,20 +49,33 @@ class MongoClient {
       .find({ favorites: creatorId })
   }
 
+  getSubscribedUsersIds(creatorId) {
+    return Models
+      .User
+      .find({
+        favorites: creatorId,
+        subscribed: true
+      })
+      .select('_id')
+      .lean()
+  }
+
   updateSubscribedUsers(creatorId, notificationId) {
     return Models.User.updateMany(
-      { favorites: creatorId },
+      { favorites: creatorId, subscribed: true },
       { $push: { notifications: notificationId } }
     )
   }
 
   async removeFavoriteFromUser(creatorId, userId) {
     const creatorDoc = await this.getDocById("Creator", creatorId)
-    return Models.User.findByIdAndUpdate(
-      userId,
-      { $pull: { favorites: creatorDoc._id } },
-      { new: true }
-    ).lean()
+    return Models
+      .User
+      .findByIdAndUpdate(
+        userId,
+        { $pull: { favorites: creatorDoc._id } },
+        { new: true }
+      ).lean()
   }
 
   getCreatorsByPage(page) {
@@ -107,7 +120,7 @@ class MongoClient {
   getCreatorByTwitchName(mediaType, name) {
     return Models
       .Creator
-      .find({ [mediaType]: name })
+      .findOne({ [mediaType]: name })
   }
 
   numOfallCreators() {

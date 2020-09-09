@@ -1,5 +1,6 @@
 import { observable, action, computed } from "mobx";
 import axios from "axios";
+import io from "socket.io-client";
 import { parseCookie, setCookie } from "../utils/utils";
 
 export class UserStore {
@@ -8,6 +9,20 @@ export class UserStore {
   @observable favorites = []
   @observable notifications = []
   @observable darkState = JSON.parse(localStorage.dark || "false")
+
+  socket = io('http://localhost:3001')
+
+  connectUserSocket = () => {
+    this.socket.emit('online', this.userId)
+    this.socket.on('newNotification', (notification) => {
+      console.log(notification)
+      this.notifications = [...this.notifications, notification]
+    })
+  }
+
+  disconnectUserSocket = () => {
+    this.socket.emit('disconnect', this.userId)
+  }
 
   @action handleDarkStateChange = () => {
     this.darkState = !this.darkState
@@ -20,8 +35,8 @@ export class UserStore {
       return axios
         .post(`http://localhost:3001/auth/cookie`, { cookie })
         .then((d) => {
-          this.isLoggedIn = true
           this.userId = cookie
+          this.isLoggedIn = true
           this.getUser(this.userId)
           return d
         })
@@ -39,8 +54,8 @@ export class UserStore {
   @action checkUser = async (user) => {
     return await axios.post("http://localhost:3001/auth/login", user)
       .then(d => {
-        this.isLoggedIn = true
         this.userId = d.data.userId
+        this.isLoggedIn = true
         setCookie(this.userId)
         this.getUser(this.userId)
       }).catch(e => e.response.data)
@@ -49,8 +64,8 @@ export class UserStore {
   @action saveUser = async (user) => {
     return await axios.post("http://localhost:3001/auth/signup", user)
       .then(d => {
-        this.isLoggedIn = true
         this.userId = d._id
+        this.isLoggedIn = true
         return d
       }).catch(e => e.response.data)
   }
@@ -79,7 +94,7 @@ export class UserStore {
       method: "DELETE",
       data: { notificationId: notificationId, userId: userId },
     }).then(res => {
-      this.notification = this.notifications.filter(notification => notification.id !== notificationId)
+      this.notifications = this.notifications.filter(notification => notification.id !== notificationId)
     })
   }
 
