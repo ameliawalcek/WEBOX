@@ -4,37 +4,20 @@ const dataSources = require("../dataSources/DataSources");
 const NotificationHandler = require("../notifications/notificationHandler");
 
 userRouter.get("/:id", async (req, res) => {
-  const { id } = req.params;
+  const { id } = req.params
   const user = await dataSources.mongoClient.getUserById(id);
-  res.send(user);
+  res.send(user)
 });
-
-const createZap = async (creatorId) => {
-  const isInFavourites = await dataSources.mongoClient.CreatorInFavourites(
-    creatorId
-  );
-  console.log("isInFavourites", isInFavourites);
-  if (isInFavourites) {
-    return "already subscribed for this creator - all good";
-  } else {
-    const handler = new NotificationHandler();
-    const creator = await dataSources.mongoClient.getCreatorById(creatorId);
-    const response = await handler.subscribeYoutube(creator.youtube);
-    //   const response = await handler.subscribeYoutube(creator.twitch);
-    //   const response = await handler.subscribeYoutube(creator.tweeter);
-    return response;
-  }
-};
 
 userRouter.post("/favorites", async (req, res) => {
   const { creatorId, userId } = req.body;
-  await createZap(creatorId);
   const response = await dataSources.mongoClient.addFavoriteToUser(
     creatorId,
     userId
   );
   res.send(response);
-});
+})
+
 userRouter.delete("/favorites", async (req, res) => {
   const { creatorId, userId } = req.body;
   const response = await dataSources.mongoClient.removeFavoriteFromUser(
@@ -45,7 +28,6 @@ userRouter.delete("/favorites", async (req, res) => {
 });
 
 userRouter.post("/notifications", async (req, res) => {
-
   const { mediaId } = req.body;
   const mediaType = mediaId.includes("UC") ? "youtube" : false;
   const creator = await dataSources.mongoClient.getCreatorByMedia(
