@@ -5,7 +5,9 @@ body {
   font-family: 'Roboto', sans-serif;
   overflow-x:  hidden !important;
 }
-
+  ::-webkit-scrollbar {
+    display: none;
+}
 .card-img{
   max-width: 100%;
   height: auto;
@@ -19,4 +21,13 @@ body {
 
 body::-webkit-scrollbar-track {
   width: 1em;
+}
+
+.MuiIconButton-edgeStart {
+  margin-left: 0px !important;
+}
+
+.MuiToolbar-gutters {
+  padding-left: 0px !important;
+  padding-right: 0px !important;
 }

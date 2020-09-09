@@ -7,6 +7,13 @@ const mediaRouter = require('./server/router/Media')
 const userRouter = require('./server/router/User')
 
 const app = express()
+const appSocket = require('./server/Socket')
+const bodyParser = require("body-parser")
+require("dotenv").config()
+const authRoutes = require("./server/router/Auth.js")
+const mediaRouter = require("./server/router/Media")
+const userRouter = require("./server/router/User")
+const notificationRouter = require('./server/router/Notifications')
 
 app.use((req, res, next) => {
   if (!req.secure && req.headers["x-forwarded-proto"] !== "https") {
@@ -20,16 +27,17 @@ app.use(express.static(path.join(__dirname, 'build')));
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))
 
-
-app.use('/auth', authRoutes)
-app.use('/media', mediaRouter)
-app.use('/user', userRouter)
+app.use("/auth", authRoutes)
+app.use("/media", mediaRouter)
+app.use("/user", userRouter)
+app.use("/notification", notificationRouter)
 
 app.get('*', function (req, res) {
   res.sendFile(path.join(__dirname, 'build', 'index.html'));
 });
 
 const { PORT } = process.env
-app.listen(PORT, () => {
+const server = app.listen(PORT, () => {
   console.log(`Server is up on port ${PORT}`)
 })
+appSocket.initSocket(server)

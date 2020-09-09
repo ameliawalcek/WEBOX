@@ -1,9 +1,10 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { observer, inject } from 'mobx-react'
 import { Button } from '@material-ui/core'
 import MuiAlert from '@material-ui/lab/Alert';
 import { Snackbar, Typography } from '@material-ui/core'
 import { useStyles } from "../styles/style";
+import { Link } from 'react-router-dom'
 
 const CreatorHeader = inject('userStore')(observer((props) => {
   const { userStore, creatorId } = props
@@ -12,7 +13,7 @@ const CreatorHeader = inject('userStore')(observer((props) => {
 
 
   let isFavorite = favorites.some(f => creatorId === f._id)
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
 
   function Alert(props) {
     return <MuiAlert elevation={6} variant="filled" {...props} />;
@@ -32,18 +33,21 @@ const CreatorHeader = inject('userStore')(observer((props) => {
   return (
     <>
       {isFavorite
-        ? <Button size='small' variant='outlined' color='secondary' onClick={handleClick}>
+        ? <Button style={{marginLeft: 20}} size='small' variant='outlined' color='secondary' onClick={handleClick}>
           <Typography className={classes.typography}>
-          Unfavorite 
+            Unfavorite
           </Typography>
-          </Button>
-        : <Button size='small' variant='contained' color='secondary' onClick={handleClick}>
+        </Button>
+        : <Button size='small' style={{marginLeft: 20}} className={classes.typographyTwo} variant='contained' color='secondary' onClick={handleClick}>
           Favorite</Button>
       }
       {!isLoggedIn &&
         <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
           <Alert onClose={handleClose} severity="info">
-            Please login</Alert>
+            <Typography>
+              <Link to='/auth/login' style={{ textDecoration: 'none', color: 'white' }}>Please login</Link>
+            </Typography>
+          </Alert>
         </Snackbar>
       }
     </>

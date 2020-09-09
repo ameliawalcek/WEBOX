@@ -35,16 +35,25 @@ export const useStyles = makeStyles((theme) => ({
         marginTop: 5,
     },
     paperMedia: {
-        height: '100vh'
+        height: '100vh',
+        width: '100%',
+    },
+    snackbarNotif: {
+        [theme.breakpoints.down('xs')]: {
+            bottom: 90,
+        }
     },
     paperTopMedia: {
-        paddingTop: 60
+        paddingTop: 50
+    },
+    paperTopMediaTwo: {
+        paddingTop: 105
     },
     customizeToolbar: {
         maxHeight: 55
     },
     iconMedia: {
-        color: 'rgba(255, 255, 255, 0.54)',
+        color: 'white',
     },
     rootMediaTwo: {
         flexGrow: 1,
@@ -61,7 +70,7 @@ export const useStyles = makeStyles((theme) => ({
         alignItems: 'center',
         flexDirection: 'column',
         margin: 10,
-        width: '80%',
+        width: '90%',
         overflow: 'hidden',
         padding: 10,
     },
@@ -78,12 +87,19 @@ export const useStyles = makeStyles((theme) => ({
             backgroundColor: fade(theme.palette.common.white, 0.25),
         },
         marginRight: theme.spacing(2),
-        marginLeft: 0,
+        marginLeft: 10,
         width: '100%',
         [theme.breakpoints.up('sm')]: {
             marginLeft: theme.spacing(3),
             width: 'auto',
         },
+    },
+    loader: {
+        left: '50%',
+        top: '50%',
+        marginLeft: -75,
+        marginTop: -75,
+        position: 'absolute'
     },
     searchIconSearch: {
         padding: theme.spacing(0, 2),
@@ -110,9 +126,9 @@ export const useStyles = makeStyles((theme) => ({
         flexGrow: 1,
     },
     listHeader: {
-        position: 'absolute',
+        position: 'fixed',
         bottom: 30,
-        justifyContent: 'center'
+        left: 25
     },
     listHightHeader: {
         height: '100%'
@@ -153,6 +169,9 @@ export const useStyles = makeStyles((theme) => ({
     },
     typography: {
         fontSize: 10,
+    },
+    typographyTwo: {
+        fontSize: 11,
     },
     instagram: {
         display: 'flex',

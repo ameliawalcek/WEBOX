@@ -7,7 +7,6 @@ import { MediaStore } from './stores/MediaStore';
 import { UserStore } from './stores/UserStore';
 import { CreatorStore } from './stores/CreatorStore';
 
-
 const mediaStore = new MediaStore()
 const userStore = new UserStore()
 const creatorStore = new CreatorStore()
