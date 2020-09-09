@@ -91,7 +91,7 @@ const Landing = inject('userStore')(
     return (
       <div>
         <Header page='basic' />
-        <Paper elevation={0} square='true'  style={{ width: '100vw', height: '100vh' }}>
+        <Paper elevation={0} square={true}  style={{ width: '100vw', height: '100vh' }}>
           <Grid
             container
             justify='center'

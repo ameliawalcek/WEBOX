@@ -44,7 +44,7 @@ const MediaCards = inject('userStore', 'mediaStore')(observer((props) => {
                 : <Paper className={classes.paperTopMedia}></Paper>}
             {mediaCard
                 ?
-                <Paper square='true' className={classes.paperMedia}>
+                <Paper square={true} className={classes.paperMedia}>
                     <Grid container>
                         <GridList cellHeight={180} className={classes.rootMedia}>
                             {!loading && renderMediaCards(media)}

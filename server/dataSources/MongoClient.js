@@ -119,12 +119,6 @@ class MongoClient {
       .findOne({ [mediaType]: mediaId })
   }
 
-  getCreatorByTwitchName(mediaType, name) {
-    return Models
-      .Creator
-      .findOne({ [mediaType]: name })
-  }
-
   numOfallCreators() {
     return Models
       .Creator

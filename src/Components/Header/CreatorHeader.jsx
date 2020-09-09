@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { observer, inject } from 'mobx-react'
 import { Button } from '@material-ui/core'
 import MuiAlert from '@material-ui/lab/Alert';
@@ -13,7 +13,7 @@ const CreatorHeader = inject('userStore')(observer((props) => {
 
 
   let isFavorite = favorites.some(f => creatorId === f._id)
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
 
   function Alert(props) {
     return <MuiAlert elevation={6} variant="filled" {...props} />;

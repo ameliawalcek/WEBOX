@@ -12,17 +12,17 @@ import { inject, observer } from 'mobx-react';
 const notificationDesign = [
   {
     site: 'twitter',
-    icon: <TwitterIcon style={{ color: '#1da1f2' }} fontSize='small' />,
+    icon: <TwitterIcon style={{ color: '#1da1f2', marginBottom: -5 }} fontSize='small' />,
     notification: 'posted a new tweet!',
   },
   {
     site: 'youTube',
-    icon: <YouTubeIcon style={{ color: '#FF0000' }} fontSize='small' />,
+    icon: <YouTubeIcon style={{ color: '#FF0000', marginBottom: -5 }} fontSize='small' />,
     notification: 'posted a new video',
   },
   {
     site: 'instagram',
-    icon: <img src={pngwave} alt='instagram' style={{ height: '20px' }} />,
+    icon: <img src={pngwave} alt='instagram' style={{ height: '20px', marginBottom: -5 }} />,
     notification: 'shared a new photo',
   },
   {
