@@ -21,7 +21,7 @@ import LogoDark from "../assets/LogoDark.png"
 import LogoLight from "../assets/LogoLight.png"
 
 const Header = inject('userStore')(observer((props) => {
-  const { darkState, handleDarkStateChange, isLoggedIn } = props.userStore;
+  const { darkState, handleDarkStateChange, isLoggedIn, notificationLength } = props.userStore;
 
   const [open, setOpen] = React.useState(false);
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -88,7 +88,7 @@ const Header = inject('userStore')(observer((props) => {
             to='/notifications'
             color='inherit'
           >
-            <Badge badgeContent={17} color='secondary'>
+            <Badge badgeContent={notificationLength || 0} color='secondary'>
               <NotificationsIcon />
             </Badge>
           </IconButton>

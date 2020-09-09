@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import { observer, inject } from 'mobx-react'
 import { InputBase } from '@material-ui/core'
 import SearchIcon from '@material-ui/icons/Search'
@@ -6,6 +6,10 @@ import { useStyles } from "../styles/style";
 
 const SearchBar = inject('mediaStore')(observer((props) => {
     const classes = useStyles()
+
+    useEffect(() => {
+        return props.mediaStore.setInput
+    })
 
     const handleSearch = ({ target }) => {
         props.mediaStore.resetTrending()

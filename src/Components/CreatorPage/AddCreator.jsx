@@ -10,7 +10,8 @@ import pngwave from "../assets/pngwave.png"
 
 const AddCreator = inject("creatorStore", "mediaStore")(observer(props => {
   const classes = useStyles();
-  props.mediaStore.setInput('')
+  const {setInput, findCreator} = props.mediaStore
+  setInput('')
   
   const [state, setState] = useState({
     twitch: "",
@@ -28,7 +29,7 @@ const AddCreator = inject("creatorStore", "mediaStore")(observer(props => {
   };
 
   const handleClick = () => {
-    console.log(state);
+    findCreator(state.twitch)
   };
 
   const media = [

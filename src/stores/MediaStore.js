@@ -45,4 +45,8 @@ export class MediaStore {
         })
         return () => {cancel(); this.setInput()}
     }
+
+    @action findCreator = async (creator) => {
+        await axios.post(`http://localhost:3001/media/addCreator`, creator);
+    }
 }

@@ -3,10 +3,10 @@ import { observer, inject } from 'mobx-react'
 import { Typography, Grid, Paper } from '@material-ui/core'
 import LandingButton from '../Landing/LandingButton'
 
-const EmptyCard = inject('userStore')(observer((props) => {
+const NoResults = inject('userStore')(observer((props) => {
 
     return (
-        <Paper>
+        <Paper style={{ width: '100vw' }}>
             <Grid
                 container
                 spacing={0}
@@ -14,9 +14,9 @@ const EmptyCard = inject('userStore')(observer((props) => {
                 alignItems="center"
                 justify="center"
                 align="center"
-                style={{ height: '100vh' }}
+                style={{ height: '100vh', width: '100wh' }}
             >
-                <Grid item xs={10} sm={6} md={6} lg={6}>
+                <Grid item xs={10} sm={6} md={6} lg={6} style={{ height: '100vh', width: '100wh', justify: 'center', align: 'center' }}>
                     <Typography color='primary' style={{ fontSize: 60 }}>
                         <i className="fas fa-user-plus"></i>
                     </Typography>
@@ -33,4 +33,4 @@ const EmptyCard = inject('userStore')(observer((props) => {
     )
 }))
 
-export default EmptyCard
+export default NoResults

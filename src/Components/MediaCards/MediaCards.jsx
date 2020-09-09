@@ -27,7 +27,8 @@ const MediaCards = inject('userStore', 'mediaStore')(observer((props) => {
 
     const renderMediaCards = (media) => {
         return media.map((data, i) => {
-            let isFavorite = favorites.some(f => data._id === f._id)
+            console.log(data)
+            let isFavorite = favorites.some(f => {console.log(f); return data._id === f._id})
 
             if (header === 'explore' && media.length === i + 1) {
                 return <MediaCard lastRef={ref} id={data._id} img={data.img} isFavorite={isFavorite} twitchName={data.twitch} key={data._id} />

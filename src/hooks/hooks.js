@@ -37,7 +37,7 @@ export const useTheme = darkState => {
 export const useCreators = (store) => {
   const {
     searchInput, getTrending, setLoading, resetTrending, pageNum,
-    category, loading, hasMore, getNextPage } = store
+    category, loading, hasMore, getNextPage, setInput } = store
 
   const observer = useRef();
   const lastCreatorElementRef = useCallback((node) => {
