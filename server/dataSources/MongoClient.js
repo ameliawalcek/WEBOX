@@ -49,28 +49,41 @@ class MongoClient {
       .find({ favorites: creatorId })
   }
 
+  getSubscribedUsersIds(creatorId) {
+    return Models
+      .User
+      .find({
+        favorites: creatorId,
+        subscribed: true
+      })
+      .select('_id')
+      .lean()
+  }
+
   updateSubscribedUsers(creatorId, notificationId) {
     return Models.User.updateMany(
-      { favorites: creatorId },
+      { favorites: creatorId, subscribed: true },
       { $push: { notifications: notificationId } }
     )
   }
 
   async removeFavoriteFromUser(creatorId, userId) {
     const creatorDoc = await this.getDocById("Creator", creatorId)
-    return Models.User.findByIdAndUpdate(
-      userId,
-      { $pull: { favorites: creatorDoc._id } },
-      { new: true }
-    ).lean()
+    return Models
+      .User
+      .findByIdAndUpdate(
+        userId,
+        { $pull: { favorites: creatorDoc._id } },
+        { new: true }
+      ).lean()
   }
 
   getCreatorsByPage(page) {
     return Models.Creator.find({})
       .skip((page - 1) * 12)
       .limit(12)
-      .select("_id twitch img")
-      .lean();
+      .select('_id twitch img')
+      .lean()
   }
 
   getAllCreators() {
@@ -84,7 +97,7 @@ class MongoClient {
   getSearchCreators(input, page) {
     return Models
       .Creator
-      .find({ twitch: { $regex: ".*" + input + ".*", $options: "i" } })
+      .find({ twitch: { $regex: ".*" + input + ".*", $options: 'i' } })
       .skip((page - 1) * 12)
       .limit(12)
       .select("_id twitch img")
@@ -102,6 +115,12 @@ class MongoClient {
     return Models
       .Creator
       .findOne({ [mediaType]: mediaId })
+  }
+
+  getCreatorByTwitchName(mediaType, name) {
+    return Models
+      .Creator
+      .findOne({ [mediaType]: name })
   }
 
   numOfallCreators() {

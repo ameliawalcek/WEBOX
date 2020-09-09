@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./App.css";
 import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
 import Landing from "./Components/Landing/Landing";
@@ -7,68 +7,68 @@ import MediaCards from "./Components/MediaCards/MediaCards";
 import Notifications from "./Components/Notifications/Notifications";
 import CreatorPage from "./Components/CreatorPage/CreatorPage";
 import AddCreator from "./Components/CreatorPage/AddCreator";
-import io from "socket.io-client";
 import { ThemeProvider } from "@material-ui/core";
 import { useTheme, useIsAuth } from "./hooks/hooks";
-
-let socket = io('http://localhost:3001')
-
-socket.on('test', (test) => {
-  console.log(test)
-})
-
 
 const App = inject(
   "userStore",
   "mediaStore"
 )(
   observer((props) => {
-    const { darkState, isLoggedIn, cookieLogIn } = props.userStore;
-    const darkTheme = useTheme(darkState);
-    useIsAuth(cookieLogIn);
+    const { darkState, isLoggedIn, cookieLogIn, connectUserSocket, disconnectUserSocket } = props.userStore
+    const darkTheme = useTheme(darkState)
+    useIsAuth(cookieLogIn)
+
+    useEffect(() => {
+      if (isLoggedIn) {
+        connectUserSocket()
+      }
+      return () => disconnectUserSocket()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [isLoggedIn])
 
     return (
       <Router>
         <ThemeProvider theme={darkTheme}>
-            <div id="main-container">
-              <Route
-                exact
-                path="/"
-                render={() =>
-                  isLoggedIn ? (
-                    <Redirect to="/dashboard" />
-                  ) : (
-                      <Redirect to="/auth/login" />
-                    )
-                }
-              />
-              <Route
-                exact
-                path="/auth/login"
-                render={() =>
-                  isLoggedIn ? <Redirect to="/dashboard" /> : <Landing />
-                }
-              />
-              <Route
-                exact
-                path="/auth/register"
-                render={() =>
-                  isLoggedIn ? <Redirect to="/dashboard" /> : <Landing />
-                }
-              />
-              <Route exact path="/dashboard" render={() => <MediaCards />} />
-              <Route exact path="/explore" render={() => <MediaCards />} />
-              <Route exact path="/creator/:id" render={() => <CreatorPage />} />
-              <Route
-                exact
-                path="/notifications"
-                render={() => <Notifications />}
-              />
-              <Route exact path="/add/creator" render={() => <AddCreator />} />
-            </div>
+          <div id="main-container">
+            <Route
+              exact
+              path="/"
+              render={() =>
+                isLoggedIn ? (
+                  <Redirect to="/dashboard" />
+                ) : (
+                    <Redirect to="/auth/login" />
+                  )
+              }
+            />
+            <Route
+              exact
+              path="/auth/login"
+              render={() =>
+                isLoggedIn ? <Redirect to="/dashboard" /> : <Landing />
+              }
+            />
+            <Route
+              exact
+              path="/auth/register"
+              render={() =>
+                isLoggedIn ? <Redirect to="/dashboard" /> : <Landing />
+              }
+            />
+            <Route exact path="/dashboard" render={() => <MediaCards />} />
+            <Route exact path="/explore" render={() => <MediaCards />} />
+            <Route exact path="/creator/:id" render={() => <CreatorPage />} />
+            <Route
+              exact
+              path="/notifications"
+              render={() => <Notifications />}
+            />
+            <Route exact path="/add/creator" render={() => <AddCreator />} />
+          </div>
         </ThemeProvider>
       </Router>
     )
-              }))
+  }))
 
 export default App;
