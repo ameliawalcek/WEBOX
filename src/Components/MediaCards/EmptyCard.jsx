@@ -8,7 +8,7 @@ const EmptyCard = inject('userStore')(observer((props) => {
     let { isLoggedIn } = props.userStore
 
     return (
-        <Paper style={{position: 'fixed', height: '100vh', width: '100' }}>
+        <Paper style={{position: 'fixed', width: "100%"}}>
             <Grid
                 container
                 spacing={0}
