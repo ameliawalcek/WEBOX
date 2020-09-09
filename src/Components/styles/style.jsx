@@ -44,7 +44,7 @@ export const useStyles = makeStyles((theme) => ({
         maxHeight: 55
     },
     iconMedia: {
-        color: 'rgba(255, 255, 255, 0.54)',
+        color: 'white',
     },
     rootMediaTwo: {
         flexGrow: 1,

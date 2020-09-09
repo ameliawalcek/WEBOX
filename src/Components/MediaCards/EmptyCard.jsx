@@ -30,7 +30,7 @@ const EmptyCard = inject('userStore')(observer((props) => {
                             }
                         </Typography>
 
-                        <Typography variant="body2" gutterBottom>
+                        <Typography variant="body2" gutterBottom >
                             {
                                 !isLoggedIn
                                     ? `Login to start favoriting creators and view their live streams, videos, and posts in one place`

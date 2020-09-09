@@ -1,4 +1,4 @@
-import { observable, action } from "mobx";
+import { observable, action, computed } from "mobx";
 import axios from "axios";
 import { parseCookie, setCookie } from "../utils/utils";
 
@@ -67,4 +67,8 @@ export class UserStore {
         await axios.delete(`http://localhost:3001/user/notifications/${id}`)
         this.notification = this.notifications.filter(notification => notification.id !== id)
     }
+
+    @computed get notificationLength(){
+        return this.notifications.length
+    } 
 }

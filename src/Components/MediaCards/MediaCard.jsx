@@ -15,7 +15,9 @@ const MediaCard = inject('userStore')(observer((props) => {
     const [anchorEl, setAnchorEl] = useState(null)
     const open = Boolean(anchorEl)
     const [openSnack, setOpen] = useState(false);
+
     const [openFavoriteSnack, setFavoriteOpen] = useState(false);
+
     const menuLabel = isFavorite ? 'Unfavorite' : 'Favorite'
 
     const handleClick = (event) => {
@@ -80,7 +82,7 @@ const MediaCard = inject('userStore')(observer((props) => {
                             {menuLabel}
                         </MenuItem>
                     </Menu>
-                    <Snackbar open={openSnack} onClose={handleSnackBarClose} autoHideDuration={3000}>
+                    <Snackbar open={openSnack} onClose={handleSnackBarClose} autoHideDuration={4000}>
                         <Alert severity="info" onClose={handleSnackBarClose}>
                             <Typography>
                                 <Link to='/auth/login' style={{ textDecoration: 'none', color: 'white' }}>Please login</Link>
@@ -88,8 +90,8 @@ const MediaCard = inject('userStore')(observer((props) => {
                         </Alert>
                     </Snackbar>
 
-                    <Snackbar open={openFavoriteSnack} onClose={handleSnackBarClose} autoHideDuration={4000}>
-                        <Alert severity={!isFavorite ? "success" : 'warning'} onClose={handleSnackBarClose}>
+                    <Snackbar open={openFavoriteSnack} onClose={handleSnackBarClose} autoHideDuration={8000}>
+                        <Alert color={!isFavorite ? "default" : 'warning'} severity={!isFavorite ? "success" : 'warning'} onClose={handleSnackBarClose}>
                             <Typography>
                                 {!isFavorite ? 'Favorite added' : 'Favorite removed'}
                             </Typography>
