@@ -22,7 +22,7 @@ notificationRouter.post('/twitch/callback', async (req, res) => {
       post: `${notification.user_name} just went live!`
     })
 
-    mongoClient.updateSubscribedUsers(creatorDoc._id, notificationDoc._id)
+    await mongoClient.updateSubscribedUsers(creatorDoc._id, notificationDoc._id)
     appSocket.emitToAllSubscribedUsers(await mongoClient.getSubscribedUsersIds(creatorDoc._id), notificationDoc)
   }
 })

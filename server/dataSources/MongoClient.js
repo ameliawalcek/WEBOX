@@ -61,10 +61,12 @@ class MongoClient {
   }
 
   updateSubscribedUsers(creatorId, notificationId) {
-    return Models.User.updateMany(
-      { favorites: creatorId, subscribed: true },
-      { $push: { notifications: notificationId } }
-    )
+    return Models
+      .User
+      .updateMany(
+        { favorites: creatorId, subscribed: true },
+        { $push: { notifications: notificationId } }
+      )
   }
 
   async removeFavoriteFromUser(creatorId, userId) {

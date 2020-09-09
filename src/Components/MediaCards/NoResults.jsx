@@ -8,7 +8,7 @@ const NoResults = inject('userStore')(observer((props) => {
     const location = useLocation()
 
     return (
-        <Paper style={{ width: '100vw', position: 'fixed' }}>
+        <Paper square={true} style={{ width: '100vw', position: 'fixed' }}>
             <Grid
                 container
                 spacing={0}
@@ -22,7 +22,7 @@ const NoResults = inject('userStore')(observer((props) => {
                     <Typography color='primary' style={{ fontSize: 60, paddingTop: 30 }}>
                         {
                             location.pathname === '/notifications'
-                                ? <i class="fas fa-bell"></i>
+                                ? <i className="fas fa-bell"></i>
                                 : <i className="fas fa-user-plus"></i>
                         }
                     </Typography>
