@@ -9,14 +9,16 @@ export const deleteCookie = () => {
 }
 
 export const parseCookie = () => {
-  const userCookie = document
-    .cookie
-    .split(' ')
-    .find(i => i.includes('user'))
+  if (document.cookie) {
+    const userCookie = document
+      .cookie
+      .split(' ')
+      .find(i => i.includes('user'))
 
-  if (userCookie.includes('null')) return false
+    if (userCookie.includes('null')) return false
 
-  return userCookie
-    ? userCookie.replace(';', '').split('=')[1]
-    : userCookie
+    return userCookie
+      ? userCookie.replace(';', '').split('=')[1]
+      : userCookie
+  }
 }

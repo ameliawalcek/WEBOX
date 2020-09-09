@@ -35,7 +35,7 @@ export const useStyles = makeStyles((theme) => ({
         marginTop: 5,
     },
     paperMedia: {
-        height: '100%',
+        height: '100vh',
         width: '100%',
     },
     snackbarNotif: {
