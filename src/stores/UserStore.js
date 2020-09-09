@@ -79,7 +79,7 @@ export class UserStore {
       method: "DELETE",
       data: { notificationId: notificationId, userId: userId },
     }).then(res => {
-      this.notification = this.notifications.filter(notification => notification.id !== notificationId)
+      this.notifications = this.notifications.filter(notification => notification.id !== notificationId)
     })
   }
 
