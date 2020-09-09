@@ -33,7 +33,7 @@ export class MediaStore {
     let cancel
     axios({
       method: 'GET',
-      url: `http://localhost:3001/media/trending?category=${category}&page=${pageNum}&input=${input}`,
+      url: `/media/trending?category=${category}&page=${pageNum}&input=${input}`,
       cancelToken: new axios.CancelToken(c => cancel = c)
     }).then(res => {
       this.trending = [...this.trending, ...res.data.creators]
@@ -47,6 +47,6 @@ export class MediaStore {
   }
 
   @action findCreator = async (creator) => {
-    await axios.post(`http://localhost:3001/media/addCreator`, creator);
+    await axios.post(`/media/addCreator`, creator);
   }
 }

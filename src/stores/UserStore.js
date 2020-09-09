@@ -11,7 +11,7 @@ export class UserStore {
   @observable notifications = [];
   @observable darkState = JSON.parse(localStorage.dark || 'false')
 
-  socket = io('http://localhost:3001')
+  socket = io('/')
 
   connectUserSocket = () => {
     this.socket.emit('online', this.userId)
@@ -36,7 +36,7 @@ export class UserStore {
     const cookie = parseCookie()
     if (cookie) {
       return axios
-        .post(`http://localhost:3001/auth/cookie`, { cookie })
+        .post(`/auth/cookie`, { cookie })
         .then((d) => {
           this.userId = cookie
           this.isLoggedIn = true
@@ -49,13 +49,14 @@ export class UserStore {
   };
 
   @action async getUser(id) {
-    let user = await axios.get(`http://localhost:3001/user/${id}`)
+    let user = await axios.get(`/user/${id}`)
     this.favorites = user.data.favorites
     this.notifications = user.data.notifications
   }
 
+
   @action checkUser = async (user) => {
-    return await axios.post("http://localhost:3001/auth/login", user)
+    return await axios.post("/auth/login", user)
       .then(d => {
         this.userId = d.data.userId
         this.isLoggedIn = true
@@ -65,7 +66,7 @@ export class UserStore {
   }
 
   @action saveUser = async (user) => {
-    return await axios.post("http://localhost:3001/auth/signup", user)
+    return await axios.post("/auth/signup", user)
       .then(d => {
         this.userId = d._id
         this.isLoggedIn = true
@@ -74,7 +75,7 @@ export class UserStore {
   }
 
   @action async saveFavorite(id) {
-    await axios.post(`http://localhost:3001/user/favorites`, {
+    await axios.post(`/user/favorites`, {
       creatorId: id,
       userId: this.userId,
     })
@@ -83,7 +84,7 @@ export class UserStore {
 
   @action async deleteFavorite(id) {
     await axios({
-      url: `http://localhost:3001/user/favorites`,
+      url: `/user/favorites`,
       method: "DELETE",
       data: { creatorId: id, userId: this.userId },
     }).then(res => {
@@ -93,7 +94,7 @@ export class UserStore {
 
   @action async deleteNotification(notificationId, userId) {
     await axios({
-      url: `http://localhost:3001/user/notifications`,
+      url: `/user/notifications`,
       method: "DELETE",
       data: { notificationId: notificationId, userId: userId },
     }).then(res => {

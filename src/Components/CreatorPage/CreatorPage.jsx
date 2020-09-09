@@ -39,7 +39,7 @@ const CreatorPage = inject(
         <Icon className="fab fa-twitch" fontSize="large" style={{ color: "#9853ff", height: "30px", paddingTop: 5, paddingBottom: 10 }} />
         <iframe
           title='twitch-embed'
-          src={`https://player.twitch.tv/?channel=${creator.twitchName}&parent=localhost`}
+          src={`https://player.twitch.tv/?channel=${creator.twitchName}&parent=webox-hub.com`}
           height='500'
           width='100%'
           frameBorder='0'
@@ -48,13 +48,14 @@ const CreatorPage = inject(
         <iframe
           title={creator.twitchName + ' chat'}
           frameBorder='0'
-          src={`https://www.twitch.tv/embed/${creator.twitchName}/chat?parent=localhost`}
+          src={`https://www.twitch.tv/embed/${creator.twitchName}/chat?parent=webox-hub.com`}
           height='500'
           width='100%'
         ></iframe>
         {creator.youtubeVideoId && (
           <>
-            <YouTubeIcon style={{ color: "#FF0000", paddingTop: 30, paddingBottom: 10 }} fontSize="large" />            <iframe
+            <YouTubeIcon style={{ color: "#FF0000", paddingTop: 30, paddingBottom: 10 }} fontSize="large" />            
+           <iframe
               title={creator.youtubeVideoId}
               frameBorder='0'
               src={`https://www.youtube.com/embed/${creator.youtubeVideoId}`}
@@ -73,10 +74,10 @@ const CreatorPage = inject(
                 containerTagName='div'
                 protocol=''
                 injectScript
-                onLoading={() => { }}
-                onSuccess={() => { }}
-                onAfterRender={() => { }}
-                onFailure={() => { }}
+                onLoading={() => {}}
+                onSuccess={() => {}}
+                onAfterRender={() => {}}
+                onFailure={() => {}}
               />
             </div></>
         )}
