@@ -14,11 +14,12 @@ export const parseCookie = () => {
       .cookie
       .split(' ')
       .find(i => i.includes('user'))
-
-    if (userCookie.includes('null')) return false
-
-    return userCookie
+    if(userCookie) {
+      if (userCookie.includes('null')) return false
+      
+      return userCookie
       ? userCookie.replace(';', '').split('=')[1]
       : userCookie
+    }
   }
 }

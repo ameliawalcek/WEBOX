@@ -11,17 +11,17 @@ import { useStyles } from "../styles/style";
 const notificationDesign = [
   {
     site: "twitter",
-    icon: <TwitterIcon style={{ color: "#1da1f2" }} fontSize="large" />,
-    notification: "just went live!",
+    icon: <TwitterIcon style={{ color: "#1da1f2" }} fontSize="small" />,
+    notification: "posted a new tweet!",
   },
   {
     site: "youTube",
-    icon: <YouTubeIcon style={{ color: "#FF0000" }} fontSize="large" />,
-    notification: "released a new video",
+    icon: <YouTubeIcon style={{ color: "#FF0000" }} fontSize="small" />,
+    notification: "posted a new video",
   },
   {
     site: "instagram",
-    icon: <img src={pngwave} alt="instagram" style={{ height: "30px" }} />,
+    icon: <img src={pngwave} alt="instagram" style={{ height: "20px" }} />,
     notification: "shared a new photo",
   },
   {
@@ -29,8 +29,8 @@ const notificationDesign = [
     icon: (
       <Icon
         className="fab fa-twitch"
-        fontSize="large"
-        style={{ color: "#9147ff" }}
+        fontSize="small"
+        style={{ color: "#9853ff", marginBottom: -5 }}
       />
     ),
     notification: "is live!",
@@ -44,25 +44,25 @@ const Notifications = inject("userStore")(
     return (
       <Paper className={classes.rootNotif}>
         <Header page={"basic"} />
-        <Paper className={classes.paperNotif} {...props} elevation={0}>
-          <Grid container wrap="nowrap" spacing={2}>
+        <Paper className={classes.paperNotif} {...props} elevation={0} style={{marginTop: 50}} >
+          <Grid container wrap="nowrap" spacing={2} >
             <Grid item xs>
               {notifications.map((n) => {
                 if (n.mediaSource === "twitter") {
                   return (
-                    <Notification  notification={n} p={props.userStore} n={notificationDesign[0]} key={n.creatorName} name={n.creatorName} />
+                    <Notification  notification={n} p={props.userStore} n={notificationDesign[0]} key={n._id} name={n.creatorName} />
                  );
                 } else if (n.mediaSource === "youtube") {
                   return (
-                    <Notification notification={n} p={props.userStore} n={notificationDesign[1]} key={n.creatorName} name={n.creatorName} />
+                    <Notification notification={n} p={props.userStore} n={notificationDesign[1]} key={n._id} name={n.creatorName} />
                   );
                 } else if (n.mediaSource === "instagram") {
                   return (
-                    <Notification notification={n} p={props.userStore} n={notificationDesign[2]} key={n.creatorName} name={n.creatorName} />
+                    <Notification notification={n} p={props.userStore} n={notificationDesign[2]} key={n._id} name={n.creatorName} />
                   );
                 } else {
                   return (
-                    <Notification notification={n} p={props.userStore} n={notificationDesign[3]} key={n.creatorName} name={n.creatorName} />
+                    <Notification notification={n} p={props.userStore} n={notificationDesign[3]} key={n._id} name={n.creatorName} />
                   );
                 }
               })}

@@ -15,6 +15,7 @@ class YouTubeAPI {
           ${this.baseUrl}playlistItems?playlistId=${uploadsId}&key=${this.api_key}&part=snippet&maxResults=1`))
           .data.items[0].snippet.resourceId.videoId;
   }
+
 }
 
 module.exports = YouTubeAPI;
