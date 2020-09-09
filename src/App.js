@@ -6,9 +6,31 @@ import { observer, inject } from "mobx-react";
 import MediaCards from "./Components/MediaCards/MediaCards";
 import Notifications from "./Components/Notifications/Notifications";
 import CreatorPage from "./Components/CreatorPage/CreatorPage";
-import AddCreator from "./Components/CreatorPage/AddCreator"
-import { ThemeProvider } from '@material-ui/core'
-import { useTheme, useIsAuth } from './hooks/hooks'
+import AddCreator from "./Components/CreatorPage/AddCreator";
+import io from "socket.io-client";
+import * as dotenv from 'dotenv'
+//user params hook
+import { ThemeProvider, Paper } from "@material-ui/core";
+import { useTheme, useIsAuth } from "./hooks/hooks";
+import { MapsLocalHospital } from "material-ui/svg-icons";
+
+dotenv.config()
+
+let socket = io('http://localhost:3001')
+
+socket.on('test', (test) => {
+  console.log(test)
+})
+
+
+const App = inject(
+  "userStore",
+  "mediaStore"
+)(
+  observer((props) => {
+    const { darkState, isLoggedIn, cookieLogIn } = props.userStore;
+    const darkTheme = useTheme(darkState);
+    useIsAuth(cookieLogIn);
 
 
     return (
@@ -22,8 +44,8 @@ import { useTheme, useIsAuth } from './hooks/hooks'
                   isLoggedIn ? (
                     <Redirect to="/dashboard" />
                   ) : (
-                    <Redirect to="/auth/login" />
-                  )
+                      <Redirect to="/auth/login" />
+                    )
                 }
               />
               <Route
@@ -52,7 +74,7 @@ import { useTheme, useIsAuth } from './hooks/hooks'
             </div>
         </ThemeProvider>
       </Router>
-    );
-  
+    )
+              }))
 
 export default App;

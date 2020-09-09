@@ -1,5 +1,4 @@
 const express = require("express");
-const app = express();
 const userRouter = express.Router();
 const dataSources = require("../dataSources/DataSources");
 const NotificationHandler = require("../notifications/notificationHandler");
@@ -46,12 +45,6 @@ userRouter.delete("/favorites", async (req, res) => {
 });
 
 userRouter.post("/notifications", async (req, res) => {
-    io.connect();
-    io.on('connection', (socket) => {
-        console.log("in")
-        socket.emit('newNotification', {new: 'value'})
-    })
-    
 
   const { mediaId } = req.body;
   const mediaType = mediaId.includes("UC") ? "youtube" : false;
