@@ -6,7 +6,7 @@ const NotificationSchema = new Schema({
   creatorName: String,
   mediaSource: String,
   post: String
-})
+}, { timestamps: true })
 
 const Notification = mongoose.model('Notification', NotificationSchema)
 module.exports = Notification

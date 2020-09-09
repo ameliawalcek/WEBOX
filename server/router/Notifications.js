@@ -34,7 +34,6 @@ notificationRouter.get('/youtube/callback', (req, res) => {
 notificationRouter.post('/youtube/callback', async (req, res) => {
   res.sendStatus(200)
   const { headers } = req
-  console.log(headers)
 
   const youtubeId = youtubeAPI.parseYoutubeNotification(headers)
   const creatorDoc = await mongoClient.getCreatorByMedia('youtube', youtubeId)

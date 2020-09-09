@@ -10,11 +10,9 @@ class Socket {
     this.io = socket(server)
 
     this.io.on('connection', (socket) => {
-      console.log(socket.id + ' connected')
 
       socket.on('online', (userId) => {
         this.onlineClients.push({ [userId]: socket })
-        console.log(this.onlineClients)
       })
 
       socket.on('disconnect', (userId) => {
