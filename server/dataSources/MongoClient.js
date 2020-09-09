@@ -1,23 +1,25 @@
-require("dotenv").config();
-require("mongoose").connect(process.env.MONGO_URI, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-  useFindAndModify: false,
-});
+require("dotenv").config()
+require("mongoose").connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false })
 
-const Models = require("../models/Models");
+const Models = require("../models/Models")
 
 class MongoClient {
   getDocById(collection, id) {
-    return Models[collection].findById(id);
+    return Models[collection].findById(id)
   }
 
   getUserByName(userName) {
-    return Models.User.findOne({ userName: userName }).lean();
+    return Models
+      .User
+      .findOne({ userName: userName })
+      .lean();
   }
 
   isCookieValid(cookie) {
-    return Models.User.findById(cookie).lean();
+    return Models
+      .User
+      .findById(cookie)
+      .lean();
   }
 
   async getUserById(id) {
@@ -41,31 +43,26 @@ class MongoClient {
     ).lean();
   }
 
-  async CreatorInFavourites(creatorId) {
-    const isCreatorSaved = await Models.User.find({ favorites: creatorId });
-    return isCreatorSaved.length;
+  CreatorInFavourites(creatorId) {
+    return Models
+      .User
+      .find({ favorites: creatorId })
   }
 
-  async updateSubscribedUsers(creatorId, notificationId) {
-    const res = await Models.User.updateMany(
+  updateSubscribedUsers(creatorId, notificationId) {
+    return Models.User.updateMany(
       { favorites: creatorId },
-      {
-        $push: {
-          notifications: notificationId,
-        },  
-      },
-      { multi: true }
-    );
-    return res;
+      { $push: { notifications: notificationId } }
+    )
   }
 
   async removeFavoriteFromUser(creatorId, userId) {
-    const creatorDoc = await this.getDocById("Creator", creatorId);
+    const creatorDoc = await this.getDocById("Creator", creatorId)
     return Models.User.findByIdAndUpdate(
       userId,
       { $pull: { favorites: creatorDoc._id } },
       { new: true }
-    ).lean();
+    ).lean()
   }
 
   getCreatorsByPage(page) {
@@ -77,46 +74,56 @@ class MongoClient {
   }
 
   getAllCreators() {
-    return Models.Creator.find({}).select("_id twitch img").lean();
+    return Models
+      .Creator
+      .find({})
+      .select("_id twitch img")
+      .lean()
   }
 
   getSearchCreators(input, page) {
-    return Models.Creator.find({
-      twitch: { $regex: ".*" + input + ".*", $options: "i" },
-    })
+    return Models
+      .Creator
+      .find({ twitch: { $regex: ".*" + input + ".*", $options: "i" } })
       .skip((page - 1) * 12)
       .limit(12)
       .select("_id twitch img")
       .lean();
   }
 
-  getCreatorById = async (id) => {
-    return await Models.Creator.findById(id).lean();
+  getCreatorById(id) {
+    return Models
+      .Creator
+      .findById(id)
+      .lean()
   };
 
   getCreatorByMedia(mediaType, mediaId) {
-    return Models.Creator.findOne({ [mediaType]: mediaId });
+    return Models
+      .Creator
+      .findOne({ [mediaType]: mediaId })
   }
 
   numOfallCreators() {
-    return Models.Creator.estimatedDocumentCount({});
+    return Models
+      .Creator
+      .estimatedDocumentCount({})
   }
 
-  saveNotification = async (notificationDoc) => {
-    return await new Models.Notification(notificationDoc).save();
+  saveNotification(notificationDoc) {
+    return new Models
+      .Notification(notificationDoc)
+      .save()
   };
 
-  async removeNotificationFromUser(notificationId, userId) {
-    const notificationDoc = await this.getDocById(
-      "Notification",
-      notificationId
-    );
-    console.log(notificationDoc)
-    return Models.User.findByIdAndUpdate(
-      userId,
-      { $pull: { notifications: notificationDoc._id } },
-      { new: true }
-    ).lean();
+  removeNotificationFromUser(notificationId, userId) {
+    return Models
+      .User
+      .findByIdAndUpdate(
+        userId,
+        { $pull: { notifications: notificationDoc._id } },
+        { new: true }
+      ).lean()
   }
 }
 

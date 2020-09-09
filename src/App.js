@@ -8,13 +8,8 @@ import Notifications from "./Components/Notifications/Notifications";
 import CreatorPage from "./Components/CreatorPage/CreatorPage";
 import AddCreator from "./Components/CreatorPage/AddCreator";
 import io from "socket.io-client";
-import * as dotenv from 'dotenv'
-//user params hook
-import { ThemeProvider, Paper } from "@material-ui/core";
+import { ThemeProvider } from "@material-ui/core";
 import { useTheme, useIsAuth } from "./hooks/hooks";
-import { MapsLocalHospital } from "material-ui/svg-icons";
-
-dotenv.config()
 
 let socket = io('http://localhost:3001')
 
@@ -31,7 +26,6 @@ const App = inject(
     const { darkState, isLoggedIn, cookieLogIn } = props.userStore;
     const darkTheme = useTheme(darkState);
     useIsAuth(cookieLogIn);
-
 
     return (
       <Router>
