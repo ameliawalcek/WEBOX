@@ -51,9 +51,7 @@ const MediaCard = inject('userStore')(observer((props) => {
         <Grid item xs={6} sm={3} md={2} lg={2}>
             <div ref={lastRef ? lastRef : null} className='media-card' style={{ backgroundImage: `url(${img})`, backgroundSize: '100% 100%' }}>
                 <GridListTile >
-                    <Link to={`creator/${id}`}>
                         <img className='card-img' src={`https://upload.wikimedia.org/wikipedia/commons/4/48/BLANK_ICON.png`} alt={``} />
-                    </Link>
                     <GridListTileBar
                         title={twitchName}
                         actionIcon={

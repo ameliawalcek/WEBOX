@@ -1,6 +1,7 @@
 import React from "react";
 import { Menu, MenuItem, IconButton, Grid } from "@material-ui/core";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
+import { Link } from "react-router-dom";
 
 function Notification(props) {
   const ITEM_HEIGHT = 20;
@@ -10,6 +11,10 @@ function Notification(props) {
   const handleClick = (event) => setAnchorEl(event.currentTarget);
 
   const handleClose = () => setAnchorEl(null);
+
+  const deleteNotification = () => {
+    props.p.deleteNotification(props.notification._id, props.p.userId);
+  };
 
   const options = ["Remove"];
 
@@ -23,7 +28,9 @@ function Notification(props) {
         >
           <MoreVertIcon fontSize="small" />
         </IconButton>
-        {props.n.icon} {props.name} {props.n.notification}
+        <Link to={`creator/${props.n.creatorId}`}>
+          {props.n.icon} {props.name} {props.n.notification}
+        </Link>
       </Grid>
       <Menu
         id="long-menu"
@@ -42,7 +49,7 @@ function Notification(props) {
           <MenuItem
             key={option}
             selected={option === "Pyxis"}
-            onClick={handleClose}
+            onClick={deleteNotification}
           >
             {option}
           </MenuItem>

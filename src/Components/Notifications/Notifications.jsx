@@ -40,9 +40,7 @@ const notificationDesign = [
 const Notifications = inject("userStore")(
   observer((props) => {
     const classes = useStyles();
-
     const { notifications } = props.userStore;
-
     return (
       <Paper className={classes.rootNotif}>
         <Header page={"basic"} />
@@ -50,21 +48,21 @@ const Notifications = inject("userStore")(
           <Grid container wrap="nowrap" spacing={2}>
             <Grid item xs>
               {notifications.map((n) => {
-                if (n.mediaType === "twitter") {
+                if (n.mediaSource === "twitter") {
                   return (
-                    <Notification n={notificationDesign[0]} key={n.creatorName} name={n.creatorName} />
+                    <Notification  notification={n} p={props.userStore} n={notificationDesign[0]} key={n.creatorName} name={n.creatorName} />
+                 );
+                } else if (n.mediaSource === "youtube") {
+                  return (
+                    <Notification notification={n} p={props.userStore} n={notificationDesign[1]} key={n.creatorName} name={n.creatorName} />
                   );
-                } else if (n.mediaType === "youtube") {
+                } else if (n.mediaSource === "instagram") {
                   return (
-                    <Notification n={notificationDesign[1]} key={n.creatorName} name={n.creatorName} />
-                  );
-                } else if (n.mediaType === "instagram") {
-                  return (
-                    <Notification n={notificationDesign[2]} key={n.creatorName} name={n.creatorName} />
+                    <Notification notification={n} p={props.userStore} n={notificationDesign[2]} key={n.creatorName} name={n.creatorName} />
                   );
                 } else {
                   return (
-                    <Notification n={notificationDesign[3]} key={n.creatorName} name={n.creatorName} />
+                    <Notification notification={n} p={props.userStore} n={notificationDesign[3]} key={n.creatorName} name={n.creatorName} />
                   );
                 }
               })}

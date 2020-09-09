@@ -72,6 +72,7 @@ userRouter.post("/notifications", async (req, res) => {
 });
 
 userRouter.delete("/notifications", async (req, res) => {
+  console.log(req)
   const { userId, notificationId } = req.body;
   const response = await dataSources.mongoClient.removeNotificationFromUser(
     notificationId,

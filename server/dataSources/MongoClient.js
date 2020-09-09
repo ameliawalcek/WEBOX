@@ -111,6 +111,7 @@ class MongoClient {
       "Notification",
       notificationId
     );
+    console.log(notificationDoc)
     return Models.User.findByIdAndUpdate(
       userId,
       { $pull: { notifications: notificationDoc._id } },
