@@ -58,7 +58,7 @@ const CategoryBar = inject('mediaStore')(observer((props) => {
     mediaStore.setCategory(categories[value].url)
 
     const handleChange = (_, newValue) => {
-        mediaStore.setInput('')
+        mediaStore.setInput()
         setValue(newValue)
     }
 

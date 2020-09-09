@@ -37,7 +37,7 @@ export const useTheme = darkState => {
 export const useCreators = (store) => {
   const {
     searchInput, getTrending, setLoading, resetTrending, pageNum,
-    category, loading, hasMore, getNextPage, setInput } = store
+    category, loading, hasMore, getNextPage } = store
 
   const observer = useRef();
   const lastCreatorElementRef = useCallback((node) => {
@@ -59,10 +59,9 @@ export const useCreators = (store) => {
 
   useEffect(() => {
     setLoading(true)
-    getTrending(category, pageNum, searchInput).then(() => {
-      setLoading(false)
-    })
-    return setInput
+    const cancel = getTrending(category, pageNum, searchInput)
+    setLoading(false)
+    return cancel
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [category, pageNum, searchInput])
 

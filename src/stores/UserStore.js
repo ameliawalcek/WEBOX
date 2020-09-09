@@ -6,7 +6,7 @@ export class UserStore {
     @observable userId = "";
     @observable isLoggedIn = false
     @observable favorites = [];
-    @observable notifications = [1, 2, 3, 4, 5, ];
+    @observable notifications = [];
     @observable darkState = JSON.parse(localStorage.dark || 'false')
 
     @action handleDarkStateChange = () => {

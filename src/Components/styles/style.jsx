@@ -38,7 +38,7 @@ export const useStyles = makeStyles((theme) => ({
         height: '100vh'
     },
     paperTopMedia: {
-        paddingTop: 60
+        paddingTop: 52
     },
     customizeToolbar: {
         maxHeight: 55
