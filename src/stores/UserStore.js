@@ -15,7 +15,6 @@ export class UserStore {
   connectUserSocket = () => {
     this.socket.emit('online', this.userId)
     this.socket.on('newNotification', (notification) => {
-      console.log(notification)
       this.notifications = [...this.notifications, notification]
     })
   }

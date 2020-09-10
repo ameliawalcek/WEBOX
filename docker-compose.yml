@@ -2,7 +2,7 @@ version: '3'
 services:
   redis-server:
     stdin_open: true
-    image: 'redis'
+    image: 'redis:6.0.7'
   node-app:
     restart: always
     build: .

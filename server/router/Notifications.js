@@ -19,7 +19,7 @@ notificationRouter.post('/twitch/callback', async (req, res) => {
       creatorId: creatorDoc,
       creatorName: notification.user_name,
       mediaSource: 'twitch',
-      post: `${notification.user_name} just went live!`
+      post: `just went live!`
     })
 
     await mongoClient.updateSubscribedUsers(creatorDoc._id, notificationDoc._id)
@@ -41,7 +41,7 @@ notificationRouter.post('/youtube/callback', async (req, res) => {
     creatorId: creatorDoc,
     creatorName: creatorDoc.twitch,
     mediaSource: "youtube",
-    post: `${creatorDoc.twitch} just uploaded a new video!`,
+    post: `uploaded a video!`,
   })
 
   await mongoClient.updateSubscribedUsers(creatorDoc._id, notificationDoc._id)

@@ -1,3 +1,4 @@
+require("dotenv").config()
 const express = require('express')
 const bodyParser = require('body-parser')
 const path = require('path')
@@ -6,15 +7,14 @@ const mediaRouter = require('./server/router/Media')
 const userRouter = require('./server/router/User')
 const app = express()
 const appSocket = require('./server/Socket')
-require("dotenv").config()
 const notificationRouter = require('./server/router/Notifications')
 
-app.use((req, res, next) => {
-  if (!req.secure && req.headers["x-forwarded-proto"] !== "https") {
-    return res.redirect('https://' + req.get('host') + req.url)
-  }
-  next()
-})
+// app.use((req, res, next) => {
+//   if (!req.secure && req.headers["x-forwarded-proto"] !== "https") {
+//     return res.redirect('https://' + req.get('host') + req.url)
+//   }
+//   next()
+// })
 
 app.use(express.static(path.join(__dirname, 'build')));
 

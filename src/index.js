@@ -6,6 +6,7 @@ import { Provider } from 'mobx-react'
 import { MediaStore } from './stores/MediaStore';
 import { UserStore } from './stores/UserStore';
 import { CreatorStore } from './stores/CreatorStore';
+import * as serviceWorker from './serviceWorker'
 
 const mediaStore = new MediaStore()
 const userStore = new UserStore()
@@ -18,3 +19,5 @@ ReactDOM.render(
   </Provider>,
   document.getElementById('root')
 )
+
+serviceWorker.register()

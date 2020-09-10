@@ -89,7 +89,9 @@ export const useNewNotification = (notificationLength) => {
 
   useEffect(() => {
     if (notificationLength > notificationNum) setOpen(true)
-    setNotificationNum(notificationLength)
+    if (notificationLength !== notificationNum) {
+      setNotificationNum(notificationLength)
+    }
   }, [notificationLength, notificationNum])
 
   return { open, setOpen }

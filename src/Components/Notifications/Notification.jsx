@@ -1,11 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import { Menu, MenuItem, IconButton, Grid } from "@material-ui/core";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
 import { Link } from "react-router-dom";
 
 function Notification(props) {
   const ITEM_HEIGHT = 20;
-  const [anchorEl, setAnchorEl] = React.useState(null);
+  const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
 
   const handleClick = (event) => setAnchorEl(event.currentTarget);
@@ -29,10 +29,10 @@ function Notification(props) {
           <MoreVertIcon  />
         </ IconButton >
         {props.n.icon} 
-        <Link to={`creator/${props.n.creatorId}`} style={{ color: "#9853ff" ,textDecoration: 'none', fontWeight: 900 , marginLeft: 15, marginRight: 5 }}> 
-         {props.name}   
+        <Link to={`creator/${props.notification.creatorId}`} style={{ color: "#9853ff" ,textDecoration: 'none', fontWeight: 900 , marginLeft: 15, marginRight: 5 }}> 
+         {props.notification.creatorName}   
         </Link>
-         {props.n.notification}
+         {props.notification.post}
       </Grid>
       <Menu
         id="long-menu"

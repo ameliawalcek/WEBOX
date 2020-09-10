@@ -19,7 +19,6 @@ export const useStyles = makeStyles((theme) => ({
     },
     paperNotif: {
         maxWidth: 400,
-
         margin: `${theme.spacing(1)}px auto`,
         padding: theme.spacing(2)
     },
@@ -127,8 +126,8 @@ export const useStyles = makeStyles((theme) => ({
     },
     listHeader: {
         position: 'fixed',
-        bottom: 30,
-        left: 25
+        bottom: -300,
+        left: 30
     },
     listHightHeader: {
         height: '100%'
