@@ -9,12 +9,12 @@ const app = express()
 const appSocket = require('./server/Socket')
 const notificationRouter = require('./server/router/Notifications')
 
-// app.use((req, res, next) => {
-//   if (!req.secure && req.headers["x-forwarded-proto"] !== "https") {
-//     return res.redirect('https://' + req.get('host') + req.url)
-//   }
-//   next()
-// })
+app.use((req, res, next) => {
+  if (!req.secure && req.headers["x-forwarded-proto"] !== "https") {
+    return res.redirect('https://' + req.get('host') + req.url)
+  }
+  next()
+})
 
 app.use(express.static(path.join(__dirname, 'build')));
 
