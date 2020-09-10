@@ -2,7 +2,7 @@ FROM node:12.18.3-alpine3.9
 
 WORKDIR '/node-app'
 
-COPY package.json .
+COPY package*.json ./
 RUN npm install
 COPY . .
 RUN npm run build
