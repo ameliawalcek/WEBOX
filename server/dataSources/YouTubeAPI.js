@@ -8,14 +8,19 @@ class YouTubeAPI {
   }
 
   async getYoutubeLatestByRef(ref) {
-    const uploadsId = (
-      await axios(`
+    try {
+      const uploadsId = (
+        await axios(`
         ${this.baseUrl}channels?id=${ref}&key=${this.api_key}&part=contentDetails`)
-    ).data.items[0].contentDetails.relatedPlaylists.uploads
-    return (
-      await axios(`
-        ${this.baseUrl}playlistItems?playlistId=${uploadsId}&key=${this.api_key}&part=snippet&maxResults=1`)
-    ).data.items[0].snippet.resourceId.videoId
+      ).data.items[0].contentDetails.relatedPlaylists.uploads
+      return (
+        await axios(`
+          ${this.baseUrl}playlistItems?playlistId=${uploadsId}&key=${this.api_key}&part=snippet&maxResults=1`)
+      ).data.items[0].snippet.resourceId.videoId
+    }
+    catch (e) {
+      return null
+    }
   }
 
   parseYoutubeNotification(notification) {

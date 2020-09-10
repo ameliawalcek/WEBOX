@@ -6,7 +6,16 @@ class InstagramAPI {
   }
 
   async getRecentPostByRef(ref) {
-    return (await axios(this.baseUrl + ref + '?__a=1')).data.graphql.user.edge_owner_to_timeline_media.edges[0].node.shortcode
+    try {
+      const instagramGql = await axios(this.baseUrl + ref + '?__a=1')
+      if (instagramGql.data) {
+        return instagramGql.data.graphql.user.edge_owner_to_timeline_media.edges[0].node.shortcode
+      }
+      return null
+    }
+    catch (e) {
+      return null
+    }
   }
 }
 
