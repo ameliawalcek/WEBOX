@@ -4,7 +4,7 @@ const notificationRouter = express.Router()
 const appSocket = require('../Socket')
 
 notificationRouter.get('/twitch/callback', (req, res) => {
-  res.type('text/plain').send('hub.challenge ' + req.query['hub.challenge'])
+  res.type('text/plain').status(200).send('hub.challenge ' + req.query['hub.challenge'])
 })
 
 notificationRouter.post('/twitch/callback', async (req, res) => {
