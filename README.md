@@ -1,68 +1,55 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Webox
+Link: [Webox](https://webox-hub.com/)
 
-## Available Scripts
+Webox is a mobile app that is a hub for entertainment where you can watch and 
+follow the top creators from Twitch and theire social media.
 
-In the project directory, you can run:
+If you login you can save creators to your favorites and get notifications for when 
+they upload new videos or go live.
 
-### `npm start`
+Webox is using React with Mobx as a state manager for the Client Side and NodeJS, Express
+with Redis for server side caching and Socket.io for live notifications for the backend,
+for the Data Base we used MongoDB with Mongoose. 
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Also Webox is using Puppeteer with Cheerio for crawling and scraping tools.
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+env:
+```
+PORT=
+MONGO_USER_NAME=
+MONGO_PASSWORD=
+MONGO_DB_NAME=
+TWITCH_CLIENT_ID=
+YOUTUBE_API_KEY
+```
+# Pictures
 
-### `npm test`
+![enter image description here](https://i.ibb.co/vV9gJHF/We-Box-Google-Chrome-11-09-2020-20-51-16.png)
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+![enter image description here](https://i.ibb.co/KjHwkrs/We-Box-Google-Chrome-11-09-2020-22-24-53.png)
 
-### `npm run build`
+User Dashboard Page:
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+![enter image description here](https://i.ibb.co/nMZHP8q/We-Box-Google-Chrome-11-09-2020-20-51-23.png)
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+Explore Page:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+![enter image description here](https://i.ibb.co/rdXymMt/We-Box-Google-Chrome-11-09-2020-20-51-49.png)
 
-### `npm run eject`
+Creator Page:
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+![enter image description here](https://i.ibb.co/gFtN8Rm/We-Box-Google-Chrome-11-09-2020-20-52-38.png)
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+![enter image description here](https://i.ibb.co/tzPSXdx/We-Box-Google-Chrome-11-09-2020-20-52-47.png)
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+![enter image description here](https://i.ibb.co/bHwPryv/We-Box-Google-Chrome-11-09-2020-20-52-53.png)
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+![enter image description here](https://i.ibb.co/SKxBwhL/We-Box-Google-Chrome-11-09-2020-20-52-59.png)
 
-## Learn More
+![enter image description here](https://i.ibb.co/SPYhPtJ/We-Box-Google-Chrome-11-09-2020-20-53-04.png)
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Notification Page:
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+![enter image description here](https://i.ibb.co/G0t3F6Y/We-Box-Google-Chrome-11-09-2020-20-53-36.png)
 
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+![enter image description here](https://i.ibb.co/7NbdxXZ/We-Box-Google-Chrome-11-09-2020-20-53-47.png)
