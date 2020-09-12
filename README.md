@@ -2,9 +2,9 @@
 Link: [Webox](https://webox-hub.com/)
 
 Webox is a mobile app that's a hub for entertainment where you can watch and 
-follow the top creators from Twitch and theire social media.
+follow the top creators from Twitch and their social media.
 
-If you login you can save creators to your favorites and get notifications for when 
+When logged in, you can save creators to your favorites and get notifications for when 
 they upload new videos or go live.
 
 Webox is using React with Mobx as a state manager for the Client Side and NodeJS & Express
