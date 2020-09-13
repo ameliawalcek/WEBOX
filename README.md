@@ -4,8 +4,8 @@ Webox is a social media aggregator where users follow their favorite creator's T
 
 When logged in, users can save creators to their dashboard and get notifications for when they upload new videos on YouTube or go live on Twitch.
 
-React with Mobx as a state manager for the Client-Side and NodeJS & Express with Redis for server-side caching and Socket.io for live notifications for the backend, for the DataBase we used MongoDB with Mongoose.
-Also, Webox is using Puppeteer with Cheerio for crawling and scraping tools.
+<b>Frontend:</b> JS, React, MobX, socket.io, Material-ui<br/>
+<b>Backend:</b> MongoDB, Mongoose, Node.js, Puppeteer, Cheerio, Express, Atlas, bcrypt, validator, AWS, Docker, Redis
 
 ### Creator Page
 Creator's Twitch, YouTube, Instagram, and Twitter all on one page 
