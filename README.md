@@ -22,33 +22,7 @@ TWITCH_CLIENT_ID=
 YOUTUBE_API_KEY
 ```
 # Pictures
-
-![enter image description here](https://i.ibb.co/vV9gJHF/We-Box-Google-Chrome-11-09-2020-20-51-16.png)
-
-![enter image description here](https://i.ibb.co/KjHwkrs/We-Box-Google-Chrome-11-09-2020-22-24-53.png)
-
-User Dashboard Page:
-
-![enter image description here](https://i.ibb.co/nMZHP8q/We-Box-Google-Chrome-11-09-2020-20-51-23.png)
-
-Explore Page:
-
-![enter image description here](https://i.ibb.co/rdXymMt/We-Box-Google-Chrome-11-09-2020-20-51-49.png)
-
-Creator Page:
-
-![enter image description here](https://i.ibb.co/gFtN8Rm/We-Box-Google-Chrome-11-09-2020-20-52-38.png)
-
-![enter image description here](https://i.ibb.co/tzPSXdx/We-Box-Google-Chrome-11-09-2020-20-52-47.png)
-
-![enter image description here](https://i.ibb.co/bHwPryv/We-Box-Google-Chrome-11-09-2020-20-52-53.png)
-
-![enter image description here](https://i.ibb.co/SKxBwhL/We-Box-Google-Chrome-11-09-2020-20-52-59.png)
-
-![enter image description here](https://i.ibb.co/SPYhPtJ/We-Box-Google-Chrome-11-09-2020-20-53-04.png)
-
-Notification Page:
-
-![enter image description here](https://i.ibb.co/G0t3F6Y/We-Box-Google-Chrome-11-09-2020-20-53-36.png)
-
-![enter image description here](https://i.ibb.co/7NbdxXZ/We-Box-Google-Chrome-11-09-2020-20-53-47.png)
+<a href="https://ibb.co/xsdG7vF"><img src="https://i.ibb.co/pP5ZLDh/Screenshot-20200910-095229.jpg" alt="Screenshot-20200910-095229" border="0" height="500px"></a>
+<a href="https://ibb.co/FqQRycB"><img src="https://i.ibb.co/dJN8VXQ/Screenshot-20200910-095310.jpg" alt="Screenshot-20200910-095310" border="0" height="500px"></a>
+<a href="https://ibb.co/55g5MRc"><img src="https://i.ibb.co/K9p90ry/Screenshot-20200910-095303.jpg" alt="Screenshot-20200910-095303" border="0" height="500px"></a>
+<a href="https://ibb.co/ykTTMg7"><img src="https://i.ibb.co/7pccTrL/Screenshot-20200910-095253.jpg" alt="Screenshot-20200910-095253" border="0" height="500px"></a><br /><a target='_blank' href='https://500pxdownload.com/'>download high resolution images instagram</a><br />
