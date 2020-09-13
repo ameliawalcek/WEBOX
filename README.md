@@ -1,8 +1,8 @@
 ### [WEBOX](https://webox-hub.com/)
 
-Webox is a social media aggregator that allows a user to follow their favorite creator on Twitch, YouTube, Instagram, and Twitter all on one page.
+Webox is a social media aggregator where users follow their favorite creator's Twitch, YouTube, Instagram, and Twitter all on one page.
 
-When logged in, you can save creators to your favorites and get notifications for when they upload new videos or go live.
+When logged in, users can save creators to their dashboard and get notifications for when they upload new videos on YouTube or go live on Twitch.
 
 React with Mobx as a state manager for the Client-Side and NodeJS & Express with Redis for server-side caching and Socket.io for live notifications for the backend, for the DataBase we used MongoDB with Mongoose.
 Also, Webox is using Puppeteer with Cheerio for crawling and scraping tools.
