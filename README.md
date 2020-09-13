@@ -1,13 +1,12 @@
 # Webox
-Link: [Webox](https://webox-hub.com/)
+[WEBOX](https://webox-hub.com/)
 
-Webox is a mobile app that's a hub for entertainment where you can watch and 
-follow the top creators from Twitch and their social media.
+Webox is a social media aggriagotor that allows a user to follow their favorite creator on Twitch, YouTube, Instagram, and Twitter all on one page.
 
 When logged in, you can save creators to your favorites and get notifications for when 
 they upload new videos or go live.
 
-Webox is using React with Mobx as a state manager for the Client Side and NodeJS & Express
+React with Mobx as a state manager for the Client Side and NodeJS & Express
 with Redis for server side caching and Socket.io for live notifications for the backend,
 for the Data Base we used MongoDB with Mongoose. 
 
