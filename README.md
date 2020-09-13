@@ -2,7 +2,7 @@
 
 Webox is a social media aggregator where users follow their favorite creator's Twitch, YouTube, Instagram, and Twitter all on one page.
 
-When logged in, users can save creators to their dashboard and get notifications for when they upload new videos on YouTube or go live on Twitch.
+When logged in, users can save creators to their dashboard and get notifications for new uploaded videos or if a creator is live on Twitch.
 
 <b>Frontend:</b> JS, React, MobX, socket.io, Material-ui<br/>
 <b>Backend:</b> MongoDB, Mongoose, Node.js, Puppeteer, Cheerio, Express, Atlas, bcrypt, validator, AWS, Docker, Redis
