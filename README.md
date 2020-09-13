@@ -20,12 +20,10 @@ Used for the notification page, user dashboard, and search results<br/><br/>
  
 ### Dark and Light mode
 #### Login
-<img src="https://i.ibb.co/qMGQrff/Screenshot-20200913-224141.jpg" alt="Screenshot-20200913-224141" border="0" height="500px">
-<img src="https://i.ibb.co/3pRxsX4/Screenshot-20200913-224146.jpg" alt="Screenshot-20200913-224146" border="0" height="500px">
+<img src="https://i.ibb.co/qMGQrff/Screenshot-20200913-224141.jpg" alt="Screenshot-20200913-224141" border="0" height="500px"> <img src="https://i.ibb.co/3pRxsX4/Screenshot-20200913-224146.jpg" alt="Screenshot-20200913-224146" border="0" height="500px">
 
 #### Drawer
-<img src="https://i.ibb.co/rbWPSNN/Screenshot-20200913-224352.jpg" alt="Screenshot-20200913-224352" border="0" height="500px">
-<img src="https://i.ibb.co/vH7Hf3P/Screenshot-20200913-224400.jpg" alt="Screenshot-20200913-224400" border="0" height="500px">
+<img src="https://i.ibb.co/rbWPSNN/Screenshot-20200913-224352.jpg" alt="Screenshot-20200913-224352" border="0" height="500px"> <img src="https://i.ibb.co/vH7Hf3P/Screenshot-20200913-224400.jpg" alt="Screenshot-20200913-224400" border="0" height="500px">
 
 #### Explore Page
 Search for your favorite creators by category and see who is trending<br/><br/>
