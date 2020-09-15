@@ -9,7 +9,7 @@ When logged in, users can save creators to their dashboard and get notifications
 
 ### Creator Page
 Creator's Twitch, YouTube, Instagram, and Twitter all on one page 
-| <img src="https://i.ibb.co/pP5ZLDh/Screenshot-20200910-095229.jpg" alt="Screenshot-20200910-095229" border="1" width="300px"  height="400px"/>  | <img src="https://i.ibb.co/7pccTrL/Screenshot-20200910-095253.jpg" alt="Screenshot-20200910-095253" border="0" height="400px" width="300px" /> | <img src="https://i.ibb.co/K9p90ry/Screenshot-20200910-095303.jpg" alt="Screenshot-20200910-095303" border="0" height="400px"  width="300px" /> |<img src="https://i.ibb.co/dJN8VXQ/Screenshot-20200910-095310.jpg" alt="Screenshot-20200910-095310" border="0" height="400px" width="300px" > |
+| <img src="https://i.ibb.co/pP5ZLDh/Screenshot-20200910-095229.jpg" alt="Screenshot-20200910-095229" border="1" width="300px"  height="350px"/>  | <img src="https://i.ibb.co/7pccTrL/Screenshot-20200910-095253.jpg" alt="Screenshot-20200910-095253" border="0" height="400px" width="350px" /> | <img src="https://i.ibb.co/K9p90ry/Screenshot-20200910-095303.jpg" alt="Screenshot-20200910-095303" border="0" height="400px"  width="350px" /> |<img src="https://i.ibb.co/dJN8VXQ/Screenshot-20200910-095310.jpg" alt="Screenshot-20200910-095310" border="0" height="400px" width="350px" > |
 | ------------- | ------------- |------------- | -------------|
 
 ### Recycled components
