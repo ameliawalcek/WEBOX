@@ -1,4 +1,4 @@
-### [WEBOX](https://webox-hub.com/)
+### WEBOX
 
 Webox is a social media aggregator where users follow their favorite creator's Twitch, YouTube, Instagram, and Twitter all on one page.
 
